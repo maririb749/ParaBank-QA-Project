@@ -9,7 +9,7 @@
 **Test Type:** Functional, Negative, Boundary, Access Control, Regression Candidate
 **Execution Mode:** Manual Testing
 **Prepared By:** Mariana
-**Document Status:** Draft — Ready for Execution
+**Document Status:** Executed — Manual Cycle Completed
 
 ---
 
@@ -29,8 +29,8 @@ Use a dedicated QA customer instead of relying on shared demo credentials.
 
 Recommended test user:
 
-* **Username:** `qa_mariana_002`
-* **Password:** `ValidPass123!`
+* **Username:** Dedicated QA test user created during setup
+* **Password:** Valid password created during setup
 
 Important execution notes:
 
@@ -38,6 +38,11 @@ Important execution notes:
 * For transfer scenarios, create or use at least two active accounts.
 * For financial validation, always capture balances before and after execution.
 * For each executed test, save evidence using the test case ID in the file name.
+
+### Execution Data Note
+
+Because ParaBank is a public demo environment, test data may change, reset or become unavailable between sessions. During this manual cycle, more than one dedicated or available QA user was used to complete the full functional coverage. Account numbers and balances are environment-specific and are documented in each related test case.
+
 
 ---
 
@@ -48,6 +53,7 @@ Important execution notes:
 * **Failed:** Actual result does not match the expected result.
 * **Blocked:** Test could not be executed due to dependency or environment issue.
 * **Retest:** Test needs to be executed again after a fix or environment change.
+* **Passed with Observation:** Main expected behavior was met, but a relevant usability, validation or clarity issue was documented.
 
 ---
 
@@ -55,25 +61,34 @@ Important execution notes:
 
 | ID     | Module              | Title                                                 | Priority | Scenario Type             | Status       |
 | ------ | ------------------- | ----------------------------------------------------- | -------- | ------------------------- | ------------ |
-| TC-001 | Authentication      | Login with valid credentials                          | High     | Positive                  | Not Executed |
-| TC-002 | Authentication      | Login with incorrect password                         | High     | Negative                  | Not Executed |
-| TC-003 | Authentication      | Login with empty required fields                      | High     | Negative / Validation     | Not Executed |
-| TC-004 | Accounts            | Open new account with valid data                      | High     | Positive                  | Not Executed |
-| TC-005 | Accounts            | View account balance                                  | High     | Positive                  | Not Executed |
-| TC-006 | Accounts / Security | Access account opening without authentication         | High     | Negative / Access Control | Not Executed |
-| TC-007 | Transfers           | Transfer money between own accounts                   | High     | Positive                  | Not Executed |
-| TC-008 | Transfers           | Transfer with negative amount                         | Medium   | Negative / Boundary       | Not Executed |
-| TC-009 | Transfers           | Transfer with insufficient balance                    | High     | Negative / Boundary       | Not Executed |
-| TC-010 | Transactions        | View transaction history                              | High     | Positive                  | Not Executed |
-| TC-011 | Transactions        | Search transactions by amount                         | Medium   | Positive                  | Not Executed |
-| TC-012 | Transactions        | Empty transaction history for a newly created account | Medium   | Edge Case                 | Not Executed |
-| TC-013 | Customer Profile    | Update contact information with valid data            | High     | Positive                  | Not Executed |
-| TC-014 | Customer Profile    | Update contact information with invalid phone format  | Medium   | Negative / Validation     | Not Executed |
-| TC-015 | Customer Profile    | Update contact information with empty required fields | Medium   | Negative / Validation     | Not Executed |
+| TC-001 | Authentication      | Login with valid credentials                          | High     | Positive                  | Passed |
+| TC-002 | Authentication      | Login with incorrect password                         | High     | Negative                  | Failed |
+| TC-003 | Authentication      | Login with empty required fields                      | High     | Negative / Validation     | Passed |
+| TC-004 | Accounts            | Open new account with valid data                      | High     | Positive                  | Passed |
+| TC-005 | Accounts            | View account balance                                  | High     | Positive                  | Passed |
+| TC-006 | Accounts / Security | Access account opening without authentication         | High     | Negative / Access Control | Passed with Observation |
+| TC-007 | Transfers           | Transfer money between own accounts                   | High     | Positive                  | Passed |
+| TC-008 | Transfers           | Transfer with negative amount                         | High     | Negative / Boundary       | Failed |
+| TC-009 | Transfers           | Transfer with insufficient balance                    | High     | Negative / Boundary       | Failed |
+| TC-010 | Transactions        | View transaction history                              | High     | Positive                  | Passed |
+| TC-011 | Transactions        | Search transactions by amount                         | Medium     | Positive                  | Passed |
+| TC-012 | Transactions        | Empty transaction history for a newly created account | Medium     | Edge Case                 | Passed |
+| TC-013 | Customer Profile    | Update contact information with valid data            | High     | Positive                  | Passed |
+| TC-014 | Customer Profile    | Update contact information with invalid phone format  | Medium     | Negative / Validation     | Passed with Observation |
+| TC-015 | Customer Profile    | Update contact information with empty required fields | Medium     | Negative / Validation     | Passed |
+
+
+**Total Executed:** 15  
+**Passed:** 10  
+**Failed:** 3  
+**Passed with Observation:** 2  
+**Blocked:** 0  
+**Confirmed Bugs:** 3  
+**Observations:** 2  
 
 ---
 
-# Test Cases
+## Test Cases
 
 ---
 
@@ -86,7 +101,7 @@ Important execution notes:
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** AUTH-001
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -96,14 +111,14 @@ Important execution notes:
 
 ### Test Data
 
-* **Username:** `qa_mariana_002`
-* **Password:** `ValidPass123!`
+* **Username:** Dedicated QA test user created during setup
+* **Password:** Valid password created during setup
 
 ### Steps
 
 1. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
-2. Enter username `qa_mariana_002`.
-3. Enter password `ValidPass123!`.
+2. Enter the dedicated QA test username.
+3. Enter the valid password created during setup.
 4. Click the **Log In** button.
 
 ### Expected Result
@@ -143,7 +158,7 @@ Passed
 **Test Type:** Functional / Validation
 **Automation Candidate:** Yes
 **Requirement Reference:** AUTH-002
-**Status:** Not Executed
+**Status:** Failed
 
 ### Pre-conditions
 
@@ -153,13 +168,13 @@ Passed
 
 ### Test Data
 
-* **Username:** `qa_mariana_002`
+* **Username:** `maririb51`
 * **Password:** `wrong_password`
 
 ### Steps
 
 1. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
-2. Enter username `qa_mariana_002`.
+2. Enter the dedicated QA test username.
 3. Enter password `wrong_password`.
 4. Click the **Log In** button.
 
@@ -202,7 +217,7 @@ Failed
 **Test Type:** Functional / Validation
 **Automation Candidate:** Yes
 **Requirement Reference:** AUTH-003
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -256,7 +271,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** ACC-001
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -316,7 +331,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** ACC-002
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -376,7 +391,7 @@ Passed
 **Test Type:** Functional / Security
 **Automation Candidate:** Yes
 **Requirement Reference:** SEC-001
-**Status:** Not Executed
+**Status:** Passed with Observation
 
 ### Pre-conditions
 
@@ -413,12 +428,16 @@ Passed
 
 ### Status
 
-Passed
+Passed with Observation
 
 ### Notes
 
 - Access to the restricted page was blocked successfully.
 - However, the application displayed a generic internal error message instead of a clearer access restriction message or a redirect to the login page.
+
+### Related Observation
+
+- `OBS-001 — Restricted page access shows generic internal error message`
 
 ---
 
@@ -431,7 +450,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** TRF-001
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -468,16 +487,28 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The transfer was completed successfully.
+- The confirmation message `Transfer Complete!` was displayed.
+- The system displayed the message `$50.00 has been transferred from account #14565 to account #15009.`
+- The source account balance decreased from `$49800.00` to `$49750.00`.
+- The destination account balance increased from `$200.00` to `$250.00`.
+- The balances were updated correctly in `Accounts Overview`.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-007_transfer_funds_before_balances.png`
+- `evidences/screenshots/TC-007_transfer_funds_confirmation.png`
+- `evidences/screenshots/TC-007_transfer_funds_after_balances.png`
 
-### Post-condition
+### Status
 
-* Record the updated balances after the transfer.
-* Save screenshots of the confirmation and account balances.
+Passed
+
+### Notes
+
+- Source account used during execution: `14565`
+- Destination account used during execution: `15009`
+- Transfer amount: `$50.00`
 
 ---
 
@@ -485,12 +516,12 @@ Passed
 
 **Module:** Transfers
 **Title:** System rejects transfer when the amount is negative
-**Priority:** Medium
+**Priority:** High
 **Scenario Type:** Negative / Validation
 **Test Type:** Functional / Boundary
 **Automation Candidate:** Yes
 **Requirement Reference:** TRF-002
-**Status:** Not Executed
+**Status:** Failed
 
 ### Pre-conditions
 
@@ -520,18 +551,28 @@ Passed
 * The source account balance remains unchanged.
 * The destination account balance remains unchanged.
 * No transaction is created for the rejected transfer.
-
 ### Actual Result
 
-* Not executed.
+- The system accepted the negative transfer amount `-50.00`.
+- The confirmation message `Transfer Complete!` was displayed.
+- The system displayed the message `-$50.00 has been transferred from account #14565 to account #15009.`
+- The source account balance changed from `$49750.00` to `$49800.00`.
+- The destination account balance changed from `$250.00` to `$200.00`.
+- No validation error message was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-008_negative_transfer_before_balances.png`
+- `evidences/screenshots/TC-008_negative_transfer_validation.png`
+- `evidences/screenshots/TC-008_negative_transfer_after_balances.png`
 
-### Post-condition
+### Status
 
-* Compare account balances with the balances recorded before execution.
+Failed
+
+### Related Bug
+
+- `BUG-002 — Negative transfer amount is accepted and processed`
 
 ---
 
@@ -544,7 +585,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** TRF-003
-**Status:** Not Executed
+**Status:** Failed
 
 ### Pre-conditions
 
@@ -555,14 +596,15 @@ Passed
 
 ### Test Data
 
-* **Source Account:** Account with balance lower than `$50.00`
+* **Source Account:** Account with balance lower than the transfer amount
 * **Destination Account:** Another active customer account
-* **Amount:** `$50.00`
+* **Amount:** Greater than the source account balance
+* **Executed Example:** `$1000.00` from account `15009` to account `14565`
 
 ### Steps
 
 1. Navigate to **Transfer Funds**.
-2. Enter amount `$50.00`.
+2. Enter an amount greater than the source account balance.
 3. Select the source account with insufficient balance.
 4. Select the destination account.
 5. Click the **Transfer** button.
@@ -577,15 +619,26 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The system accepted a transfer amount greater than the source account balance.
+- The transfer amount `$1000.00` was processed from account `15009` to account `14565`.
+- The source account balance changed from `$700.00` to `-$300.00`.
+- The destination account balance changed from `$49300.00` to `$50300.00`.
+- No insufficient funds validation message was displayed.
+- The system allowed the source account to become negative.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-009_insufficient_balance_before_balances.png`
+- `evidences/screenshots/TC-009_insufficient_balance_validation.png`
+- `evidences/screenshots/TC-009_insufficient_balance_after_balances.png`
 
-### Post-condition
+### Status
 
-* Compare account balances with the balances recorded before execution.
+Failed
+
+### Related Bug
+
+- `BUG-003 — Transfer with insufficient balance is accepted and creates negative balance`
 
 ---
 
@@ -598,7 +651,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** TXN-001
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -627,15 +680,27 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The account details page was displayed successfully.
+- Account number `15009` was visible.
+- Account type `CHECKING` was visible.
+- The current balance was displayed as `-$300.00`.
+- The available balance was displayed as `$0.00`.
+- The `Account Activity` section was displayed.
+- The transaction history list was visible.
+- Transactions displayed relevant information such as date, transaction description, debit amount and credit amount.
+- Monetary values were displayed in currency format.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-010_view_transaction_history_pass.png`
 
-### Post-condition
+### Status
 
-* No data should be changed by this test case.
+Passed
+
+### Notes
+
+- Account used during execution: `15009`
 
 ---
 
@@ -648,7 +713,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** TXN-002
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -678,16 +743,25 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The transaction search was completed successfully.
+- The `Transaction Results` page was displayed.
+- Transactions matching the searched amount `$50.00` were displayed.
+- The results displayed relevant information such as date, transaction description, debit amount and credit amount.
+- Monetary values were displayed in currency format.
+- No application error was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-011_search_transactions_by_amount_pass.png`
 
-### Post-condition
+### Status
 
-* No data should be changed by this test case.
+Passed
 
+### Notes
+
+- Account used during execution: `15009`
+- Amount searched: `$50.00`
 ---
 
 ## TC-012 — Empty Transaction History for a Newly Created Account
@@ -699,7 +773,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** TXN-003
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -728,15 +802,31 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- A new account was created successfully.
+- The new account number `21225` was displayed.
+- The account details page for account `21225` was displayed.
+- Account type `CHECKING` was visible.
+- The account balance was displayed as `$100.00`.
+- The available balance was displayed as `$100.00`.
+- The `Account Activity` section loaded without error.
+- The application created and displayed an initial funding transaction.
+- The transaction `Funds Transfer Received` was displayed with a credit amount of `$100.00`.
+- No unrelated transactions were displayed.
+- No application error was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-012_new_account_created.png`
+- `evidences/screenshots/TC-012_empty_transaction_history_new_account_pass.png`
 
-### Post-condition
+### Status
 
-* Record whether the environment creates an initial transaction for newly opened accounts.
+Passed
+
+### Notes
+
+- New account created during execution: `21225`
+- ParaBank automatically creates an initial funding transaction for newly opened accounts.
 
 ---
 
@@ -749,7 +839,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** PRF-001
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -790,28 +880,36 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The contact information update was completed successfully.
+- The success message `Profile Updated` was displayed.
+- The system displayed the message `Your updated address and phone number have been added to the system.`
+- The user remained in the authenticated account services area.
+- No validation error message was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-013_update_contact_info_valid_data_pass.png`
 
-### Post-condition
+### Status
 
-* Restore the original customer contact information after execution if needed.
+Passed
+
+### Notes
+
+- User used during execution: `maririb52`
 
 ---
 
 ## TC-014 — Update Contact Information with Invalid Phone Format
 
 **Module:** Customer Profile
-**Title:** System validates invalid phone format when updating contact information
+**Title:** Application behavior when updating contact information with invalid phone format
 **Priority:** Medium
 **Scenario Type:** Negative / Validation
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** PRF-002
-**Status:** Not Executed
+**Status:** Passed with Observation
 
 ### Pre-conditions
 
@@ -839,15 +937,24 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The system accepted the invalid phone value `invalid_phone`.
+- The contact information update was completed successfully.
+- The success message `Profile Updated` was displayed.
+- The system displayed the message `Your updated address and phone number have been added to the system.`
+- No validation error message was displayed.
+- No application crash or server error was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-014_invalid_phone_format_observation.png`
 
-### Post-condition
+### Status
 
-* Restore the original phone value if it was saved by the application.
+Passed with Observation
+
+### Related Observation
+
+- `OBS-002 — Invalid phone format is accepted during contact information update`
 
 ---
 
@@ -860,7 +967,7 @@ Passed
 **Test Type:** Functional
 **Automation Candidate:** Yes
 **Requirement Reference:** PRF-003
-**Status:** Not Executed
+**Status:** Passed
 
 ### Pre-conditions
 
@@ -896,36 +1003,47 @@ Passed
 
 ### Actual Result
 
-* Not executed.
+- The contact information update was not completed.
+- The system displayed the validation message `First name is required.`
+- The system displayed the validation message `Last name is required.`
+- The user remained on the `Update Profile` page.
+- Other fields remained filled.
+- No partial update confirmation was displayed.
+- No internal error or application crash was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-015_update_contact_info_empty_required_fields_pass.png`
 
-### Post-condition
+### Status
 
-* Confirm that the original first name and last name are still saved.
+Passed
 
 ---
 
-# Suggested Evidence Naming Convention
+## Suggested Evidence Naming Convention
 
 ```text
 TC-001_login_valid_credentials_pass.png
-TC-002_login_incorrect_password_pass.png
+TC-002_login_incorrect_password_fail.png
+TC-003_login_empty_required_fields_pass.png
 TC-004_open_new_account_confirmation_pass.png
 TC-007_transfer_funds_before_balances.png
 TC-007_transfer_funds_confirmation.png
 TC-007_transfer_funds_after_balances.png
+TC-008_negative_transfer_validation.png
+TC-009_insufficient_balance_validation.png
+TC-014_invalid_phone_format_observation.png
 ```
 
 ---
 
-# Review Notes
+## Review Notes
 
 * Test cases are written to be clear, reproducible and suitable for manual execution.
-* Expected results avoid vague alternatives where possible.
-* Financial scenarios include balance verification before and after execution.
-* Tests that change data include post-conditions.
-* Some expected results should be refined after the first real execution against the ParaBank demo environment.
-* Any mismatch between expected result and actual ParaBank behavior should be documented as a bug, limitation, observation or test case adjustment depending on the requirement.
+* Expected results were reviewed after the first manual execution cycle.
+* Confirmed defects were linked to related failed test cases.
+* Observations were documented when the main expected behavior passed but usability or validation behavior required clarification.
+* Financial scenarios include before and after balance evidence.
+* Public demo environment instability was handled through dedicated QA test users created during execution.
+* Any mismatch between expected result and actual ParaBank behavior was documented as a bug, limitation, observation or test case adjustment depending on the requirement.
