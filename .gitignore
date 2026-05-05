@@ -1,0 +1,106 @@
+# ============================================
+# Java / Maven
+# ============================================
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+.flattened-pom.xml
+*.log
+.classpath
+.project
+.settings/
+bin/
+out/
+build/
+
+# ============================================
+# Node / npm / Cypress
+# ============================================
+node_modules/
+npm-debug.log
+yarn-error.log
+cypress/videos/
+cypress/screenshots/
+cypress/plugins/index.js
+.cypress/
+dist/
+coverage/
+
+# ============================================
+# IDEs
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+.gradle
+.gradle/
+
+# ============================================
+# Environment Variables
+# ============================================
+.env
+.env.local
+.env.*.local
+config.local.properties
+
+# ============================================
+# OS / Temporary Files
+# ============================================
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+*~
+
+# ============================================
+# Test Reports
+# ============================================
+test-results/
+test-reports/
+surefire-reports/
+allure-results/
+allure-report/
+
+# ============================================
+# Database / Sensitive Data
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+secrets.json
+credentials.json
+passwords.txt
+
+# ============================================
+# Build Output
+# ============================================
+dist/
+build/
+*.exe
+*.so
+*.dylib
+
+# ============================================
+# Cypress Specific
+# ============================================
+cypress.env.json
+
+# ============================================
+# Performance Testing
+# ============================================
+results/
+reports/
+performance-test-results.json
