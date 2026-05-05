@@ -29,7 +29,7 @@ Use a dedicated QA customer instead of relying on shared demo credentials.
 
 Recommended test user:
 
-* **Username:** `qa_mariana_001`
+* **Username:** `qa_mariana_002`
 * **Password:** `ValidPass123!`
 
 Important execution notes:
@@ -96,13 +96,13 @@ Important execution notes:
 
 ### Test Data
 
-* **Username:** `qa_mariana_001`
+* **Username:** `qa_mariana_002`
 * **Password:** `ValidPass123!`
 
 ### Steps
 
 1. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
-2. Enter username `qa_mariana_001`.
+2. Enter username `qa_mariana_002`.
 3. Enter password `ValidPass123!`.
 4. Click the **Log In** button.
 
@@ -153,13 +153,13 @@ Passed
 
 ### Test Data
 
-* **Username:** `qa_mariana_001`
+* **Username:** `qa_mariana_002`
 * **Password:** `wrong_password`
 
 ### Steps
 
 1. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
-2. Enter username `qa_mariana_001`.
+2. Enter username `qa_mariana_002`.
 3. Enter password `wrong_password`.
 4. Click the **Log In** button.
 
@@ -231,15 +231,19 @@ Failed
 
 ### Actual Result
 
-* Not executed.
+- User was not authenticated.
+- The system displayed the error message `Please enter a username and password.`
+- The authenticated area was not displayed.
+- The `Accounts Overview` page was not displayed.
+- The `Log Out` option was not visible.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-003_login_empty_required_fields_pass.png`
 
-### Post-condition
+### Status
 
-* No authenticated session should be created.
+Passed
 
 ---
 
@@ -283,15 +287,23 @@ Failed
 
 ### Actual Result
 
-* Not executed.
+- New account was created successfully.
+- The success message `Congratulations, your account is now open.` was displayed.
+- The new account number `22557` was displayed.
+- The user remained in the authenticated account services area.
+- No error message was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-004_open_new_account_confirmation_pass.png`
 
-### Post-condition
+### Status
 
-* Record the newly created account number for future account and transfer tests.
+Passed
+
+### Notes
+
+- New account created during execution: `22557`
 
 ---
 
@@ -333,15 +345,25 @@ Failed
 
 ### Actual Result
 
-* Not executed.
+- The account details page was displayed successfully.
+- Account number `22557` was visible.
+- Account type `CHECKING` was visible.
+- The current balance was displayed as `-$1900.00`.
+- The available balance was displayed as `$0.00`.
+- Monetary values were displayed in currency format.
+- The account activity section was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-005_view_account_balance_pass.png`
 
-### Post-condition
+### Status
 
-* No data should be changed by this test case.
+Passed
+
+### Notes
+
+- Account used during execution: `22557`
 
 ---
 
@@ -379,15 +401,24 @@ Failed
 
 ### Actual Result
 
-* Not executed.
+- The unauthenticated user was not able to access the account opening form.
+- The system displayed the error message `An internal error has occurred and has been logged.`
+- The login form remained visible.
+- The restricted account opening functionality was not available.
+- No account was created.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-006_access_open_account_without_authentication_pass.png`
 
-### Post-condition
+### Status
 
-* No authenticated session should exist after the test.
+Passed
+
+### Notes
+
+- Access to the restricted page was blocked successfully.
+- However, the application displayed a generic internal error message instead of a clearer access restriction message or a redirect to the login page.
 
 ---
 

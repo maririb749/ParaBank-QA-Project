@@ -206,7 +206,7 @@ The current test cycle requires controlled and reusable test data.
 
 ### Recommended Test User
 
-- **Username:** `qa_mariana_001`
+- **Username:** `qa_mariana_002`
 - **Password:** `ValidPass123!`
 
 ### Important Notes
