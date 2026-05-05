@@ -154,9 +154,69 @@ Add any additional context, investigation notes, browser console information, or
 
 # Confirmed Bugs
 
-No confirmed bugs have been identified yet.
+## BUG-001 — User is authenticated with incorrect password
 
-Confirmed bugs will be added below after test execution.
+**Related Test Case:** TC-002  
+**Module:** Authentication  
+**Severity:** Critical  
+**Priority:** P0  
+**Status:** New  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
+
+### Summary
+
+The system authenticates a registered user even when an incorrect password is provided. This allows access to the authenticated account area without valid credentials.
+
+### Pre-conditions
+
+- The user is not logged in.
+- Browser is opened in incognito mode.
+- The ParaBank login page is displayed.
+- A valid registered username exists.
+
+### Test Data
+
+- **Username:** Valid registered username
+- **Password:** Incorrect password
+
+### Steps to Reproduce
+
+1. Open Chrome in incognito mode.
+2. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
+3. Enter a valid registered username.
+4. Enter an incorrect password.
+5. Click the **Log In** button.
+
+### Expected Result
+
+- The user should not be authenticated.
+- The system should display an authentication error message.
+- The authenticated account services area should not be displayed.
+- The `Accounts Overview` page should not be displayed.
+- The `Log Out` option should not be visible.
+
+### Actual Result
+
+- The user was authenticated even with an incorrect password.
+- The authenticated account services area was displayed.
+- The `Accounts Overview` page was displayed.
+- The welcome message was visible.
+- The `Log Out` option was visible.
+- No authentication error message was displayed.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/TC-002_login_incorrect_password_fail.png`
+
+### Impact
+
+This issue affects authentication reliability. If a user can access the system with an incorrect password, restricted account information may be exposed and the login validation flow cannot be trusted.
+
+### Notes
+
+The issue was reproduced in Chrome incognito mode, reducing the likelihood that the result was caused by an existing authenticated browser session.
 
 ---
 

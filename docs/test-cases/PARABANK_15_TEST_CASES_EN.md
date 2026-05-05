@@ -117,15 +117,20 @@ Important execution notes:
 
 ### Actual Result
 
-* Not executed.
+- User was successfully authenticated.
+- The authenticated account services area was displayed.
+- The `Accounts Overview` page was displayed.
+- The welcome message `Welcome John Smith` was visible.
+- The `Log Out` option was visible.
+- No authentication error message was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-001_login_valid_credentials_pass.png`
 
-### Post-condition
+### Status
 
-* Log out after execution.
+Passed
 
 ---
 
@@ -168,15 +173,23 @@ Important execution notes:
 
 ### Actual Result
 
-* Not executed.
+- User was authenticated even when an incorrect password was provided.
+- The authenticated account services area was displayed.
+- The `Accounts Overview` page was displayed.
+- The `Log Out` option was visible.
+- No authentication error message was displayed.
 
 ### Evidence
 
-* Not captured yet.
+- `evidences/screenshots/TC-002_login_incorrect_password_fail.png`
 
-### Post-condition
+### Status
 
-* No authenticated session should be created.
+Failed
+
+### Related Bug
+
+- `BUG-001 — User is authenticated with incorrect password`
 
 ---
 
