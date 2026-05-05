@@ -104,3 +104,9 @@ cypress.env.json
 results/
 reports/
 performance-test-results.json
+
+# Cypress automation dependencies
+Automation/node_modules/
+Automation/cypress/screenshots/
+Automation/cypress/videos/
+Automation/cypress.env.json

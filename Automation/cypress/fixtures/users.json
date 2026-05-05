@@ -1,0 +1,10 @@
+{
+  "invalidLogin": {
+    "username": "valid_registered_user",
+    "password": "wrong_password"
+  },
+  "emptyLogin": {
+    "username": "",
+    "password": ""
+  }
+}

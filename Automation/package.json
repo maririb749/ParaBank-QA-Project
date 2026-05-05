@@ -1,0 +1,23 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome"
+  },
+  "keywords": [
+    "qa",
+    "cypress",
+    "ui-automation",
+    "e2e-testing",
+    "parabank"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "ParaBank Cypress UI automation suite",
+  "devDependencies": {
+    "cypress": "^15.14.2"
+  }
+}
