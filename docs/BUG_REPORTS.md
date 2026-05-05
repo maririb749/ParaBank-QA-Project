@@ -1,20 +1,20 @@
 # ParaBank Bug Reports
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Last Updated:** May 2026  
 **Document Type:** Bug Reports  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Execution Mode:** Manual Testing  
 **Prepared By:** Mariana  
-**Document Status:** Draft — Ready for Test Execution  
+**Document Status:** Executed — Manual Cycle Completed  
 
 ---
 
 ## 1. Purpose
 
-This document is used to record confirmed bugs and relevant observations found during the manual testing phase of the ParaBank QA Portfolio project.
+This document records confirmed bugs and relevant observations found during the manual testing phase of the ParaBank QA Portfolio project.
 
-The goal is to document issues clearly, consistently, and professionally, including reproduction steps, actual result, expected result, severity, priority, environment, and evidence.
+The goal is to document issues clearly, consistently, and professionally, including reproduction steps, expected result, actual result, severity, priority, environment, impact, and screenshot evidence.
 
 This document supports the following project artifacts:
 
@@ -26,9 +26,31 @@ This document supports the following project artifacts:
 
 ## 2. Current Bug Status
 
-No confirmed bugs have been identified yet.
+The first manual execution cycle identified confirmed bugs and observations.
 
-This document will be updated during test execution if defects, inconsistencies, or relevant observations are found.
+### Summary
+
+- **Confirmed Bugs:** 3
+- **Observations:** 2
+- **Critical Bugs:** 3
+- **High Bugs:** 0
+- **Medium Bugs:** 0
+- **Low Bugs:** 0
+
+### Confirmed Bugs
+
+| Bug ID | Related Test Case | Module | Severity | Priority | Status |
+|---|---|---|---|---|---|
+| BUG-001 | TC-002 | Authentication | Critical | P0 | New |
+| BUG-002 | TC-008 | Transfers | Critical | P0 | New |
+| BUG-003 | TC-009 | Transfers | Critical | P0 | New |
+
+### Observations
+
+| Observation ID | Related Test Case | Module | Status |
+|---|---|---|---|
+| OBS-001 | TC-006 | Accounts / Security | Observation |
+| OBS-002 | TC-014 | Customer Profile | Observation |
 
 ---
 
@@ -41,7 +63,7 @@ Before creating a bug report:
 - Reproduce the issue at least once.
 - Confirm the test data used.
 - Confirm the test environment.
-- Capture evidence.
+- Capture screenshot evidence.
 - Check whether the issue is a real bug, a test data issue, an environment issue, or a test case expectation that needs to be updated.
 
 If the behavior is unclear, document it as an observation until it can be confirmed.
@@ -54,10 +76,10 @@ Severity describes the impact of the issue on the application or user flow.
 
 | Severity | Definition | Example |
 |---|---|---|
-| Critical | Core functionality is blocked, restricted access fails, or simulated financial data becomes inconsistent | Unauthenticated user accesses a restricted account page |
-| High | Major functionality fails with significant user impact | Transfer confirmation appears but balances do not update |
+| Critical | Core functionality is blocked, restricted access fails, or simulated financial data becomes inconsistent | Incorrect password authenticates a user |
+| High | Major functionality fails with significant user impact | Balance is not updated after a valid transfer |
 | Medium | Feature partially fails, validation is unclear, or user flow is affected but not blocked | Required field error message is missing |
-| Low | Minor usability, visual, wording, or cosmetic issue | Label is unclear or layout is slightly misaligned |
+| Low | Minor usability, wording, or cosmetic issue | Label is unclear or layout is slightly misaligned |
 
 ---
 
@@ -92,8 +114,6 @@ Priority describes how urgently the issue should be addressed.
 
 Use the following structure for each confirmed bug.
 
----
-
 ## BUG-XXX — Short bug title
 
 **Related Test Case:** TC-XXX  
@@ -117,10 +137,8 @@ Briefly describe the issue and the user impact.
 
 ### Test Data
 
-- **Username:** `example_user`
-- **Password:** `example_password`
-- **Account:** `example_account`
-- **Amount:** `$00.00`
+- Test data used during execution.
+- Do not include real or reusable passwords in versioned documentation.
 
 ### Steps to Reproduce
 
@@ -140,11 +158,10 @@ Describe what actually happened.
 ### Evidence
 
 - Screenshot: `evidences/screenshots/BUG-XXX_short_description.png`
-- Video: `evidences/videos/BUG-XXX_short_description.mp4`
 
 ### Impact
 
-Explain how this issue affects the user, business flow, or test execution.
+Explain how this issue affects the user, business flow, data integrity, or test execution.
 
 ### Notes
 
@@ -152,7 +169,9 @@ Add any additional context, investigation notes, browser console information, or
 
 ---
 
-# Confirmed Bugs
+## 8. Confirmed Bugs
+
+---
 
 ## BUG-001 — User is authenticated with incorrect password
 
@@ -220,177 +239,176 @@ The issue was reproduced in Chrome incognito mode, reducing the likelihood that 
 
 ---
 
-# Observations
-
-Observations are used when behavior is notable but not yet confirmed as a defect.
-
----
-
-## OBS-001 — No confirmed observations yet
-
-**Related Test Case:** N/A  
-**Module:** N/A  
-**Status:** Observation  
-**Reported By:** Mariana  
-**Reported Date:** May 2026  
-
-### Summary
-
-No observations have been documented yet.
-
-### Notes
-
-This section will be updated during test execution if the application behavior requires clarification.
-
----
-
-# Example Bug Reports
-
-The examples below are included only to demonstrate the expected documentation style. They should be replaced, removed, or moved to a separate examples section after real execution.
-
----
-
-## BUG-EXAMPLE-001 — Login error message is not displayed when username and password are empty
-
-**Related Test Case:** TC-003  
-**Module:** Authentication  
-**Severity:** Medium  
-**Priority:** P2  
-**Status:** Example  
-**Reported By:** Mariana  
-**Reported Date:** May 2026  
-**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
-
-### Summary
-
-When the user attempts to log in with both username and password fields empty, the system should display a clear validation or authentication error message. If no message is displayed, the user may not understand why the login attempt failed.
-
-### Pre-conditions
-
-- The user is not logged in.
-- The browser is on the ParaBank home page.
-- Username and password fields are visible.
-
-### Test Data
-
-- **Username:** Empty
-- **Password:** Empty
-
-### Steps to Reproduce
-
-1. Navigate to `https://parabank.parasoft.com/parabank/index.htm`.
-2. Leave the username field empty.
-3. Leave the password field empty.
-4. Click the **Log In** button.
-
-### Expected Result
-
-- The user is not authenticated.
-- The system displays a clear validation or authentication error message.
-- The authenticated area is not displayed.
-- The `Accounts Overview` page is not displayed.
-
-### Actual Result
-
-Example only. Actual result must be completed during real execution.
-
-### Evidence
-
-- Screenshot: `evidences/screenshots/BUG-EXAMPLE-001_empty_login_error.png`
-- Video: `evidences/videos/BUG-EXAMPLE-001_empty_login_error.mp4`
-
-### Impact
-
-The user may not understand why the login attempt failed, which affects usability and validation clarity.
-
-### Notes
-
-This is an example bug report. It should only be kept if the issue is reproduced during real execution.
-
----
-
-## BUG-EXAMPLE-002 — Transfer with negative amount is accepted by the system
+## BUG-002 — Negative transfer amount is accepted and processed
 
 **Related Test Case:** TC-008  
 **Module:** Transfers  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** Example  
+**Status:** New  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
 
 ### Summary
 
-The system should reject negative transfer amounts. If a negative amount is accepted, the transfer logic may allow invalid simulated financial transactions.
+The system accepts and processes a negative transfer amount. Instead of rejecting the invalid amount, the application completes the transfer and updates both account balances.
 
 ### Pre-conditions
 
 - The user is logged in.
 - The user has at least two active accounts.
-- The current balances for source and destination accounts are recorded before execution.
+- Source and destination account balances are recorded before execution.
 
 ### Test Data
 
-- **Source Account:** Active customer account
-- **Destination Account:** Another active customer account
+- **Source Account:** `14565`
+- **Destination Account:** `15009`
 - **Amount:** `-50.00`
 
 ### Steps to Reproduce
 
 1. Log in with a valid customer.
-2. Navigate to **Transfer Funds**.
-3. Enter `-50.00` in the amount field.
-4. Select a source account.
-5. Select a destination account.
-6. Click the **Transfer** button.
+2. Navigate to **Accounts Overview**.
+3. Record the balances for accounts `14565` and `15009`.
+4. Navigate to **Transfer Funds**.
+5. Enter `-50.00` in the amount field.
+6. Select account `14565` as the source account.
+7. Select account `15009` as the destination account.
+8. Click the **Transfer** button.
+9. Return to **Accounts Overview** and compare the balances.
 
 ### Expected Result
 
-- The transfer is not completed.
-- A validation error message is displayed.
-- Source account balance remains unchanged.
-- Destination account balance remains unchanged.
-- No transaction is created for the rejected transfer.
+- The transfer should not be completed.
+- A validation error message should be displayed for the invalid amount.
+- The source account balance should remain unchanged.
+- The destination account balance should remain unchanged.
+- No transaction should be created for the rejected transfer.
 
 ### Actual Result
 
-Example only. Actual result must be completed during real execution.
+- The transfer was completed successfully.
+- The confirmation message `Transfer Complete!` was displayed.
+- The system displayed `-$50.00 has been transferred from account #14565 to account #15009.`
+- The source account balance changed from `$49750.00` to `$49800.00`.
+- The destination account balance changed from `$250.00` to `$200.00`.
+- No validation error message was displayed.
 
 ### Evidence
 
-- Screenshot: `evidences/screenshots/BUG-EXAMPLE-002_negative_transfer.png`
-- Video: `evidences/videos/BUG-EXAMPLE-002_negative_transfer.mp4`
+- Screenshot: `evidences/screenshots/TC-008_negative_transfer_before_balances.png`
+- Screenshot: `evidences/screenshots/TC-008_negative_transfer_validation.png`
+- Screenshot: `evidences/screenshots/TC-008_negative_transfer_after_balances.png`
 
 ### Impact
 
-Invalid transfer processing may cause inconsistent balances and unreliable transaction behavior.
+This issue affects the reliability of the transfer flow. Negative amounts should not be accepted because they can reverse the expected debit and credit behavior, causing incorrect account balance changes.
 
 ### Notes
 
-This is an example bug report. It should only be kept if the issue is reproduced during real execution.
+This bug is classified as Critical because it affects simulated financial transaction logic and balance consistency.
 
 ---
 
-## BUG-EXAMPLE-003 — Unauthenticated user can access the Open New Account page
+## BUG-003 — Transfer with insufficient balance is accepted and creates negative balance
 
-**Related Test Case:** TC-006  
-**Module:** Accounts / Security  
+**Related Test Case:** TC-009  
+**Module:** Transfers  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** Example  
+**Status:** New  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
 
 ### Summary
 
-Restricted account functionality should not be accessible without authentication. If an unauthenticated user can access the Open New Account page directly, access control is not working as expected.
+The system allows a transfer to be completed even when the source account does not have sufficient balance. As a result, the source account balance becomes negative.
+
+### Pre-conditions
+
+- The user is logged in.
+- The user has at least two active accounts.
+- Source and destination account balances are recorded before execution.
+- Source account balance is lower than the transfer amount.
+
+### Test Data
+
+- **Source Account:** `15009`
+- **Source Balance Before:** `$700.00`
+- **Destination Account:** `14565`
+- **Destination Balance Before:** `$49300.00`
+- **Amount:** `$1000.00`
+
+### Steps to Reproduce
+
+1. Log in with a valid customer.
+2. Navigate to **Accounts Overview**.
+3. Confirm that account `15009` has a balance of `$700.00`.
+4. Confirm that account `14565` has a balance of `$49300.00`.
+5. Navigate to **Transfer Funds**.
+6. Enter `1000.00` in the amount field.
+7. Select account `15009` as the source account.
+8. Select account `14565` as the destination account.
+9. Click the **Transfer** button.
+10. Return to **Accounts Overview** and compare the balances.
+
+### Expected Result
+
+- The transfer should not be completed.
+- The system should display an insufficient funds or validation error message.
+- The source account balance should remain `$700.00`.
+- The destination account balance should remain `$49300.00`.
+- No transaction should be created for the rejected transfer.
+
+### Actual Result
+
+- The transfer was completed successfully.
+- The source account balance changed from `$700.00` to `-$300.00`.
+- The destination account balance changed from `$49300.00` to `$50300.00`.
+- No insufficient funds validation message was displayed.
+- The system allowed the source account to become negative.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/TC-009_insufficient_balance_before_balances.png`
+- Screenshot: `evidences/screenshots/TC-009_insufficient_balance_validation.png`
+- Screenshot: `evidences/screenshots/TC-009_insufficient_balance_after_balances.png`
+
+### Impact
+
+This issue affects the reliability of the transfer flow. The system should prevent transfers that exceed the available source account balance. Allowing this operation creates incorrect financial behavior and negative account balances.
+
+### Notes
+
+This bug is classified as Critical because it affects simulated financial transaction validation and account balance integrity.
+
+---
+
+## 9. Observations
+
+---
+
+## OBS-001 — Restricted page access shows generic internal error message
+
+**Related Test Case:** TC-006  
+**Module:** Accounts / Security  
+**Status:** Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
+
+### Summary
+
+When an unauthenticated user accesses the Open New Account page directly, the system blocks access correctly, but displays the message `An internal error has occurred and has been logged.` instead of showing a clearer access restriction message or redirecting the user cleanly to the login page.
 
 ### Pre-conditions
 
 - The user is not logged in.
-- Browser cookies and session data are cleared.
+- Browser is opened in incognito mode.
+- The ParaBank login page is accessible.
+- No authenticated session exists.
 
 ### Test Data
 
@@ -398,75 +416,132 @@ Restricted account functionality should not be accessible without authentication
 
 ### Steps to Reproduce
 
-1. Open a new browser session.
-2. Ensure no user is logged in.
-3. Navigate directly to `https://parabank.parasoft.com/parabank/openaccount.htm`.
+1. Open Chrome in incognito mode.
+2. Navigate directly to `https://parabank.parasoft.com/parabank/openaccount.htm`.
+3. Observe the page displayed by the application.
 
 ### Expected Result
 
-- The unauthenticated user cannot access the account opening form.
-- The system redirects the user to the login page or displays an access restriction message.
-- No account creation controls are available.
-- No account is created.
+- The unauthenticated user should not access the account opening form.
+- The system should redirect the user to the login page or display a clear access restriction message.
+- No account creation controls should be available.
+- No account should be created.
 
 ### Actual Result
 
-Example only. Actual result must be completed during real execution.
+- The unauthenticated user could not access the account opening form.
+- The system displayed the message `An internal error has occurred and has been logged.`
+- The login form remained visible.
+- No account creation controls were available.
+- No account was created.
 
 ### Evidence
 
-- Screenshot: `evidences/screenshots/BUG-EXAMPLE-003_unauthorized_open_account.png`
-- Video: `evidences/videos/BUG-EXAMPLE-003_unauthorized_open_account.mp4`
+- Screenshot: `evidences/screenshots/TC-006_access_open_account_without_authentication_pass.png`
 
 ### Impact
 
-Restricted functionality may be exposed to unauthenticated users, which affects access control and application trust.
+The access control behavior worked correctly because the restricted form was not exposed. However, the generic internal error message may confuse users and does not clearly explain that authentication is required.
 
 ### Notes
 
-This is an example bug report. It should only be kept if the issue is reproduced during real execution.
+This is documented as an observation instead of a confirmed bug because the core access control expectation was met. The issue is related to error message clarity and user experience.
 
 ---
 
-# Evidence Naming Convention
+## OBS-002 — Invalid phone format is accepted during contact information update
+
+**Related Test Case:** TC-014  
+**Module:** Customer Profile  
+**Status:** Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+The system accepts the value `invalid_phone` in the phone field during contact information update. The profile update is completed successfully and no validation error message is displayed.
+
+### Pre-conditions
+
+- The user is logged in.
+- The user is on the `Update Contact Info` page.
+- All required fields are filled with valid data except the phone field.
+
+### Test Data
+
+- **Phone:** `invalid_phone`
+
+### Steps to Reproduce
+
+1. Log in with a valid customer.
+2. Navigate to **Update Contact Info**.
+3. Replace the current phone value with `invalid_phone`.
+4. Keep all other required fields filled with valid data.
+5. Click the update button.
+
+### Expected Result
+
+- If phone format validation is implemented, the system should reject the invalid phone format and display a validation message.
+- If phone format validation is not implemented, the value may be saved and the behavior should be documented as an observation.
+- Required customer data should not be removed or corrupted.
+- No application crash or server error should be displayed.
+
+### Actual Result
+
+- The invalid phone value `invalid_phone` was accepted.
+- The profile update was completed successfully.
+- The success message `Profile Updated` was displayed.
+- No validation error message was displayed.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/TC-014_invalid_phone_format_observation.png`
+
+### Impact
+
+The application allows non-phone text to be saved in the phone field. This may reduce contact data quality, but it does not block the user flow or cause an application error.
+
+### Notes
+
+This is documented as an observation instead of a confirmed bug because the current test case allows this behavior to be recorded when phone format validation is not implemented.
+
+---
+
+## 10. Evidence Naming Convention
 
 Recommended file naming pattern:
 
-- `BUG-001_short_description.png`
-- `BUG-001_short_description.mp4`
-- `OBS-001_short_description.png`
+- `TC-002_login_incorrect_password_fail.png`
+- `TC-006_access_open_account_without_authentication_pass.png`
+- `TC-008_negative_transfer_validation.png`
+- `TC-009_insufficient_balance_validation.png`
+- `TC-014_invalid_phone_format_observation.png`
 
-Recommended folders:
+Recommended folder:
 
 - `evidences/screenshots/`
-- `evidences/videos/`
-
-Examples:
-
-- `evidences/screenshots/BUG-001_empty_login_error.png`
-- `evidences/videos/BUG-001_empty_login_error.mp4`
-- `evidences/screenshots/OBS-001_profile_phone_validation_behavior.png`
 
 ---
 
-# Bug Review Checklist
+## 11. Bug Review Checklist
 
 Before marking a bug as confirmed, verify:
 
-- [ ] The issue is reproducible.
-- [ ] The related test case is identified.
-- [ ] The expected result is clear.
-- [ ] The actual result is documented.
-- [ ] Severity is assigned.
-- [ ] Priority is assigned.
-- [ ] Environment is documented.
-- [ ] Evidence is attached or referenced.
-- [ ] The issue is not caused by incorrect test data.
-- [ ] The issue is not caused by an outdated test case expectation.
+- [x] The issue is reproducible.
+- [x] The related test case is identified.
+- [x] The expected result is clear.
+- [x] The actual result is documented.
+- [x] Severity is assigned.
+- [x] Priority is assigned.
+- [x] Environment is documented.
+- [x] Evidence is attached or referenced.
+- [x] The issue is not caused by incorrect test data.
+- [x] The issue is not caused by an outdated test case expectation.
 
 ---
 
-# Retest Checklist
+## 12. Retest Checklist
 
 When retesting a bug:
 
@@ -480,11 +555,12 @@ When retesting a bug:
 
 ---
 
-# Document History
+## 13. Document History
 
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial bug reports document with template, severity, priority, examples, and evidence guidelines |
+| 1.1 | May 2026 | Mariana | Updated after first manual execution cycle with confirmed bugs and observations |
 
 ---
 

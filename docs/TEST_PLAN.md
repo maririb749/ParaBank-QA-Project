@@ -6,7 +6,7 @@
 **Application Under Test:** ParaBank Demo Banking Application  
 **Execution Mode:** Manual Testing  
 **Prepared By:** Mariana  
-**Document Status:** Draft — Ready for Execution  
+**Document Status:** Executed — Manual Cycle Completed  
 
 ---
 
@@ -206,8 +206,8 @@ The current test cycle requires controlled and reusable test data.
 
 ### Recommended Test User
 
-- **Username:** `qa_mariana_002`
-- **Password:** `ValidPass123!`
+- **Username:** Dedicated QA test user created during setup
+- **Password:** Valid password created during setup
 
 ### Important Notes
 
@@ -215,6 +215,11 @@ The current test cycle requires controlled and reusable test data.
 - Account numbers created during execution should be recorded.
 - Balances should be captured before and after transfer tests.
 - Test data changes should be documented in the evidence or execution notes.
+
+### Execution Data Note
+
+ParaBank is a public demo environment. Test data may be reset, reused, invalidated, or changed between sessions. During execution, dedicated QA users may need to be recreated. Credentials used during execution must be stored locally and must not be committed to the repository.
+
 
 ---
 
@@ -224,12 +229,12 @@ Testing can begin when the following conditions are met:
 
 - [x] Test plan is documented.
 - [x] Functional test cases are documented.
-- [ ] Dedicated test user is created and validated.
-- [ ] At least two customer accounts are available for transfer scenarios.
-- [ ] Test environment is accessible.
-- [ ] Browser is available and working correctly.
-- [ ] Evidence folders are prepared.
-- [ ] Test execution status format is defined.
+- [x] Dedicated test user was created and validated.
+- [x] At least two customer accounts were available for transfer scenarios.
+- [x] Test environment was accessible.
+- [x] Browser was available and working correctly.
+- [x] Evidence folders were prepared.
+- [x] Test execution status format was defined.
 
 ---
 
@@ -237,14 +242,13 @@ Testing can begin when the following conditions are met:
 
 Testing is considered complete when:
 
-- [ ] All 15 test cases are executed at least once.
-- [ ] 100% of High priority test cases are executed.
-- [ ] Evidence is captured for each executed test case.
-- [ ] All failed tests have a documented bug report or observation.
-- [ ] No Critical defect remains open without documented decision.
-- [ ] No High severity defect remains open without documented decision.
+- [x] All 15 test cases were executed at least once.
+- [x] 100% of High priority test cases were executed.
+- [x] Evidence was captured for each executed test case.
+- [x] All failed tests have a documented bug report or observation.
+- [x] Critical and High severity findings were documented for portfolio review.
+- [x] Test documentation was updated according to actual application behavior.
 - [ ] Test results are summarized in a test execution report.
-- [ ] Test documentation is updated according to actual application behavior.
 
 ---
 
@@ -327,8 +331,8 @@ If the issue is not a bug but a mismatch between the test case and the actual ex
 
 - [x] Test Plan
 - [x] Functional Test Cases
-- [ ] Bug Reports
-- [ ] Test Evidence
+- [x] Bug Reports
+- [x] Test Evidence
 - [ ] Test Execution Summary
 
 ---
@@ -341,6 +345,23 @@ If the issue is not a bug but a mismatch between the test case and the actual ex
 - [ ] API Test Collection
 - [ ] CI Pipeline
 - [ ] Final Test Summary Report
+
+---
+
+
+## 15. Current Manual Execution Summary
+
+The first manual execution cycle has been completed.
+
+- **Total test cases executed:** 15
+- **Passed:** 10
+- **Failed:** 3
+- **Passed with observation:** 2
+- **Blocked:** 0
+- **Confirmed bugs:** 3
+- **Observations:** 2
+
+Detailed execution results will be documented in `docs/TEST_SUMMARY_REPORT.md`.
 
 ---
 
@@ -420,6 +441,7 @@ Test cases should also be reviewed after each execution cycle to ensure they rem
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial test plan for 15 manual functional test cases |
+| 1.1 | May 2026 | Mariana | Updated after first manual execution cycle |
 
 ---
 
