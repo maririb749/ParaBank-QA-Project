@@ -1,10 +1,9 @@
 {
   "invalidLogin": {
-    "username": "valid_registered_user",
-    "password": "wrong_password"
+    "password": "wrong_password",
+    "expectedErrorMessage": "The username and password could not be verified."
   },
   "emptyLogin": {
-    "username": "",
-    "password": ""
+    "expectedErrorMessage": "Please enter a username and password."
   }
 }

@@ -5,13 +5,16 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:run:chrome": "cypress run --browser chrome"
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:auth": "cypress run --spec cypress/e2e/authentication.cy.js",
+    "cy:run:auth:known-bugs": "cypress run --spec cypress/e2e/authentication.cy.js --env runKnownBugTests=true"
   },
   "keywords": [
     "qa",
     "cypress",
     "ui-automation",
     "e2e-testing",
+    "authentication",
     "parabank"
   ],
   "author": "",
