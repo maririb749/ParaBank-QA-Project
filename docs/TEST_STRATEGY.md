@@ -1,12 +1,12 @@
 # ParaBank QA Test Strategy
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Last Updated:** May 2026  
 **Document Type:** Test Strategy  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation  
 **Prepared By:** Mariana  
-**Document Status:** Draft — Ready for Execution  
+**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
 
 ---
 
@@ -14,11 +14,11 @@
 
 This document defines the testing strategy for the ParaBank QA Portfolio project.
 
-The purpose of this strategy is to explain how the application will be tested, how scenarios were selected, how risks are prioritized, how evidence will be collected, and how defects or observations will be documented.
+The purpose of this strategy is to explain how the application was tested, how scenarios were selected, how risks were prioritized, how evidence was collected, how defects or observations were documented, and how Cypress UI automation was added for regression coverage.
 
 This strategy supports the test scope defined in `docs/TEST_PLAN.md` and aligns with the functional test cases documented in `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`.
 
-The current phase focuses on manual functional testing through the web user interface. API testing, database testing, automation, performance testing, and full accessibility testing are not part of the current execution scope and may be introduced in future phases.
+The first phase focused on manual functional testing through the web user interface. The second phase added Cypress UI automation mapped to the documented manual test cases. API testing, database testing, performance testing, and full accessibility testing are not part of the current execution scope and may be introduced in future phases.
 
 ---
 
@@ -56,7 +56,7 @@ This does not mean every real-world feature should always have exactly three tes
 
 ## 3. Current Testing Scope
 
-The current strategy covers 15 manual test cases across 5 modules:
+The current strategy covers 15 manual test cases and Cypress UI automation mapped to those same 15 scenarios across 5 modules:
 
 - Authentication
 - Accounts
@@ -68,13 +68,40 @@ Out of scope for the current phase:
 
 - API testing
 - Database testing
-- Automated testing
 - Load testing
 - Stress testing
 - Security penetration testing
 - Full accessibility compliance testing
 - Full localization testing
 - Native mobile testing
+
+### Cypress Automation Scope
+
+Cypress UI automation was implemented under the `Automation/` folder.
+
+The automation suite contains 5 spec files mapped to the 15 documented manual test cases:
+
+| Spec File | Related Test Cases | Status |
+|---|---|---|
+| `authentication.cy.js` | TC-001, TC-002, TC-003 | 2 Passed, 1 Pending Known Bug |
+| `accounts.cy.js` | TC-004, TC-005, TC-006 | 3 Passed |
+| `transfers.cy.js` | TC-007, TC-008, TC-009 | 1 Passed, 2 Pending Known Bugs |
+| `transactions.cy.js` | TC-010, TC-011, TC-012 | 3 Passed |
+| `customer-profile.cy.js` | TC-013, TC-014, TC-015 | 3 Passed |
+
+Latest full Cypress execution result:
+
+- **Total automated scenarios mapped:** 15
+- **Passing:** 12
+- **Pending known bugs:** 3
+- **Failing:** 0
+- **Full suite duration:** 01:36
+
+Known bugs intentionally kept pending in the automation suite:
+
+- TC-002 → BUG-001
+- TC-008 → BUG-002
+- TC-009 → BUG-003
 
 ---
 
@@ -710,7 +737,7 @@ Evidence should help prove:
 - What result was observed.
 - Whether the result passed, failed, or needs clarification.
 
-For failed tests or unclear behavior, video evidence is preferred when possible.
+For failed tests or unclear behavior, additional screenshots and clear execution notes are preferred. Video evidence is currently not included in this project scope.
 
 ---
 
@@ -720,8 +747,9 @@ Test data should be prepared and documented before execution.
 
 Current test data strategy:
 
-- Use a dedicated QA user.
-- Record account numbers created during execution.
+- Use dedicated QA users during manual execution.
+- Use dynamic QA users during Cypress automation to reduce dependency on unstable public demo data.
+- Record account numbers created during execution when relevant.
 - Record balances before and after transfer tests.
 - Avoid relying on shared or unstable demo data when possible.
 - Recreate test data if the public demo environment is reset.
@@ -736,7 +764,6 @@ The following are intentionally excluded from current execution:
 
 - Direct database verification.
 - API response validation.
-- Automated test scripts.
 - Performance benchmarks.
 - Penetration testing.
 - Full WCAG compliance testing.
@@ -843,7 +870,7 @@ All confirmed defects and observations should be documented in `docs/BUG_REPORTS
 
 Regression testing ensures that existing functionality continues to work after a fix, update, or behavior change.
 
-In this project, regression testing is planned as a future repeatable execution activity based on the 15 documented functional test cases.
+In this project, regression testing is supported by the 15 documented functional test cases and the Cypress UI automation suite mapped to those scenarios.
 
 ---
 
@@ -855,7 +882,7 @@ Regression testing should be considered when:
 - A test case expected result is updated.
 - A module behavior changes.
 - A new feature is added in a future phase.
-- Automation is introduced.
+- The Cypress automation suite is updated.
 - The public demo environment is reset.
 
 ---
@@ -902,6 +929,26 @@ If a transfer bug is found and corrected, the minimum regression should include:
 - TC-009 — Transfer with insufficient balance
 - TC-010 — View transaction history
 
+### 8.5 Cypress Regression Automation
+
+The Cypress suite is used as the current automated regression layer for stable UI flows.
+
+Automation strategy:
+
+- Keep tests mapped to manual test case IDs.
+- Use dynamic QA users to avoid dependence on unstable demo credentials.
+- Keep known confirmed bugs represented in automation but pending/skipped by default.
+- Run the full Cypress suite before major documentation updates or future portfolio milestones.
+- Re-enable pending known-bug tests only after the related application behavior is fixed.
+
+Latest full Cypress suite result:
+
+- **Specs:** 5
+- **Tests:** 15
+- **Passing:** 12
+- **Pending:** 3
+- **Failing:** 0
+
 ---
 
 ## 9. Test Evidence Requirements
@@ -925,7 +972,7 @@ For each executed test case, evidence should include:
 For failed tests, evidence should include:
 
 - Screenshot of the issue.
-- Screen recording when useful.
+- Additional screenshots when useful.
 - Exact steps performed.
 - Actual result.
 - Expected result.
@@ -945,10 +992,9 @@ Recommended file names:
 - `TC-007_transfer_funds_confirmation.png`
 - `TC-007_transfer_funds_after_balances.png`
 
-Recommended folders:
+Recommended folder:
 
 - `evidences/screenshots/`
-- `evidences/videos/`
 
 ---
 
@@ -964,6 +1010,10 @@ Testing is considered successful when:
 - Test cases are updated if actual ParaBank behavior differs from the original expected result.
 - Test execution results are summarized.
 - The documentation remains consistent across the project.
+- Cypress UI automation is implemented for the documented functional scenarios.
+- The Cypress full suite is executed successfully.
+- Known confirmed bugs are represented as pending/skipped automated scenarios.
+
 
 ---
 
@@ -977,7 +1027,8 @@ This document works together with the other project documents:
 - `TEST_STRATEGY.md` defines how testing will be approached and prioritized.
 - `PARABANK_15_TEST_CASES_EN.md` contains the detailed executable test cases.
 - `BUG_REPORTS.md` documents confirmed bugs and observations.
-- Future test execution reports will summarize execution results.
+- `TEST_SUMMARY_REPORT.md` summarizes manual and Cypress automation execution results.
+- `Automation/` contains Cypress UI automation mapped to the documented manual test cases.
 
 ---
 
@@ -989,7 +1040,8 @@ Recommended documentation flow:
 2. Define approach and prioritization in `TEST_STRATEGY.md`.
 3. Execute detailed scenarios from `PARABANK_15_TEST_CASES_EN.md`.
 4. Document defects and observations in `BUG_REPORTS.md`.
-5. Summarize results in a future test execution report.
+5. Summarize results in `TEST_SUMMARY_REPORT.md`.
+6. Maintain Cypress automation under `Automation/` for repeatable UI regression coverage.
 
 ---
 
@@ -997,11 +1049,10 @@ Recommended documentation flow:
 
 The following improvements may be added in future project phases:
 
-- UI automation with Playwright or Cypress.
+- Expand Cypress automation with additional validation, exploratory, accessibility and compatibility scenarios.
 - API testing with Postman if stable endpoints are included.
-- CI execution with GitHub Actions.
+- CI execution with GitHub Actions for the Cypress suite.
 - Traceability matrix.
-- Test summary report.
 - Accessibility checklist.
 - Responsive testing checklist.
 - Exploratory testing notes.
@@ -1015,6 +1066,8 @@ The following improvements may be added in future project phases:
 - Test Plan: `docs/TEST_PLAN.md`
 - Test Cases: `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - Bug Reports: `docs/BUG_REPORTS.md`
+- Test Summary Report: `docs/TEST_SUMMARY_REPORT.md`
+- Cypress Automation: `Automation/`
 - Application URL: `https://parabank.parasoft.com/parabank/index.htm`
 - Repository: `ParaBank-QA-Project`
 
@@ -1025,6 +1078,7 @@ The following improvements may be added in future project phases:
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial test strategy aligned with 15 manual functional test cases |
+| 1.1 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 
 ---
 
