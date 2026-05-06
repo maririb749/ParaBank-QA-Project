@@ -81,6 +81,8 @@ const transferFunds = ({ amount, fromAccountId, toAccountId }) => {
   cy.get('input[value="Transfer"]').click();
 };
 
+const knownBugIt = Cypress.expose('runKnownBugTests') ? it : it.skip;
+
 describe('ParaBank Transfers', () => {
   it('TC-007: should transfer money successfully between own accounts', () => {
     /**
@@ -126,7 +128,7 @@ describe('ParaBank Transfers', () => {
     });
   });
 
-  it.skip('TC-008: should reject transfer with negative amount - known issue BUG-002', () => {
+  knownBugIt('TC-008: should reject transfer with negative amount - known issue BUG-002', () => {
     /**
      * Purpose:
      * Validates that negative transfer amounts are rejected.
@@ -154,7 +156,7 @@ describe('ParaBank Transfers', () => {
     });
   });
 
-  it.skip('TC-009: should reject transfer with insufficient balance - known issue BUG-003', () => {
+  knownBugIt('TC-009: should reject transfer with insufficient balance - known issue BUG-003', () => {
     /**
      * Purpose:
      * Validates that transfers greater than the source balance are rejected.

@@ -21,6 +21,9 @@ function buildTestUser() {
 
 module.exports = defineConfig({
   allowCypressEnv: false,
+  expose: {
+    runKnownBugTests: false
+  },
 
   e2e: {
     baseUrl: 'https://parabank.parasoft.com/parabank',

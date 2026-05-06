@@ -17,6 +17,8 @@
  * - TC-002 is linked to known bug BUG-001 and is skipped by default to keep the regression suite stable.
  */
 
+const knownBugIt = Cypress.expose('runKnownBugTests') ? it : it.skip;
+
 describe('ParaBank Authentication', () => {
   it('TC-001: should log in successfully with valid credentials', () => {
     /**
@@ -41,7 +43,7 @@ describe('ParaBank Authentication', () => {
     });
   });
 
-  it.skip('TC-002: should reject login with incorrect password - known issue BUG-001', () => {
+  knownBugIt('TC-002: should reject login with incorrect password - known issue BUG-001', () => {
     /**
      * Purpose:
      * Validates that an incorrect password does not authenticate a registered user.
