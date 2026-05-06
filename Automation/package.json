@@ -10,7 +10,8 @@
     "cy:run:auth:known-bugs": "cypress run --spec cypress/e2e/authentication.cy.js --env runKnownBugTests=true",
     "cy:run:accounts": "cypress run --spec cypress/e2e/accounts.cy.js",
     "cy:run:transfers": "cypress run --spec cypress/e2e/transfers.cy.js",
-    "cy:run:transactions": "cypress run --spec cypress/e2e/transactions.cy.js"
+    "cy:run:transactions": "cypress run --spec cypress/e2e/transactions.cy.js",
+    "cy:run:profile": "cypress run --spec cypress/e2e/customer-profile.cy.js"
   },
   "keywords": [
     "qa",
