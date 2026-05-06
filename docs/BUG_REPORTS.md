@@ -394,7 +394,6 @@ The system allows a transfer to be completed even when the source account does n
 
 ### Evidence
 
-- Screenshot: `evidences/screenshots/TC-009_insufficient_balance_before_balances.png`
 - Screenshot: `evidences/screenshots/TC-009_insufficient_balance_validation.png`
 - Screenshot: `evidences/screenshots/TC-009_insufficient_balance_after_balances.png`
 

@@ -628,7 +628,6 @@ Failed
 
 ### Evidence
 
-- `evidences/screenshots/TC-009_insufficient_balance_before_balances.png`
 - `evidences/screenshots/TC-009_insufficient_balance_validation.png`
 - `evidences/screenshots/TC-009_insufficient_balance_after_balances.png`
 
