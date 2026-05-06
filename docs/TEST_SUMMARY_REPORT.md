@@ -1,20 +1,20 @@
 # ParaBank Test Summary Report
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Last Updated:** May 2026  
 **Document Type:** Test Summary Report  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual Cycle Executed  
+**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
 
 ---
 
 ## 1. Purpose
 
-This document summarizes the results of the first manual functional testing cycle executed for the ParaBank QA Portfolio project.
+This document summarizes the results of the first manual functional testing cycle and the Cypress UI automation cycle executed for the ParaBank QA Portfolio project.
 
-The report consolidates the executed scope, test results, confirmed bugs, observations, evidence, and final testing conclusion.
+The report consolidates the executed manual scope, Cypress automation coverage, test results, confirmed bugs, observations, evidence, and final testing conclusion.
 
 This document is based on:
 
@@ -27,11 +27,13 @@ This document is based on:
 
 ## 2. Executive Summary
 
-The first manual testing cycle was completed for the ParaBank Demo Banking Application.
+The first manual testing cycle and the Cypress UI automation cycle were completed for the ParaBank Demo Banking Application.
 
 A total of 15 functional test cases were executed across Authentication, Accounts, Transfers, Transactions, and Customer Profile modules.
 
-The execution identified 3 confirmed bugs and 2 observations. The most critical issues were related to authentication and transfer validation.
+The manual execution identified 3 confirmed bugs and 2 observations. The most critical issues were related to authentication and transfer validation.
+
+After the manual cycle, Cypress UI automation was implemented for the 15 documented functional scenarios. The automation suite contains 5 spec files, with 12 passing tests and 3 pending tests linked to known confirmed bugs.
 
 ---
 
@@ -63,7 +65,53 @@ The execution identified 3 confirmed bugs and 2 observations. The most critical 
 
 ---
 
-## 5. Test Case Results
+## 5. Cypress Automation Summary
+
+After the manual execution cycle, a Cypress UI automation suite was implemented under:
+
+- `Automation/`
+
+The automated suite maps directly to the 15 documented manual test cases.
+
+| Metric | Total |
+|---|---:|
+| Cypress Spec Files | 5 |
+| Automated Test Cases Mapped | 15 |
+| Passing Automated Tests | 12 |
+| Pending Known Bug Tests | 3 |
+| Failing Automated Tests | 0 |
+| Latest Full Suite Duration | 01:36 |
+
+### Cypress Spec Coverage
+
+| Spec File | Related Test Cases | Result |
+|---|---|---|
+| `accounts.cy.js` | TC-004, TC-005, TC-006 | 3 Passed |
+| `authentication.cy.js` | TC-001, TC-002, TC-003 | 2 Passed, 1 Pending |
+| `customer-profile.cy.js` | TC-013, TC-014, TC-015 | 3 Passed |
+| `transactions.cy.js` | TC-010, TC-011, TC-012 | 3 Passed |
+| `transfers.cy.js` | TC-007, TC-008, TC-009 | 1 Passed, 2 Pending |
+
+### Pending Automated Tests
+
+The following automated tests are intentionally pending because the related behaviors are already documented as confirmed bugs from the manual cycle:
+
+| Test Case | Related Bug | Reason |
+|---|---|---|
+| TC-002 | BUG-001 | Incorrect password authentication is a known confirmed bug |
+| TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
+| TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
+
+### Automation Quality Notes
+
+- Cypress tests use dynamic QA users to reduce dependency on unstable public demo data.
+- Known bugs are represented in the automation suite but skipped/pending by default to keep the regression suite stable.
+- Automated scenarios are linked to the documented manual test cases.
+- The latest full Cypress run completed with 0 failing tests.
+
+---
+
+## 6. Test Case Results
 
 | Test Case | Module | Title | Status | Related Finding |
 |---|---|---|---|---|
@@ -85,7 +133,7 @@ The execution identified 3 confirmed bugs and 2 observations. The most critical 
 
 ---
 
-## 6. Confirmed Bugs
+## 7. Confirmed Bugs
 
 | Bug ID | Related Test Case | Module | Severity | Priority | Summary |
 |---|---|---|---|---|---|
@@ -95,7 +143,7 @@ The execution identified 3 confirmed bugs and 2 observations. The most critical 
 
 ---
 
-## 7. Observations
+## 8. Observations
 
 | Observation ID | Related Test Case | Module | Summary |
 |---|---|---|---|
@@ -104,13 +152,21 @@ The execution identified 3 confirmed bugs and 2 observations. The most critical 
 
 ---
 
-## 8. Evidence Summary
+## 9. Evidence Summary
 
-Screenshot evidence was captured for the executed test cases and stored in:
+Screenshot evidence was captured for the manual executed test cases and stored in:
 
 - `evidences/screenshots/`
 
-Examples of captured evidence:
+
+Cypress automation was executed through the terminal using the scripts defined in `Automation/package.json`. The latest full suite execution completed with:
+
+- **15 automated test cases mapped**
+- **12 passing**
+- **3 pending known bugs**
+- **0 failing**
+
+Examples of captured manual evidence:
 
 - `TC-001_login_valid_credentials_pass.png`
 - `TC-002_login_incorrect_password_fail.png`
@@ -125,9 +181,9 @@ Examples of captured evidence:
 
 ---
 
-## 9. Key Findings
+## 10. Key Findings
 
-The following key findings were identified during the manual execution cycle:
+The following key findings were identified during the manual execution and automation cycles:
 
 - The application authenticated a user even when an incorrect password was provided.
 - The transfer flow accepted and processed a negative amount.
@@ -135,9 +191,17 @@ The following key findings were identified during the manual execution cycle:
 - Direct access to a restricted page was blocked, but the system displayed a generic internal error message.
 - The contact information form accepted a non-phone text value in the phone field.
 
+Automation-related findings:
+
+- Cypress automation successfully covered the 15 documented functional scenarios.
+- 12 automated scenarios passed in the latest full suite run.
+- 3 automated scenarios were intentionally kept pending because they are linked to confirmed known bugs.
+- Dynamic test data improved automation stability in the public ParaBank demo environment.
+
+
 ---
 
-## 10. Risk Assessment
+## 11. Risk Assessment
 
 | Area | Risk Level | Reason |
 |---|---|---|
@@ -149,7 +213,7 @@ The following key findings were identified during the manual execution cycle:
 
 ---
 
-## 11. Exit Criteria Evaluation
+## 12. Exit Criteria Evaluation
 
 | Exit Criteria | Status |
 |---|---|
@@ -160,12 +224,16 @@ The following key findings were identified during the manual execution cycle:
 | Observations documented where behavior required clarification | Met |
 | Test documentation updated after execution | Met |
 | Test summary report created | Met |
+| Cypress automation suite implemented | Met |
+| Cypress full suite executed successfully | Met |
+| Cypress automated tests completed with 0 failures | Met |
+| Known bugs represented as pending/skipped automation scenarios | Met |
 
 ---
 
-## 12. Conclusion
+## 13. Conclusion
 
-The first manual functional testing cycle for the ParaBank QA Portfolio project was completed.
+The first manual functional testing cycle and the Cypress UI automation cycle for the ParaBank QA Portfolio project were completed.
 
 The application passed most positive and standard functional scenarios. However, critical issues were found in authentication and transfer validation.
 
@@ -175,11 +243,11 @@ The most important concerns are:
 - Validation of negative transfer amounts.
 - Validation of insufficient balance scenarios.
 
-The project is suitable for demonstrating manual QA skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, and result analysis.
+The project is suitable for demonstrating manual QA and UI automation skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, Cypress automation, regression mapping, and result analysis.
 
 ---
 
-## 13. Recommendation
+## 14. Recommendation
 
 Before considering the tested scope stable, the following actions are recommended:
 
@@ -190,10 +258,14 @@ Before considering the tested scope stable, the following actions are recommende
 - Consider adding phone format validation or documenting accepted phone input rules.
 - Re-run failed and related test cases after fixes.
 - Execute targeted regression testing around authentication, account access, transfers, and transaction history.
+- Keep known-bug automated tests pending until the related application behavior is fixed.
+- Re-enable TC-002, TC-008, and TC-009 automated tests after the related bugs are fixed.
+- Run the Cypress full suite before future documentation or release milestones.
+
 
 ---
 
-## 14. Future Improvements
+## 15. Future Improvements
 
 Recommended next improvements for the project:
 
@@ -202,16 +274,17 @@ Recommended next improvements for the project:
 - Add responsive testing checklist.
 - Add accessibility checklist.
 - Add API testing in a separate future phase if stable endpoints are included.
-- Add UI automation with Playwright or Cypress after the manual cycle is fully documented.
-- Add GitHub Actions only after automated tests exist.
+- Expand Cypress coverage with additional input validation, exploratory, accessibility and compatibility scenarios in future cycles.
+- Add GitHub Actions to run the Cypress suite in CI.
 
 ---
 
-## 15. Document History
+## 16. Document History
 
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial summary report for the first manual functional testing cycle |
+| 1.1 | May 2026 | Mariana | Updated with Cypress UI automation results and full suite execution summary |
 
 ---
 
