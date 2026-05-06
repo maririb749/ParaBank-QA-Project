@@ -1,22 +1,22 @@
 # ParaBank QA Test Plan
 
-**Version:** 1.0  
+**Version:** 1.2  
 **Last Updated:** May 2026  
 **Document Type:** Test Plan  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation  
 **Prepared By:** Mariana  
-**Document Status:** Executed — Manual Cycle Completed  
+**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
 
 ---
 
 ## 1. Executive Summary
 
-This test plan defines the manual testing scope, objectives, environment, execution approach, risks, and deliverables for the ParaBank QA Portfolio project.
+This test plan defines the manual testing and Cypress UI automation scope, objectives, environment, execution approach, risks, and deliverables for the ParaBank QA Portfolio project.
 
 ParaBank is a demo online banking application used to simulate common banking workflows such as user authentication, account opening, account balance verification, fund transfers, transaction history, and customer contact information updates.
 
-The current test cycle focuses on manual functional testing through the web user interface. The goal is to validate the most relevant user flows, document results clearly, capture evidence, and demonstrate structured QA thinking through well-written test artifacts.
+The first test cycle focused on manual functional testing through the web user interface. After the manual cycle, Cypress UI automation was implemented to provide repeatable regression coverage mapped to the same documented test cases. The goal is to validate the most relevant user flows, document results clearly, capture evidence, automate stable regression scenarios, and demonstrate structured QA thinking through well-written test artifacts.
 
 ---
 
@@ -39,7 +39,7 @@ The objectives of this test plan are to:
 
 ### 3.1 In Scope
 
-The current test cycle covers 15 manual functional test cases across 5 modules.
+The current test cycle covers 15 manual functional test cases across 5 modules. Cypress UI automation was also implemented and mapped to the same 15 scenarios.
 
 | Module | Functionality | Coverage |
 |---|---|---:|
@@ -51,6 +51,11 @@ The current test cycle covers 15 manual functional test cases across 5 modules.
 
 **Total Test Cases:** 15  
 **Scenario Types:** Positive, Negative, Boundary, Edge Case, Access Control  
+
+**Cypress Automation Coverage:** 15 automated scenarios mapped to the manual test cases  
+**Latest Cypress Result:** 12 passing, 3 pending known bugs, 0 failing  
+**Automation Location:** `Automation/`  
+
 
 ---
 
@@ -67,7 +72,6 @@ The following areas are not included in the current test cycle:
 - Mobile native application testing
 - API testing
 - Database testing
-- Automated test execution
 - Third-party integrations outside the visible ParaBank demo application
 
 These areas may be considered in future phases if project scope is expanded.
@@ -76,7 +80,7 @@ These areas may be considered in future phases if project scope is expanded.
 
 ## 4. Test Types
 
-The following test types are included in the current manual testing phase:
+The following test types are included in the current manual and Cypress automation testing scope:
 
 | Test Type | Purpose | Related Test Cases |
 |---|---|---|
@@ -85,7 +89,8 @@ The following test types are included in the current manual testing phase:
 | Negative Testing | Validate system behavior with invalid data or invalid access | TC-002, TC-003, TC-006, TC-008, TC-009, TC-014, TC-015 |
 | Boundary / Edge Case Testing | Validate edge conditions and unusual but possible scenarios | TC-003, TC-008, TC-009, TC-012, TC-015 |
 | Access Control Testing | Validate that unauthenticated users cannot access restricted pages | TC-006 |
-| Regression Candidate Testing | Identify tests suitable for future regression execution | High-priority and critical flow test cases |
+| Regression Candidate Testing | Identify tests suitable for repeatable regression execution | High-priority and critical flow test cases |
+| Cypress UI Automation | Automate stable UI regression scenarios mapped to manual test cases | TC-001 to TC-015, with known bugs pending/skipped |
 
 ---
 
@@ -174,7 +179,9 @@ High-priority test cases should be executed first because failures in these flow
 | GitHub | Repository hosting and documentation |
 | Markdown | Test documentation |
 | Chrome DevTools | UI inspection, console checks, debugging support |
-| Browser screenshots / screen recorder | Test evidence capture |
+| Browser screenshots | Manual test evidence capture |
+| Cypress | UI automation and regression execution |
+| Node.js / npm | Cypress dependency management and test execution scripts |
 
 ---
 
@@ -184,16 +191,15 @@ The following tools may be introduced in future phases:
 
 | Tool | Purpose |
 |---|---|
-| Playwright or Cypress | UI test automation |
 | Postman | API testing, if accessible endpoints are included |
-| GitHub Actions | Automated test execution pipeline |
+| GitHub Actions | Future CI execution for the Cypress suite |
 | SQL tool | Database validation, only if database access becomes available |
 
 ---
 
 ## 8. Test Data Requirements
 
-The current test cycle requires controlled and reusable test data.
+The current test cycle requires controlled and reusable manual test data, plus dynamic test data for Cypress automation.
 
 ### Required Test Data
 
@@ -203,6 +209,7 @@ The current test cycle requires controlled and reusable test data.
 - At least two active accounts for transfer scenarios.
 - Account with existing transactions for transaction history validation.
 - Contact information data for customer profile update tests.
+- Dynamic QA users for Cypress automation.
 
 ### Recommended Test User
 
@@ -248,7 +255,10 @@ Testing is considered complete when:
 - [x] All failed tests have a documented bug report or observation.
 - [x] Critical and High severity findings were documented for portfolio review.
 - [x] Test documentation was updated according to actual application behavior.
-- [ ] Test results are summarized in a test execution report.
+- [x] Test results are summarized in a test execution report.
+- [x] Cypress UI automation suite was implemented.
+- [x] Cypress full suite was executed successfully.
+- [x] Known confirmed bugs are represented as pending/skipped automated scenarios.
 
 ---
 
@@ -298,6 +308,35 @@ If a defect is found:
 
 If the issue is not a bug but a mismatch between the test case and the actual expected behavior, the test case should be updated and the reason should be documented.
 
+### 11.4 Cypress Automation Strategy
+
+Cypress UI automation was introduced after the manual execution cycle to support repeatable regression testing.
+
+Automation approach:
+
+- Automated tests are mapped to the documented manual test case IDs.
+- Dynamic QA users are created during Cypress execution to reduce dependency on unstable public demo data.
+- Stable scenarios are active in the regression suite.
+- Confirmed known bugs are represented in the suite but kept pending/skipped by default.
+- Cypress tests are organized by module under `Automation/cypress/e2e/`.
+
+Latest full Cypress suite result:
+
+- **Spec files:** 5
+- **Automated scenarios mapped:** 15
+- **Passing:** 12
+- **Pending known bugs:** 3
+- **Failing:** 0
+- **Duration:** 01:36
+
+Known pending automated scenarios:
+
+| Test Case | Related Bug | Reason |
+|---|---|---|
+| TC-002 | BUG-001 | Incorrect password authentication is a known confirmed bug |
+| TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
+| TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
+
 ---
 
 ## 12. Risks and Mitigation
@@ -312,6 +351,7 @@ If the issue is not a bug but a mismatch between the test case and the actual ex
 | Application behavior differs from expected result | Medium | Medium | Document observation and update test case if needed |
 | Insufficient time for full execution | Medium | High | Prioritize High priority test cases first |
 | Future API or database testing is blocked | Low | Medium | Keep API and database testing as future scope only |
+| Public demo instability affects Cypress execution | Medium | Medium | Use dynamic test data and rerun after environment stabilization |
 
 ---
 
@@ -330,24 +370,23 @@ If the issue is not a bug but a mismatch between the test case and the actual ex
 ### 14.1 Current Deliverables
 
 - [x] Test Plan
+- [x] Test Strategy
 - [x] Functional Test Cases
 - [x] Bug Reports
 - [x] Test Evidence
-- [ ] Test Execution Summary
-
----
+- [x] Test Execution Summary
+- [x] Cypress Automation Test Suite
 
 ### 14.2 Future Deliverables
 
-- [ ] Test Strategy
 - [ ] Traceability Matrix
-- [ ] Automation Test Suite
 - [ ] API Test Collection
-- [ ] CI Pipeline
-- [ ] Final Test Summary Report
+- [ ] CI Pipeline with GitHub Actions
+- [ ] Additional exploratory testing notes
+- [ ] Accessibility checklist
+- [ ] Responsive testing checklist
 
 ---
-
 
 ## 15. Current Manual Execution Summary
 
@@ -361,11 +400,42 @@ The first manual execution cycle has been completed.
 - **Confirmed bugs:** 3
 - **Observations:** 2
 
-Detailed execution results will be documented in `docs/TEST_SUMMARY_REPORT.md`.
+Detailed manual execution results are documented in `docs/TEST_SUMMARY_REPORT.md`.
 
 ---
 
-## 15. Evidence Management
+## 16. Current Cypress Automation Summary
+
+The Cypress UI automation cycle has been completed.
+
+- **Spec files executed:** 5
+- **Automated scenarios mapped:** 15
+- **Passed:** 12
+- **Pending known bugs:** 3
+- **Failed:** 0
+- **Latest full suite duration:** 01:36
+
+Cypress spec coverage:
+
+| Spec File | Related Test Cases | Result |
+|---|---|---|
+| `authentication.cy.js` | TC-001, TC-002, TC-003 | 2 Passed, 1 Pending |
+| `accounts.cy.js` | TC-004, TC-005, TC-006 | 3 Passed |
+| `transfers.cy.js` | TC-007, TC-008, TC-009 | 1 Passed, 2 Pending |
+| `transactions.cy.js` | TC-010, TC-011, TC-012 | 3 Passed |
+| `customer-profile.cy.js` | TC-013, TC-014, TC-015 | 3 Passed |
+
+Pending automated tests are linked to confirmed known bugs:
+
+- TC-002 → BUG-001
+- TC-008 → BUG-002
+- TC-009 → BUG-003
+
+Detailed Cypress automation results are documented in `docs/TEST_SUMMARY_REPORT.md`.
+
+---
+
+## 17. Evidence Management
 
 Evidence should be stored using a clear and consistent naming convention.
 
@@ -378,10 +448,9 @@ Recommended evidence file names:
 - `TC-007_transfer_funds_confirmation.png`
 - `TC-007_transfer_funds_after_balances.png`
 
-Recommended evidence folders:
+Recommended evidence folder:
 
 - `evidences/screenshots/`
-- `evidences/videos/`
 
 Each evidence file should clearly identify:
 
@@ -392,7 +461,7 @@ Each evidence file should clearly identify:
 
 ---
 
-## 16. Traceability
+## 18. Traceability
 
 Each test case is mapped to a requirement reference to support coverage analysis.
 
@@ -411,7 +480,7 @@ The full mapping is maintained in the functional test cases document.
 
 ---
 
-## 17. Maintenance Guidelines
+## 19. Maintenance Guidelines
 
 This test plan should be reviewed and updated when:
 
@@ -419,29 +488,32 @@ This test plan should be reviewed and updated when:
 - A test case expected result is updated.
 - New bugs or observations change the testing approach.
 - New modules are added to the project.
-- Automation, API, or database testing is introduced.
+- Cypress automation changes or API/database testing is introduced.
 - Test execution results reveal coverage gaps.
 
 Test cases should also be reviewed after each execution cycle to ensure they remain accurate and useful.
 
 ---
 
-## 18. References
+## 20. References
 
 - Test Cases Document: `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - Bug Reports Document: `docs/BUG_REPORTS.md`
 - Test Strategy Document: `docs/TEST_STRATEGY.md`
+- Test Summary Report: `docs/TEST_SUMMARY_REPORT.md`
+- Cypress Automation: `Automation/`
 - Application URL: `https://parabank.parasoft.com/parabank/index.htm`
 - Repository: `ParaBank-QA-Project`
 
 ---
 
-## 19. Document History
+## 21. Document History
 
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial test plan for 15 manual functional test cases |
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle |
+| 1.2 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 
 ---
 
