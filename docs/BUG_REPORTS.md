@@ -1,18 +1,18 @@
 # ParaBank Bug Reports
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Last Updated:** May 2026  
 **Document Type:** Bug Reports  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation  
 **Prepared By:** Mariana  
-**Document Status:** Executed — Manual Cycle Completed  
+**Document Status:** Completed — Manual Findings and Cypress Known Bug Mapping  
 
 ---
 
 ## 1. Purpose
 
-This document records confirmed bugs and relevant observations found during the manual testing phase of the ParaBank QA Portfolio project.
+This document records confirmed bugs and relevant observations found during the manual testing phase of the ParaBank QA Portfolio project. It also documents how confirmed bugs are represented in the Cypress automation suite.
 
 The goal is to document issues clearly, consistently, and professionally, including reproduction steps, expected result, actual result, severity, priority, environment, impact, and screenshot evidence.
 
@@ -21,6 +21,8 @@ This document supports the following project artifacts:
 - `docs/TEST_PLAN.md`
 - `docs/TEST_STRATEGY.md`
 - `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
+- `docs/TEST_SUMMARY_REPORT.md`
+- `Automation/`
 
 ---
 
@@ -51,6 +53,26 @@ The first manual execution cycle identified confirmed bugs and observations.
 |---|---|---|---|
 | OBS-001 | TC-006 | Accounts / Security | Observation |
 | OBS-002 | TC-014 | Customer Profile | Observation |
+
+### Cypress Known Bug Mapping
+
+The Cypress automation suite maps the confirmed bugs from the manual cycle as pending/skipped known-bug scenarios. This keeps the regression suite stable while preserving coverage visibility for the known defects.
+
+Latest full Cypress suite result:
+
+- **Automated scenarios mapped:** 15
+- **Passing:** 12
+- **Pending known bugs:** 3
+- **Failing:** 0
+
+| Test Case | Related Bug | Cypress Spec | Automation Status |
+|---|---|---|---|
+| TC-002 | BUG-001 | `authentication.cy.js` | Pending / Skipped Known Bug |
+| TC-008 | BUG-002 | `transfers.cy.js` | Pending / Skipped Known Bug |
+| TC-009 | BUG-003 | `transfers.cy.js` | Pending / Skipped Known Bug |
+
+No new confirmed bugs were identified during the Cypress automation cycle.
+
 
 ---
 
@@ -561,6 +583,7 @@ When retesting a bug:
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial bug reports document with template, severity, priority, examples, and evidence guidelines |
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle with confirmed bugs and observations |
+| 1.2 | May 2026 | Mariana | Added Cypress known bug mapping for confirmed manual defects |
 
 ---
 
