@@ -818,6 +818,16 @@ When time is limited, execution should focus first on:
 
 ---
 
+## Impact and Effort Prioritization
+
+Testing priority was based on customer impact, business risk, data sensitivity, and execution effort.
+
+High-impact, reasonable-effort checks were executed first, including login, restricted access, transfer validation, balance updates, and transaction history. These areas were selected because defects could expose sensitive account data, allow unauthorized access, corrupt financial state, or reduce customer trust.
+
+Lower-risk checks, such as profile field format behavior and broader compatibility checks, were planned or executed after the core banking workflows were covered.
+
+---
+
 ### 6.2 Test Priority
 
 Test priority is based on business impact, user impact, and dependency between modules.

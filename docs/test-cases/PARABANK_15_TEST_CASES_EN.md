@@ -86,6 +86,14 @@ Because ParaBank is a public demo environment, test data may change, reset or be
 **Confirmed Bugs:** 3  
 **Observations:** 2  
 
+### Priority Mapping Note
+
+This test case document uses High / Medium priority labels for manual execution planning. High-priority failed scenarios linked to Critical/P0 bugs are documented with Critical/P0 impact in `docs/BUG_REPORTS.md`.
+
+- TC-002 / BUG-001: Critical / P0 / Needs Retest
+- TC-008 / BUG-002: Critical / P0
+- TC-009 / BUG-003: Critical / P0
+
 ---
 
 ## Test Cases

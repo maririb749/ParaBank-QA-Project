@@ -245,8 +245,8 @@ Automation-related findings:
 
 | Area | Risk Level | Reason |
 |---|---|---|
-| Authentication | High | Incorrect password authentication affects access control reliability |
-| Transfers | High | Invalid transfer amounts and insufficient balance scenarios affect simulated financial logic |
+| Authentication | High | Authentication is a high-risk module. BUG-001 is a Critical/P0 defect and remains Needs Retest. |
+| Transfers | High | Transfers are a high-risk module. BUG-002 and BUG-003 are Critical/P0 defects affecting financial validation and balance integrity. |
 | Accounts | Medium | Restricted access was blocked, but the error message was unclear |
 | Transactions | Low | Transaction history and search behaved as expected during execution |
 | Customer Profile | Medium | Invalid phone format was accepted, affecting data quality |
