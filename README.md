@@ -196,7 +196,7 @@ ParaBank-QA-Project/
 | Git Bash | Command-line Git and project workflow |
 ---
 
-##Planned Next Steps
+## Planned Next Steps
 
 - Execute the planned accessibility smoke test checklist and capture evidence.
 - Execute the planned responsive testing checklist and capture evidence.
