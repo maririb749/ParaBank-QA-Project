@@ -3,7 +3,7 @@
 **Project:** ParaBank QA Portfolio  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Document Type:** Exploratory Testing Plan and Execution Report  
-**Status:** In Progress  
+**Status:** First Exploratory Cycle Completed — Additional Sessions Planned  
 **Prepared By:** Mariana  
 **Last Updated:** May 2026  
 
@@ -15,7 +15,7 @@ This document defines exploratory testing charters and execution notes for the P
 
 Exploratory testing is used to investigate risks, unexpected behavior, usability concerns, and workflow gaps that may not be fully covered by scripted test cases.
 
-This document includes both planned exploratory charters and executed exploratory sessions. EXP-001 has been executed, while EXP-003 remains prioritized for the next exploratory execution. The remaining sessions are still planned.
+This document includes both planned exploratory charters and executed exploratory sessions. EXP-001 and EXP-003 were executed as part of the first exploratory testing cycle. EXP-002, EXP-004, and EXP-005 remain planned for future cycles.
 
 ---
 
@@ -28,7 +28,7 @@ This document includes both planned exploratory charters and executed explorator
 | Environment | ParaBank public demo environment |
 | Browser | Chrome |
 | Operating System | Windows 11 |
-| Session Duration | EXP-001: approximately 30 minutes |
+| Session Duration | EXP-001: approximately 30 minutes; EXP-003: approximately 45 minutes |
 | Evidence Folder | `evidences/screenshots/exploratory/` |
 | Related Test Documents | `docs/TEST_PLAN.md`, `docs/TEST_STRATEGY.md`, `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`, `docs/BUG_REPORTS.md`, `docs/TRACEABILITY_MATRIX.md` |
 
@@ -39,7 +39,6 @@ This document includes both planned exploratory charters and executed explorator
 | Status | Meaning |
 |---|---|
 | Planned | Session has not been executed yet |
-| Priority for Initial Execution | Session is planned as part of the first exploratory cycle |
 | In Progress | Session is currently being executed |
 | Completed | Session was executed and notes were recorded |
 | Blocked | Session could not be completed due to environment or data issues |
@@ -52,7 +51,7 @@ This document includes both planned exploratory charters and executed explorator
 |---|---|---|---|---|
 | EXP-001 | Authentication and Session Access | Explore login, logout, direct URLs, browser back behavior, and unauthenticated access paths | Unauthorized access, confusing session state, poor error handling | Completed |
 | EXP-002 | Accounts and Balances | Explore account creation, account overview, account details, balance display, and navigation between accounts | Incorrect balance visibility, broken account navigation, unclear account state | Planned |
-| EXP-003 | Transfers | Explore valid and invalid transfer behavior, amount input variations, source and destination selection, and balance changes | Invalid financial operations, incorrect balance changes, unclear validation | Priority for Initial Execution |
+| EXP-003 | Transfers | Explore valid and invalid transfer behavior, amount input variations, source and destination selection, and balance changes | Invalid financial operations, incorrect balance changes, unclear validation | Completed |
 | EXP-004 | Transactions | Explore account activity, search by amount, transaction result states, and navigation from transaction results | Missing transactions, unrelated results, unclear empty states | Planned |
 | EXP-005 | Customer Profile | Explore contact information editing, required fields, invalid values, persistence, and validation clarity | Data quality issues, incomplete validation, unexpected profile changes | Planned |
 
@@ -60,7 +59,7 @@ This document includes both planned exploratory charters and executed explorator
 
 ## Initial Execution Scope
 
-The first exploratory cycle focuses on:
+The first exploratory cycle focused on:
 
 - EXP-001 - Authentication and Session Access
 - EXP-003 - Transfers
@@ -74,11 +73,11 @@ These areas also relate to previously documented findings from the manual testin
 - BUG-003 - Transfer with insufficient balance is accepted and creates negative balance
 - OBS-001 - Restricted page access shows generic internal error message
 
-EXP-001 has been executed as part of the first exploratory cycle. EXP-003 remains prioritized for the next exploratory execution.
+EXP-001 and EXP-003 were executed as part of the first exploratory cycle.
 
 ---
 
-# Executed Sessions
+## Executed Sessions
 
 ---
 
@@ -157,6 +156,8 @@ Explore login, logout, direct URLs, browser back behavior, and unauthenticated a
 
 No new confirmed bugs were found during EXP-001.
 
+Existing bug retest result and observations from this exploratory session:
+
 | Finding | Result | Evidence |
 |---|---|---|
 | BUG-001 | Not reproduced during this exploratory session. Incorrect password was rejected as expected. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
@@ -178,22 +179,17 @@ No new confirmed bugs were found during EXP-001.
 - Update `docs/BUG_REPORTS.md` with a retest note for BUG-001, since the incorrect password issue was not reproduced during EXP-001.
 - Add OBS-003 to the project observations if the cached account information after logout should be formally tracked.
 - Consider adding a future security/usability test case for browser Back behavior after logout.
-- Continue the first exploratory cycle with EXP-003 - Transfers.
-
----
-
-# Pending Sessions
 
 ---
 
 ## EXP-003 - Transfers
 
-**Status:** Priority for Initial Execution  
-**Execution Date:** Pending  
+**Status:** Completed  
+**Execution Date:** May 2026  
 **Tester:** Mariana  
-**Browser:** Pending  
-**Operating System:** Pending  
-**Session Duration:** Pending  
+**Browser:** Chrome  
+**Operating System:** Windows 11  
+**Session Duration:** Approximately 45 minutes  
 
 ### Charter
 
@@ -209,9 +205,9 @@ Explore valid and invalid transfer behavior, amount input variations, source and
 - Zero amount
 - Decimal amount
 - Very large amount
-- Same source and destination account, if available
-- Balance consistency after invalid transfer attempts
-- Transaction history after transfer attempts
+- Same source and destination account
+- Balance consistency after invalid or questionable transfer attempts
+- Transaction history after invalid or questionable transfer attempts
 
 ### Related Scripted Test Cases
 
@@ -225,9 +221,77 @@ Explore valid and invalid transfer behavior, amount input variations, source and
 - BUG-002 - Negative transfer amount is accepted and processed
 - BUG-003 - Transfer with insufficient balance is accepted and creates negative balance
 
-### Execution Status
+### Test Data
 
-EXP-003 has not been executed yet. It remains prioritized for the next exploratory testing session.
+- **User account:** `pbqa_exp003_01`
+- **Customer name:** Mariana QA
+- **Password:** Valid local test password, not stored in versioned documentation
+- **Accounts used during execution:** `22668`, `23556`, `14232`, `14343`
+- **Initial balance evidence:** `evidences/screenshots/exploratory/EXP-003_initial_balances.png`
+- **Execution note:** Multiple ParaBank test accounts were used during the exploratory session because additional account creation and transfer attempts generated new account states during execution.
+
+### Evidence Setup
+
+- `evidences/screenshots/exploratory/EXP-003_initial_balances.png`
+
+### Results
+
+| Check ID | Check | Result | Notes | Evidence |
+|---|---|---|---|---|
+| EXP-003-01 | Valid transfer between own accounts | Passed | A valid transfer of `$10.00` was completed successfully from account `22668` to account `23556`. | `evidences/screenshots/exploratory/EXP-003_valid_transfer.png` |
+| EXP-003-02 | Negative transfer amount | Existing Bug Confirmed | BUG-002 confirmed: negative transfer amount `-$10.00` was accepted and processed instead of being rejected. | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
+| EXP-003-03 | Insufficient balance transfer | Existing Bug Confirmed | BUG-003 confirmed: transfer with insufficient balance `$999999.00` was accepted instead of being rejected. | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png` |
+| EXP-003-04 | Empty amount | Observation | Empty transfer amount was not processed, but the system displayed a generic internal error message instead of a clear validation message. | `evidences/screenshots/exploratory/EXP-003_empty_amount.png` |
+| EXP-003-05 | Non-numeric amount | Observation | Non-numeric transfer amount was not processed, but the system displayed a generic internal error message instead of a clear validation message. | `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
+| EXP-003-06 | Zero amount | Observation | Zero amount transfer `$0.00` was accepted and processed. No monetary value was moved, but the system should ideally reject zero-value transfers or provide a clear validation message. | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
+| EXP-003-07 | Decimal amount | Passed | Decimal transfer amount `$0.01` was accepted and processed successfully as a valid monetary value. | `evidences/screenshots/exploratory/EXP-003_decimal_amount.png` |
+| EXP-003-08 | Very large amount | Existing Bug Confirmed | BUG-003 confirmed with a very large amount: transfer `$9999999999.00` was accepted instead of being rejected for insufficient balance. | `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
+| EXP-003-09 | Same source and destination account | Observation | Transfer to the same account was accepted and processed. The system should ideally prevent transfers where source and destination accounts are the same. | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
+| EXP-003-10 | Transaction history after invalid attempts | Observation | Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers. | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| EXP-003-11 | Final balance consistency | Observation | Final balances were affected by invalid or questionable transfer attempts processed during the exploratory session, creating extreme negative and positive account balances while the total balance remained `$515.00`. | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+
+### Observations
+
+| Observation ID | Summary | Related Check | Evidence |
+|---|---|---|---|
+| OBS-004 | Invalid transfer amount inputs displayed generic internal error messages instead of clear validation messages. This was observed for empty and non-numeric amount inputs. | EXP-003-04, EXP-003-05 | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
+| OBS-005 | Zero-value transfer was accepted and processed. The system should ideally reject zero-value transfers or provide a clear validation message. | EXP-003-06 | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
+| OBS-006 | Transfer to the same source and destination account was accepted and processed. | EXP-003-09 | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
+| OBS-007 | Transaction history displayed records for invalid or questionable transfer attempts. | EXP-003-10 | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| OBS-008 | Final account balances showed extreme negative and positive values after invalid or questionable transfer attempts were processed. | EXP-003-11 | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+
+### Bugs Found
+
+No new confirmed bugs were found during EXP-003.
+
+Existing bugs confirmed during this exploratory session:
+
+| Bug ID | Result | Evidence |
+|---|---|---|
+| BUG-002 | Confirmed. Negative transfer amount was accepted and processed instead of being rejected. | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
+| BUG-003 | Confirmed. Transfers with insufficient balance and very large amounts were accepted instead of being rejected. | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
+
+### Evidence
+
+- `evidences/screenshots/exploratory/EXP-003_initial_balances.png`
+- `evidences/screenshots/exploratory/EXP-003_valid_transfer.png`
+- `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png`
+- `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`
+- `evidences/screenshots/exploratory/EXP-003_empty_amount.png`
+- `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png`
+- `evidences/screenshots/exploratory/EXP-003_zero_amount.png`
+- `evidences/screenshots/exploratory/EXP-003_decimal_amount.png`
+- `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png`
+- `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png`
+- `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png`
+- `evidences/screenshots/exploratory/EXP-003_final_balances.png`
+
+### Follow-Up Ideas
+
+- Update `docs/BUG_REPORTS.md` with exploratory retest notes for BUG-002 and BUG-003.
+- Add OBS-004, OBS-005, OBS-006, OBS-007 and OBS-008 to the project observations if they should be formally tracked.
+- Consider adding future scripted test cases for empty amount, non-numeric amount, zero amount, same-account transfer and transaction history after invalid attempts.
+- Consider automating high-value exploratory findings in Cypress after documentation is aligned.
 
 ---
 
@@ -246,19 +310,22 @@ EXP-003 has not been executed yet. It remains prioritized for the next explorato
 | Metric | Total |
 |---|---:|
 | Sessions Planned | 5 |
-| Sessions Executed | 1 |
+| Sessions Executed | 2 |
 | Sessions Blocked | 0 |
 | New Bugs Found | 0 |
+| Existing Bugs Confirmed | 2 |
 | Existing Bugs Not Reproduced | 1 |
 | Observations Confirmed | 1 |
-| New Observations Recorded | 1 |
+| New Observations Recorded | 6 |
 
 ### Summary Notes
 
+- **Executed sessions:** EXP-001, EXP-003
+- **Existing bugs confirmed:** BUG-002, BUG-003
 - **Existing bug not reproduced:** BUG-001
 - **Observation confirmed:** OBS-001
-- **New observation recorded:** OBS-003 - Browser Back after logout displayed cached authenticated account data, but protected actions required login.
-- **Next prioritized session:** EXP-003 - Transfers
+- **New observations recorded:** OBS-003, OBS-004, OBS-005, OBS-006, OBS-007, OBS-008
+- **Remaining planned sessions:** EXP-002, EXP-004, EXP-005
 
 ---
 
