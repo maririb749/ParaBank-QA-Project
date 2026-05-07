@@ -29,7 +29,7 @@ This document is currently a planned execution template. It does not claim that 
 | Browser | To be completed during execution |
 | Operating System | To be completed during execution |
 | Device / Viewport Mode | To be completed during execution |
-| Evidence Folder | `evidences/screenshots/` |
+| Evidence Folder | `evidences/screenshots/responsive/` |
 | Related Test Documents | `docs/TEST_PLAN.md`, `docs/TEST_STRATEGY.md`, `docs/test-cases/PARABANK_15_TEST_CASES_EN.md` |
 
 ---
