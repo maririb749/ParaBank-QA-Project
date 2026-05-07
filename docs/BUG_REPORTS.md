@@ -1,18 +1,18 @@
 # ParaBank Bug Reports
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Last Updated:** May 2026  
 **Document Type:** Bug Reports  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual Findings and Cypress Known Bug Mapping  
+**Document Status:** Completed — Manual Findings, Cypress Known Bug Mapping, and Exploratory Retest Notes  
 
 ---
 
 ## 1. Purpose
 
-This document records confirmed bugs and relevant observations found during the manual testing phase of the ParaBank QA Portfolio project. It also documents how confirmed bugs are represented in the Cypress automation suite.
+This document records confirmed bugs and relevant observations found during the manual and exploratory testing phases of the ParaBank QA Portfolio project. It also documents how confirmed bugs are represented in the Cypress automation suite.
 
 The goal is to document issues clearly, consistently, and professionally, including reproduction steps, expected result, actual result, severity, priority, environment, impact, and screenshot evidence.
 
@@ -32,8 +32,13 @@ The first manual execution cycle identified confirmed bugs and observations. Lat
 
 ### Summary
 
-- **Confirmed Bugs:** 3
-- **Observations:** 8
+- **Manual Bugs:** 3
+- **Manual Observations:** 2
+- **Exploratory Observations:** 4
+- **Total Observations:** 6
+- **Existing Bugs Confirmed by Exploratory Testing:** 2
+- **Existing Bugs Not Reproduced by Exploratory Testing:** 1
+- **Linked Exploratory Impact Evidence Items:** 2
 - **Critical Bugs:** 3
 - **High Bugs:** 0
 - **Medium Bugs:** 0
@@ -49,20 +54,29 @@ The first manual execution cycle identified confirmed bugs and observations. Lat
 
 ### Observations
 
-| Observation ID | Related Test Case / Session | Module | Status |
-|---|---|---|---|
-| OBS-001 | TC-006 / EXP-001 | Accounts / Security | Observation Confirmed |
-| OBS-002 | TC-014 | Customer Profile | Observation |
-| OBS-003 | EXP-001 | Authentication / Session | New Observation |
-| OBS-004 | EXP-003 | Transfers / Validation | New Observation |
-| OBS-005 | EXP-003 | Transfers / Validation | New Observation |
-| OBS-006 | EXP-003 | Transfers / Validation | New Observation |
-| OBS-007 | EXP-003 | Transactions / Transfer History | New Observation |
-| OBS-008 | EXP-003 | Accounts / Balance Consistency | New Observation |
+| Observation ID | Source | Related Test Case / Session | Module | Risk / Priority | Status |
+|---|---|---|---|---|---|
+| OBS-001 | Manual + Exploratory | TC-006 / EXP-001 | Accounts / Security | Low / P2 | Observation Confirmed |
+| OBS-002 | Manual | TC-014 | Customer Profile | Low / P3 | Observation |
+| OBS-003 | Exploratory | EXP-001 | Authentication / Session | High / P1 | New Observation |
+| OBS-004 | Exploratory | EXP-003 | Transfers / Validation | Medium / P2 | New Observation |
+| OBS-005 | Exploratory | EXP-003 | Transfers / Validation | Medium / P2 | New Observation |
+| OBS-006 | Exploratory | EXP-003 | Transfers / Validation | Medium / P2 | New Observation |
+
+### Linked Exploratory Impact Evidence
+
+The following EXP-003 findings are treated as impact evidence linked to BUG-003 and related transfer validation issues, not as separate standalone observations in the project metrics.
+
+| Evidence ID | Related Session | Related Issue | Module | Evidence |
+|---|---|---|---|---|
+| OBS-007 | EXP-003 | BUG-003 / transfer validation impact | Transactions / Transfer History | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| OBS-008 | EXP-003 | BUG-003 / transfer validation impact | Accounts / Balance Consistency | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
 
 ### Cypress Known Bug Mapping
 
 The Cypress automation suite maps the confirmed bugs from the manual cycle as pending/skipped known-bug scenarios. This keeps the regression suite stable while preserving coverage visibility for the known defects.
+
+BUG-001 was reproduced during the manual cycle and was not reproduced during exploratory session EXP-001. Its status remains `Needs Retest` until the behavior is consistently retested. TC-002 remains a pending/skipped known-bug Cypress scenario until the documentation and automation strategy are updated after consistent retest results.
 
 Latest full Cypress suite result:
 
@@ -89,6 +103,8 @@ Exploratory testing added retest context for existing bugs and identified new ob
 | BUG-002 | EXP-003 | Confirmed. Negative transfer amount was accepted and processed. | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
 | BUG-003 | EXP-003 | Confirmed. Insufficient balance and very large transfers were accepted and processed. | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
 | OBS-001 | EXP-001 | Confirmed. Direct unauthenticated access was blocked with a generic internal error message. | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
+
+EXP-003 also produced transaction-history and final-balance evidence showing the impact of invalid transfer processing. These are linked to BUG-003 and related transfer validation issues rather than counted as separate standalone observations.
 
 
 ---
@@ -221,7 +237,7 @@ Add any additional context, investigation notes, browser console information, or
 **Module:** Authentication  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** Needs Retest
+**Status:** Needs Retest  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
@@ -374,7 +390,7 @@ This bug is classified as Critical because it affects simulated financial transa
 **Module:** Transfers  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** Open
+**Status:** Open  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -439,9 +455,6 @@ This issue affects the reliability of the transfer flow. The system should preve
 ### Notes
 
 This bug is classified as Critical because it affects simulated financial transaction validation and account balance integrity.
-
----
-
 
 ### Exploratory Retest Notes
 
@@ -574,13 +587,13 @@ This is documented as an observation instead of a confirmed bug because the curr
 
 ---
 
----
-
 ## OBS-003 — Browser Back after logout displays cached authenticated account information
 
 **Related Session:** EXP-001  
 **Module:** Authentication / Session  
 **Status:** New Observation  
+**Risk Level:** High  
+**Priority:** P1  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -620,6 +633,8 @@ This is documented as an observation because the active session was not restored
 **Related Session:** EXP-003  
 **Module:** Transfers / Validation  
 **Status:** New Observation  
+**Risk Level:** Medium  
+**Priority:** P2  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -656,6 +671,8 @@ The transfer was not processed, which protects the financial operation. However,
 **Related Session:** EXP-003  
 **Module:** Transfers / Validation  
 **Status:** New Observation  
+**Risk Level:** Medium  
+**Priority:** P2  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -689,6 +706,8 @@ This behavior does not directly change the monetary balance, but it may create u
 **Related Session:** EXP-003  
 **Module:** Transfers / Validation  
 **Status:** New Observation  
+**Risk Level:** Medium  
+**Priority:** P2  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -717,18 +736,18 @@ Same-account transfers do not provide meaningful financial value and may create 
 
 ---
 
-## OBS-007 — Transaction history displays records for invalid or questionable transfer attempts
+## OBS-007 — Linked impact evidence: transaction history displays records for invalid or questionable transfer attempts
 
 **Related Session:** EXP-003  
 **Module:** Transactions / Transfer History  
-**Status:** New Observation  
+**Status:** Linked Impact Evidence  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
 
 ### Summary
 
-Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers.
+Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers. This is tracked as impact evidence linked to BUG-003 and related transfer validation issues, not as a separate standalone observation in the project metrics.
 
 ### Expected Result
 
@@ -745,22 +764,22 @@ Transaction history displayed records for invalid or questionable transfer attem
 
 ### Impact
 
-The transaction history may become unreliable if invalid or questionable operations are recorded as successful activity. This can affect user trust and auditability of account activity.
+The transaction history may become unreliable if invalid or questionable operations are recorded as successful activity. This supports the impact analysis for BUG-003 and related transfer validation weaknesses.
 
 ---
 
-## OBS-008 — Final balances show extreme values after invalid transfer attempts
+## OBS-008 — Linked impact evidence: final balances show extreme values after invalid transfer attempts
 
 **Related Session:** EXP-003  
 **Module:** Accounts / Balance Consistency  
-**Status:** New Observation  
+**Status:** Linked Impact Evidence  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
 
 ### Summary
 
-Final account balances showed extreme negative and positive values after invalid or questionable transfer attempts were processed.
+Final account balances showed extreme negative and positive values after invalid or questionable transfer attempts were processed. This is tracked as impact evidence linked to BUG-003 and related transfer validation issues, not as a separate standalone observation in the project metrics.
 
 ### Expected Result
 
@@ -779,7 +798,7 @@ Final account balances showed extreme negative and positive values after invalid
 
 ### Impact
 
-Extreme account balances indicate that invalid or questionable transfer attempts affected individual account state. This reinforces the risk already identified in the transfer validation bugs and affects confidence in account balance integrity.
+Extreme account balances indicate that invalid or questionable transfer attempts affected individual account state. This reinforces the risk already identified in BUG-003 and related transfer validation weaknesses.
 
 ---
 
@@ -837,6 +856,7 @@ When retesting a bug:
 | 1.0 | May 2026 | Mariana | Initial bug reports document with template, severity, priority, examples, and evidence guidelines |
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle with confirmed bugs and observations |
 | 1.2 | May 2026 | Mariana | Added Cypress known bug mapping for confirmed manual defects |
+| 1.3 | May 2026 | Mariana | Refined exploratory metrics, BUG-001 retest status, observation risk classification, and linked impact evidence for EXP-003 |
 
 ---
 

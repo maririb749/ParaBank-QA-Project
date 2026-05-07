@@ -1,20 +1,20 @@
 # ParaBank Test Summary Report
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Last Updated:** May 2026  
 **Document Type:** Test Summary Report  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
+**Document Status:** Completed — Manual, Cypress Automation, and First Exploratory Cycles Executed  
 
 ---
 
 ## 1. Purpose
 
-This document summarizes the results of the first manual functional testing cycle and the Cypress UI automation cycle executed for the ParaBank QA Portfolio project.
+This document summarizes the results of the first manual functional testing cycle, the Cypress UI automation cycle, and the first exploratory testing cycle executed for the ParaBank QA Portfolio project.
 
-The report consolidates the executed manual scope, Cypress automation coverage, test results, confirmed bugs, observations, evidence, and final testing conclusion.
+The report consolidates the executed manual scope, Cypress automation coverage, exploratory testing scope, test results, confirmed bugs, observations, evidence, and final testing conclusion.
 
 This document is based on:
 
@@ -22,12 +22,14 @@ This document is based on:
 - `docs/TEST_STRATEGY.md`
 - `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - `docs/BUG_REPORTS.md`
+- `docs/EXPLORATORY_TESTING.md`
+- `docs/TRACEABILITY_MATRIX.md`
 
 ---
 
 ## 2. Executive Summary
 
-The first manual testing cycle and the Cypress UI automation cycle were completed for the ParaBank Demo Banking Application.
+The first manual testing cycle, the Cypress UI automation cycle, and the first exploratory testing cycle were completed for the ParaBank Demo Banking Application.
 
 A total of 15 functional test cases were executed across Authentication, Accounts, Transfers, Transactions, and Customer Profile modules.
 
@@ -35,9 +37,13 @@ The manual execution identified 3 confirmed bugs and 2 observations. The most cr
 
 After the manual cycle, Cypress UI automation was implemented for the 15 documented functional scenarios. The automation suite contains 5 spec files, with 12 passing tests and 3 pending tests linked to known confirmed bugs.
 
+Exploratory testing was then executed for two high-risk areas: authentication/session access and transfers. It confirmed two existing transfer bugs, did not reproduce BUG-001 during EXP-001, confirmed one existing observation, recorded four standalone exploratory observations, and captured two linked impact evidence items for transfer validation risk.
+
 ---
 
 ## 3. Scope Executed
+
+The executed scope includes the manual functional cycle, Cypress UI automation mapping for the same 15 scenarios, and the first exploratory testing cycle.
 
 | Module | Test Cases Executed | Result Summary |
 |---|---:|---|
@@ -46,6 +52,11 @@ After the manual cycle, Cypress UI automation was implemented for the 15 documen
 | Transfers | 3 | 1 Passed, 2 Failed |
 | Transactions | 3 | 3 Passed |
 | Customer Profile | 3 | 2 Passed, 1 Passed with Observation |
+
+| Exploratory Session | Area | Status | Result Summary |
+|---|---|---|---|
+| EXP-001 | Authentication and Session Access | Completed | BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. |
+| EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-006 were recorded. OBS-007 and OBS-008 were retained as linked impact evidence. |
 
 ---
 
@@ -60,8 +71,13 @@ After the manual cycle, Cypress UI automation was implemented for the 15 documen
 | Passed with Observation | 2 |
 | Blocked | 0 |
 | Not Executed | 0 |
-| Confirmed Bugs | 3 |
-| Observations | 2 |
+| Manual Bugs | 3 |
+| Manual Observations | 2 |
+| Exploratory Observations | 4 |
+| Total Observations | 6 |
+| Existing Bugs Confirmed by Exploratory Testing | 2 |
+| Existing Bugs Not Reproduced by Exploratory Testing | 1 |
+| Linked Exploratory Impact Evidence Items | 2 |
 
 ---
 
@@ -98,7 +114,7 @@ The following automated tests are intentionally pending because the related beha
 
 | Test Case | Related Bug | Reason |
 |---|---|---|
-| TC-002 | BUG-001 | Incorrect password authentication is a known confirmed bug |
+| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle. It was not reproduced during EXP-001, but remains pending/skipped until consistent retest results support a documentation and automation strategy update. |
 | TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
 | TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
 
@@ -133,7 +149,7 @@ The following automated tests are intentionally pending because the related beha
 
 ---
 
-## 7. Confirmed Bugs
+## 7. Manual Bugs
 
 | Bug ID | Related Test Case | Module | Severity | Priority | Summary |
 |---|---|---|---|---|---|
@@ -141,14 +157,34 @@ The following automated tests are intentionally pending because the related beha
 | BUG-002 | TC-008 | Transfers | Critical | P0 | Negative transfer amount is accepted and processed |
 | BUG-003 | TC-009 | Transfers | Critical | P0 | Transfer with insufficient balance is accepted and creates negative balance |
 
+BUG-001 was reproduced during the manual cycle and was not reproduced during EXP-001. It remains `Needs Retest` until the behavior is consistently retested.
+
 ---
 
 ## 8. Observations
+
+### Manual Observations
 
 | Observation ID | Related Test Case | Module | Summary |
 |---|---|---|---|
 | OBS-001 | TC-006 | Accounts / Security | Restricted page access shows generic internal error message |
 | OBS-002 | TC-014 | Customer Profile | Invalid phone format is accepted during contact information update |
+
+### Exploratory Observations
+
+| Observation ID | Related Session | Module | Risk / Priority | Summary |
+|---|---|---|---|---|
+| OBS-003 | EXP-001 | Authentication / Session | High / P1 | Browser Back after logout displayed cached account information, but protected actions required login. |
+| OBS-004 | EXP-003 | Transfers / Validation | Medium / P2 | Empty and non-numeric transfer amounts displayed generic internal error messages. |
+| OBS-005 | EXP-003 | Transfers / Validation | Medium / P2 | Zero-value transfer was accepted and processed. |
+| OBS-006 | EXP-003 | Transfers / Validation | Medium / P2 | Same-account transfer was accepted and processed. |
+
+### Linked Exploratory Impact Evidence
+
+| Evidence ID | Related Session | Related Issue | Summary |
+|---|---|---|---|
+| OBS-007 | EXP-003 | BUG-003 / transfer validation impact | Transaction history displayed records for invalid or questionable transfer attempts. |
+| OBS-008 | EXP-003 | BUG-003 / transfer validation impact | Final balances showed extreme negative and positive values after invalid or questionable transfer attempts. |
 
 ---
 
@@ -183,13 +219,17 @@ Examples of captured manual evidence:
 
 ## 10. Key Findings
 
-The following key findings were identified during the manual execution and automation cycles:
+The following key findings were identified during the manual execution, Cypress automation, and exploratory testing cycles:
 
 - The application authenticated a user even when an incorrect password was provided.
 - The transfer flow accepted and processed a negative amount.
 - The transfer flow allowed a transaction greater than the source account balance and created a negative balance.
 - Direct access to a restricted page was blocked, but the system displayed a generic internal error message.
 - The contact information form accepted a non-phone text value in the phone field.
+- BUG-001 was not reproduced during exploratory retest and remains Needs Retest.
+- BUG-002 and BUG-003 were confirmed again during exploratory transfer testing.
+- Browser Back after logout displayed cached authenticated account information, but protected actions required login.
+- Additional transfer validation weaknesses were observed for empty, non-numeric, zero-value, and same-account transfers.
 
 Automation-related findings:
 
@@ -233,7 +273,7 @@ Automation-related findings:
 
 ## 13. Conclusion
 
-The first manual functional testing cycle and the Cypress UI automation cycle for the ParaBank QA Portfolio project were completed.
+The first manual functional testing cycle, Cypress UI automation cycle, and first exploratory testing cycle for the ParaBank QA Portfolio project were completed.
 
 The application passed most positive and standard functional scenarios. However, critical issues were found in authentication and transfer validation.
 
@@ -243,7 +283,7 @@ The most important concerns are:
 - Validation of negative transfer amounts.
 - Validation of insufficient balance scenarios.
 
-The project is suitable for demonstrating manual QA and UI automation skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, Cypress automation, regression mapping, and result analysis.
+The project is suitable for demonstrating manual QA, exploratory testing, and UI automation skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, exploratory analysis, Cypress automation, regression mapping, and result analysis.
 
 ---
 
@@ -269,13 +309,11 @@ Before considering the tested scope stable, the following actions are recommende
 
 Recommended next improvements for the project:
 
-- Add a traceability matrix.
-- Add exploratory testing notes.
-- Add responsive testing checklist.
-- Add accessibility checklist.
+- Execute the planned accessibility checklist and capture results/evidence.
+- Execute the planned responsive testing checklist and capture results/evidence.
 - Add API testing in a separate future phase if stable endpoints are included.
 - Expand Cypress coverage with additional input validation, exploratory, accessibility and compatibility scenarios in future cycles.
-- Add GitHub Actions to run the Cypress suite in CI.
+- Improve CI reporting and artifact retention for Cypress execution results.
 
 ---
 
@@ -304,29 +342,30 @@ These areas were selected because authentication controls access to protected ba
 | Existing Bugs Confirmed | 2 |
 | Existing Bugs Not Reproduced | 1 |
 | Existing Observations Confirmed | 1 |
-| New Observations Recorded | 6 |
+| New Exploratory Observations Recorded | 4 |
+| Linked Exploratory Impact Evidence Items | 2 |
 
 ### Executed Sessions
 
 | Session ID | Area | Status | Main Result |
 |---|---|---|---|
 | EXP-001 | Authentication and Session Access | Completed | BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. |
-| EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-008 were recorded. |
+| EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-006 were recorded. OBS-007 and OBS-008 were retained as linked impact evidence. |
 
 ### Exploratory Findings
 
 | Finding ID | Type | Related Session | Summary |
 |---|---|---|---|
-| BUG-001 | Existing Bug Not Reproduced | EXP-001 | Incorrect password was rejected during exploratory retest. |
+| BUG-001 | Existing Bug Not Reproduced | EXP-001 | Incorrect password was rejected during exploratory retest. BUG-001 remains Needs Retest because it was previously reproduced during the manual cycle. |
 | BUG-002 | Existing Bug Confirmed | EXP-003 | Negative transfer amount was accepted and processed. |
 | BUG-003 | Existing Bug Confirmed | EXP-003 | Insufficient balance and very large transfers were accepted and processed. |
 | OBS-001 | Existing Observation Confirmed | EXP-001 | Direct unauthenticated access was blocked with a generic internal error message. |
-| OBS-003 | New Observation | EXP-001 | Browser Back after logout displayed cached account information, but protected actions required login. |
-| OBS-004 | New Observation | EXP-003 | Empty and non-numeric transfer amounts displayed generic internal error messages. |
-| OBS-005 | New Observation | EXP-003 | Zero-value transfer was accepted and processed. |
-| OBS-006 | New Observation | EXP-003 | Same-account transfer was accepted and processed. |
-| OBS-007 | New Observation | EXP-003 | Transaction history displayed records for invalid or questionable transfer attempts. |
-| OBS-008 | New Observation | EXP-003 | Final balances showed extreme negative and positive values after invalid or questionable transfer attempts. |
+| OBS-003 | New Observation | EXP-001 | Browser Back after logout displayed cached account information, but protected actions required login. Classified as High / P1 risk. |
+| OBS-004 | New Observation | EXP-003 | Empty and non-numeric transfer amounts displayed generic internal error messages. Classified as Medium / P2 risk. |
+| OBS-005 | New Observation | EXP-003 | Zero-value transfer was accepted and processed. Classified as Medium / P2 risk. |
+| OBS-006 | New Observation | EXP-003 | Same-account transfer was accepted and processed. Classified as Medium / P2 risk. |
+| OBS-007 | Linked Impact Evidence | EXP-003 | Transaction history displayed records for invalid or questionable transfer attempts. This supports BUG-003 and related transfer validation impact. |
+| OBS-008 | Linked Impact Evidence | EXP-003 | Final balances showed extreme negative and positive values after invalid or questionable transfer attempts. This supports BUG-003 and related transfer validation impact. |
 
 ### Evidence
 
@@ -348,15 +387,13 @@ The exploratory testing cycle strengthened the portfolio by showing investigatio
 
 Main conclusions:
 
-- Authentication behavior improved during exploratory retest because BUG-001 was not reproduced.
+- BUG-001 was not reproduced during exploratory retest, but remains Needs Retest because it was previously reproduced in the manual cycle.
 - Transfer validation remains high-risk because BUG-002 and BUG-003 were confirmed.
-- Additional usability, validation, transaction history, and balance consistency observations were identified.
+- Additional session, usability, and validation observations were identified. Transaction history and final balance screenshots support the impact analysis for transfer validation defects.
 - The exploratory results provide candidates for future manual regression cases and Cypress automation coverage.
 
 ### Recommended Follow-Up
 
-- Update `docs/BUG_REPORTS.md` with retest notes and new observations.
-- Update `docs/TRACEABILITY_MATRIX.md` to include exploratory coverage.
 - Consider creating future scripted test cases for:
   - empty transfer amount
   - non-numeric transfer amount
@@ -364,7 +401,8 @@ Main conclusions:
   - same-account transfer
   - browser Back behavior after logout
   - transaction history after invalid transfer attempts
-- Consider automating high-value exploratory findings in Cypress after documentation is aligned.
+- Keep TC-002 pending/skipped in Cypress until BUG-001 has consistent retest results and the documentation/automation strategy is updated.
+- Consider automating high-value exploratory findings in Cypress after the expected behavior is agreed.
   
 ---
 
@@ -374,6 +412,7 @@ Main conclusions:
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial summary report for the first manual functional testing cycle |
 | 1.1 | May 2026 | Mariana | Updated with Cypress UI automation results and full suite execution summary |
+| 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, consistent metrics, BUG-001 retest clarification, and refined exploratory observation classification |
 
 ---
 

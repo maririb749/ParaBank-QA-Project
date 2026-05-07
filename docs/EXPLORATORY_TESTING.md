@@ -147,10 +147,10 @@ Explore login, logout, direct URLs, browser back behavior, and unauthenticated a
 
 ### Observations
 
-| Observation ID | Summary | Related Check | Evidence |
-|---|---|---|---|
-| OBS-001 | Direct unauthenticated access to `openaccount.htm` was blocked, but the system displayed a generic internal error message. | EXP-001-06 | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
-| OBS-003 | Browser Back after logout displayed cached authenticated account information, including account balance and Account Services. Protected actions requested login, indicating the active session was not restored. | EXP-001-05 | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
+| Observation ID | Summary | Risk / Priority | Related Check | Evidence |
+|---|---|---|---|---|
+| OBS-001 | Direct unauthenticated access to `openaccount.htm` was blocked, but the system displayed a generic internal error message. | Low / P2 | EXP-001-06 | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
+| OBS-003 | Browser Back after logout displayed cached authenticated account information, including account balance and Account Services. Protected actions requested login, indicating the active session was not restored. | High / P1 | EXP-001-05 | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
 
 ### Bugs Found
 
@@ -160,7 +160,7 @@ Existing bug retest result and observations from this exploratory session:
 
 | Finding | Result | Evidence |
 |---|---|---|
-| BUG-001 | Not reproduced during this exploratory session. Incorrect password was rejected as expected. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-001 | Not reproduced during this exploratory session. Incorrect password was rejected as expected. BUG-001 remains Needs Retest because it was previously reproduced during the manual cycle. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
 | OBS-001 | Confirmed. Direct unauthenticated access was blocked with a generic internal error message. | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
 | OBS-003 | New observation recorded. Browser Back after logout displayed cached account information, but protected actions required login. | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
 
@@ -176,8 +176,7 @@ Existing bug retest result and observations from this exploratory session:
 
 ### Follow-Up Ideas
 
-- Update `docs/BUG_REPORTS.md` with a retest note for BUG-001, since the incorrect password issue was not reproduced during EXP-001.
-- Add OBS-003 to the project observations if the cached account information after logout should be formally tracked.
+- Continue retesting BUG-001 before changing its `Needs Retest` status or the Cypress skipped known-bug strategy for TC-002.
 - Consider adding a future security/usability test case for browser Back behavior after logout.
 
 ---
@@ -247,16 +246,23 @@ Explore valid and invalid transfer behavior, amount input variations, source and
 | EXP-003-07 | Decimal amount | Passed | Decimal transfer amount `$0.01` was accepted and processed successfully as a valid monetary value. | `evidences/screenshots/exploratory/EXP-003_decimal_amount.png` |
 | EXP-003-08 | Very large amount | Existing Bug Confirmed | BUG-003 confirmed with a very large amount: transfer `$9999999999.00` was accepted instead of being rejected for insufficient balance. | `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
 | EXP-003-09 | Same source and destination account | Observation | Transfer to the same account was accepted and processed. The system should ideally prevent transfers where source and destination accounts are the same. | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
-| EXP-003-10 | Transaction history after invalid attempts | Observation | Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers. | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
-| EXP-003-11 | Final balance consistency | Observation | Final balances were affected by invalid or questionable transfer attempts processed during the exploratory session, creating extreme negative and positive account balances while the total balance remained `$515.00`. | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+| EXP-003-10 | Transaction history after invalid attempts | Linked Impact Evidence | Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers. This supports BUG-003 and related transfer validation impact. | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| EXP-003-11 | Final balance consistency | Linked Impact Evidence | Final balances were affected by invalid or questionable transfer attempts processed during the exploratory session, creating extreme negative and positive account balances while the total balance remained `$515.00`. This supports BUG-003 and related transfer validation impact. | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
 
 ### Observations
 
-| Observation ID | Summary | Related Check | Evidence |
+| Observation ID | Summary | Risk / Priority | Related Check | Evidence |
+|---|---|---|---|---|
+| OBS-004 | Invalid transfer amount inputs displayed generic internal error messages instead of clear validation messages. This was observed for empty and non-numeric amount inputs. | Medium / P2 | EXP-003-04, EXP-003-05 | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
+| OBS-005 | Zero-value transfer was accepted and processed. The system should ideally reject zero-value transfers or provide a clear validation message. | Medium / P2 | EXP-003-06 | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
+| OBS-006 | Transfer to the same source and destination account was accepted and processed. | Medium / P2 | EXP-003-09 | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
+
+### Linked Impact Evidence
+
+The following evidence is linked to BUG-003 and related transfer validation issues. It is not counted as separate standalone exploratory observations.
+
+| Evidence ID | Summary | Related Check | Evidence |
 |---|---|---|---|
-| OBS-004 | Invalid transfer amount inputs displayed generic internal error messages instead of clear validation messages. This was observed for empty and non-numeric amount inputs. | EXP-003-04, EXP-003-05 | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
-| OBS-005 | Zero-value transfer was accepted and processed. The system should ideally reject zero-value transfers or provide a clear validation message. | EXP-003-06 | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
-| OBS-006 | Transfer to the same source and destination account was accepted and processed. | EXP-003-09 | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
 | OBS-007 | Transaction history displayed records for invalid or questionable transfer attempts. | EXP-003-10 | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
 | OBS-008 | Final account balances showed extreme negative and positive values after invalid or questionable transfer attempts were processed. | EXP-003-11 | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
 
@@ -288,10 +294,8 @@ Existing bugs confirmed during this exploratory session:
 
 ### Follow-Up Ideas
 
-- Update `docs/BUG_REPORTS.md` with exploratory retest notes for BUG-002 and BUG-003.
-- Add OBS-004, OBS-005, OBS-006, OBS-007 and OBS-008 to the project observations if they should be formally tracked.
 - Consider adding future scripted test cases for empty amount, non-numeric amount, zero amount, same-account transfer and transaction history after invalid attempts.
-- Consider automating high-value exploratory findings in Cypress after documentation is aligned.
+- Consider automating high-value exploratory findings in Cypress after the expected behavior is agreed.
 
 ---
 
@@ -316,7 +320,8 @@ Existing bugs confirmed during this exploratory session:
 | Existing Bugs Confirmed | 2 |
 | Existing Bugs Not Reproduced | 1 |
 | Observations Confirmed | 1 |
-| New Observations Recorded | 6 |
+| New Exploratory Observations Recorded | 4 |
+| Linked Exploratory Impact Evidence Items | 2 |
 
 ### Summary Notes
 
@@ -324,7 +329,8 @@ Existing bugs confirmed during this exploratory session:
 - **Existing bugs confirmed:** BUG-002, BUG-003
 - **Existing bug not reproduced:** BUG-001
 - **Observation confirmed:** OBS-001
-- **New observations recorded:** OBS-003, OBS-004, OBS-005, OBS-006, OBS-007, OBS-008
+- **New exploratory observations recorded:** OBS-003, OBS-004, OBS-005, OBS-006
+- **Linked exploratory impact evidence:** OBS-007, OBS-008
 - **Remaining planned sessions:** EXP-002, EXP-004, EXP-005
 
 ---

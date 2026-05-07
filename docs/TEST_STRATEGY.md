@@ -1,12 +1,12 @@
 # ParaBank QA Test Strategy
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Last Updated:** May 2026  
 **Document Type:** Test Strategy  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
+**Document Status:** Completed — Manual, Cypress Automation, and First Exploratory Cycles Executed  
 
 ---
 
@@ -14,11 +14,11 @@
 
 This document defines the testing strategy for the ParaBank QA Portfolio project.
 
-The purpose of this strategy is to explain how the application was tested, how scenarios were selected, how risks were prioritized, how evidence was collected, how defects or observations were documented, and how Cypress UI automation was added for regression coverage.
+The purpose of this strategy is to explain how the application was tested, how scenarios were selected, how risks were prioritized, how evidence was collected, how defects or observations were documented, how exploratory testing was used for high-risk areas, and how Cypress UI automation was added for regression coverage.
 
 This strategy supports the test scope defined in `docs/TEST_PLAN.md` and aligns with the functional test cases documented in `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`.
 
-The first phase focused on manual functional testing through the web user interface. The second phase added Cypress UI automation mapped to the documented manual test cases. API testing, database testing, performance testing, and full accessibility testing are not part of the current execution scope and may be introduced in future phases.
+The first phase focused on manual functional testing through the web user interface. The second phase added Cypress UI automation mapped to the documented manual test cases. The first exploratory cycle then investigated authentication/session access and transfers because those areas carry high customer, data, money, and trust risk. API testing, database testing, performance testing, accessibility execution, and responsive execution are not part of the completed execution scope and may be introduced in future phases.
 
 ---
 
@@ -56,13 +56,20 @@ This does not mean every real-world feature should always have exactly three tes
 
 ## 3. Current Testing Scope
 
-The current strategy covers 15 manual test cases and Cypress UI automation mapped to those same 15 scenarios across 5 modules:
+The current strategy covers 15 manual test cases, Cypress UI automation mapped to those same 15 scenarios, and the first exploratory testing cycle.
+
+Manual and automated functional coverage spans 5 modules:
 
 - Authentication
 - Accounts
 - Transfers
 - Transactions
 - Customer Profile
+
+Completed exploratory sessions:
+
+- EXP-001 - Authentication and Session Access
+- EXP-003 - Transfers
 
 Out of scope for the current phase:
 
@@ -71,9 +78,13 @@ Out of scope for the current phase:
 - Load testing
 - Stress testing
 - Security penetration testing
+- Accessibility checklist execution
+- Responsive checklist execution
 - Full accessibility compliance testing
 - Full localization testing
 - Native mobile testing
+
+Accessibility and responsive testing templates exist and are ready for execution, but their checks have not been executed yet.
 
 ### Cypress Automation Scope
 
@@ -97,11 +108,24 @@ Latest full Cypress execution result:
 - **Failing:** 0
 - **Full suite duration:** 01:36
 
-Known bugs intentionally kept pending in the automation suite:
+Known bugs or retest-risk scenarios intentionally kept pending in the automation suite:
 
-- TC-002 → BUG-001
+- TC-002 → BUG-001, reproduced during the manual cycle and still Needs Retest after EXP-001
 - TC-008 → BUG-002
 - TC-009 → BUG-003
+
+---
+
+### Exploratory Testing Scope
+
+Exploratory testing was used to investigate high-risk behavior beyond fixed scripted test cases.
+
+| Session | Area | Status | Risk Focus |
+|---|---|---|---|
+| EXP-001 | Authentication and Session Access | Completed | Unauthorized access, confusing session state, cached account information, poor error handling |
+| EXP-003 | Transfers | Completed | Invalid financial operations, incorrect balance changes, weak validation, transaction history impact |
+
+Exploratory testing confirmed BUG-002 and BUG-003, did not reproduce BUG-001 during EXP-001, confirmed OBS-001, recorded OBS-003 to OBS-006, and preserved OBS-007 and OBS-008 as linked impact evidence.
 
 ---
 
@@ -182,7 +206,7 @@ Risk if it fails:
 
 Priority:
 
-- High.
+- Critical / P0.
 
 ---
 
@@ -404,10 +428,12 @@ Verification points:
 Risk if it fails:
 
 - Invalid financial transactions may be accepted.
+- Account balances may be altered incorrectly.
+- Customer trust in transfer validation may be compromised.
 
 Priority:
 
-- Medium.
+- Critical / P0.
 
 ---
 
@@ -429,10 +455,11 @@ Risk if it fails:
 
 - Account balance may become negative.
 - Transfer logic may be unreliable.
+- Financial data integrity may be compromised.
 
 Priority:
 
-- High.
+- Critical / P0.
 
 ### UI-Level Data Consistency
 
@@ -775,38 +802,54 @@ These may be planned separately in future phases.
 
 ## 6. Priority and Risk-Based Testing
 
-### 6.1 Test Priority
+### 6.1 Risk-Based Test Prioritization Rationale
+
+Testing was prioritized by customer impact, business risk, data sensitivity, and effort.
+
+Highest priority was given to authentication, restricted access, transfers, balances, and transaction history because failures in these areas could expose account data, allow unauthorized access, corrupt financial state, or break customer trust.
+
+When time is limited, execution should focus first on:
+
+1. Login and session access, because all authenticated workflows depend on it.
+2. Restricted account access, because sensitive banking functions must not be exposed.
+3. Transfers and balances, because incorrect money movement creates the highest business and data-integrity risk.
+4. Transaction history, because users need reliable records of account activity.
+5. Customer profile and lower-risk validation checks after core banking flows are covered.
+
+---
+
+### 6.2 Test Priority
 
 Test priority is based on business impact, user impact, and dependency between modules.
 
 | Priority | Test Cases | Reason |
 |---|---|---|
-| P0 - Critical | TC-001, TC-006, TC-007 | Login, access control, and transfers are critical flows |
-| P1 - High | TC-004, TC-005, TC-009, TC-010 | Account creation, balance visibility, insufficient funds handling, and transaction history |
-| P2 - Medium | TC-002, TC-003, TC-008, TC-011, TC-013, TC-015 | Validation scenarios and important user workflows |
+| P0 - Critical | TC-001, TC-002, TC-006, TC-007, TC-008, TC-009 | Login, invalid authentication handling, restricted access, valid transfers, negative transfer handling, and insufficient funds handling are critical to access control and financial integrity |
+| P1 - High | TC-004, TC-005, TC-010 | Account creation, balance visibility, and transaction history support core banking workflows and user trust |
+| P2 - Medium | TC-003, TC-011, TC-013, TC-015 | Validation scenarios and important user workflows |
 | P3 - Low | TC-012, TC-014 | Lower-risk edge or observation scenarios |
 
 ---
 
-### 6.2 Recommended Execution Order
+### 6.3 Recommended Execution Order
 
 The recommended execution order is:
 
 1. TC-001 — Login with valid credentials
-2. TC-006 — Access account opening without authentication
-3. TC-004 — Open new account with valid data
-4. TC-005 — View account balance
-5. TC-007 — Transfer money between own accounts
-6. TC-009 — Transfer with insufficient balance
+2. TC-002 — Login with incorrect password
+3. TC-006 — Access account opening without authentication
+4. TC-004 — Open new account with valid data
+5. TC-005 — View account balance
+6. TC-007 — Transfer money between own accounts
 7. TC-008 — Transfer with negative amount
-8. TC-010 — View transaction history
-9. TC-011 — Search transactions by amount
-10. TC-012 — Empty transaction history for a newly created account
-11. TC-013 — Update contact information with valid data
-12. TC-015 — Update contact information with empty required fields
-13. TC-014 — Update contact information with invalid phone format
-14. TC-002 — Login with incorrect password
-15. TC-003 — Login with empty required fields
+8. TC-009 — Transfer with insufficient balance
+9. TC-010 — View transaction history
+10. TC-003 — Login with empty required fields
+11. TC-011 — Search transactions by amount
+12. TC-013 — Update contact information with valid data
+13. TC-015 — Update contact information with empty required fields
+14. TC-012 — Empty transaction history for a newly created account
+15. TC-014 — Update contact information with invalid phone format
 
 Execution can be adjusted if test data dependencies require a different order.
 
@@ -937,7 +980,7 @@ Automation strategy:
 
 - Keep tests mapped to manual test case IDs.
 - Use dynamic QA users to avoid dependence on unstable demo credentials.
-- Keep known confirmed bugs represented in automation but pending/skipped by default.
+- Keep known confirmed bugs and retest-risk scenarios represented in automation but pending/skipped by default.
 - Run the full Cypress suite before major documentation updates or future portfolio milestones.
 - Re-enable pending known-bug tests only after the related application behavior is fixed.
 
@@ -1013,6 +1056,7 @@ Testing is considered successful when:
 - Cypress UI automation is implemented for the documented functional scenarios.
 - The Cypress full suite is executed successfully.
 - Known confirmed bugs are represented as pending/skipped automated scenarios.
+- High-risk exploratory sessions are documented with evidence and follow-up notes.
 
 
 ---
@@ -1027,7 +1071,11 @@ This document works together with the other project documents:
 - `TEST_STRATEGY.md` defines how testing will be approached and prioritized.
 - `PARABANK_15_TEST_CASES_EN.md` contains the detailed executable test cases.
 - `BUG_REPORTS.md` documents confirmed bugs and observations.
-- `TEST_SUMMARY_REPORT.md` summarizes manual and Cypress automation execution results.
+- `TEST_SUMMARY_REPORT.md` summarizes manual, Cypress automation, and exploratory execution results.
+- `TRACEABILITY_MATRIX.md` connects requirements, manual test cases, automation, findings, and evidence.
+- `EXPLORATORY_TESTING.md` documents exploratory charters, execution notes, observations, and linked impact evidence.
+- `ACCESSIBILITY_CHECKLIST.md` defines planned accessibility checks.
+- `RESPONSIVE_TESTING.md` defines planned responsive checks.
 - `Automation/` contains Cypress UI automation mapped to the documented manual test cases.
 
 ---
@@ -1041,7 +1089,9 @@ Recommended documentation flow:
 3. Execute detailed scenarios from `PARABANK_15_TEST_CASES_EN.md`.
 4. Document defects and observations in `BUG_REPORTS.md`.
 5. Summarize results in `TEST_SUMMARY_REPORT.md`.
-6. Maintain Cypress automation under `Automation/` for repeatable UI regression coverage.
+6. Maintain traceability in `TRACEABILITY_MATRIX.md`.
+7. Document exploratory testing in `EXPLORATORY_TESTING.md`.
+8. Maintain Cypress automation under `Automation/` for repeatable UI regression coverage.
 
 ---
 
@@ -1051,11 +1101,10 @@ The following improvements may be added in future project phases:
 
 - Expand Cypress automation with additional validation, exploratory, accessibility and compatibility scenarios.
 - API testing with Postman if stable endpoints are included.
-- CI execution with GitHub Actions for the Cypress suite.
-- Traceability matrix.
-- Accessibility checklist.
-- Responsive testing checklist.
-- Exploratory testing notes.
+- Execute the planned accessibility checklist and capture evidence.
+- Execute the planned responsive testing checklist and capture evidence.
+- Run a small compatibility smoke pass in an additional browser.
+- Improve CI reporting and artifact retention for Cypress execution results.
 - Additional regression scenarios.
 - Expanded transaction search coverage.
 
@@ -1067,7 +1116,12 @@ The following improvements may be added in future project phases:
 - Test Cases: `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - Bug Reports: `docs/BUG_REPORTS.md`
 - Test Summary Report: `docs/TEST_SUMMARY_REPORT.md`
+- Traceability Matrix: `docs/TRACEABILITY_MATRIX.md`
+- Exploratory Testing: `docs/EXPLORATORY_TESTING.md`
+- Accessibility Checklist: `docs/ACCESSIBILITY_CHECKLIST.md`
+- Responsive Testing: `docs/RESPONSIVE_TESTING.md`
 - Cypress Automation: `Automation/`
+- GitHub Actions Workflow: `.github/workflows/cypress.yml`
 - Application URL: `https://parabank.parasoft.com/parabank/index.htm`
 - Repository: `ParaBank-QA-Project`
 
@@ -1079,6 +1133,7 @@ The following improvements may be added in future project phases:
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial test strategy aligned with 15 manual functional test cases |
 | 1.1 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
+| 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, explicit risk-based prioritization, CI status, and current portfolio deliverables |
 
 ---
 

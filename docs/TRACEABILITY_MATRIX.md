@@ -2,7 +2,7 @@
 
 **Project:** ParaBank QA Portfolio  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
 **Prepared By:** Mariana  
 **Last Updated:** May 2026  
 
@@ -28,13 +28,15 @@ It helps reviewers quickly verify that each tested requirement has documented co
 | Passed with Observation | 2 |
 | Passing Cypress Tests | 12 |
 | Pending Known-Bug Cypress Tests | 3 |
-| Confirmed Bugs | 3 |
-| Observations | 2 |
+| Manual Bugs | 3 |
+| Manual Observations | 2 |
+| Exploratory Observations | 4 |
+| Total Observations | 6 |
 | Exploratory Sessions Executed | 2 |
 | Exploratory Checks Executed | 18 |
 | Existing Bugs Confirmed by Exploratory Testing | 2 |
 | Existing Bugs Not Reproduced by Exploratory Testing | 1 |
-| New Exploratory Observations | 6 |
+| Linked Exploratory Impact Evidence Items | 2 |
 
 ---
 
@@ -64,7 +66,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Finding ID | Type | Related Test Case | Requirement ID | Module | Severity / Status | Cypress Mapping |
 |---|---|---|---|---|---|---|
-| BUG-001 | Confirmed Bug | TC-002 | AUTH-002 | Authentication | Critical / P0 | `authentication.cy.js` - pending known bug |
+| BUG-001 | Confirmed Bug | TC-002 | AUTH-002 | Authentication | Critical / P0 / Needs Retest | `authentication.cy.js` - pending known bug |
 | BUG-002 | Confirmed Bug | TC-008 | TRF-002 | Transfers | Critical / P0 | `transfers.cy.js` - pending known bug |
 | BUG-003 | Confirmed Bug | TC-009 | TRF-003 | Transfers | Critical / P0 | `transfers.cy.js` - pending known bug |
 | OBS-001 | Observation | TC-006 | SEC-001 | Accounts / Security | Observation | `accounts.cy.js` - passed |
@@ -76,7 +78,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Cypress Spec | Related Manual Test Cases | Active Passing Tests | Pending Known-Bug Tests | Coverage Notes |
 |---|---|---:|---:|---|
-| `authentication.cy.js` | TC-001, TC-002, TC-003 | 2 | 1 | TC-002 is linked to BUG-001 |
+| `authentication.cy.js` | TC-001, TC-002, TC-003 | 2 | 1 | TC-002 is linked to BUG-001. BUG-001 was not reproduced during EXP-001, but remains pending/skipped until consistent retest results support a documentation and automation strategy update. |
 | `accounts.cy.js` | TC-004, TC-005, TC-006 | 3 | 0 | Includes unauthenticated direct URL access check |
 | `transfers.cy.js` | TC-007, TC-008, TC-009 | 1 | 2 | TC-008 and TC-009 are linked to confirmed transfer validation bugs |
 | `transactions.cy.js` | TC-010, TC-011, TC-012 | 3 | 0 | Covers transaction history, amount search, and new account history state |
@@ -88,7 +90,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Risk Area | Related Requirements | Covered By | Current Result |
 |---|---|---|---|
-| Authentication reliability | AUTH-001, AUTH-002, AUTH-003 | TC-001 to TC-003, `authentication.cy.js` | One critical bug found for incorrect password handling |
+| Authentication reliability | AUTH-001, AUTH-002, AUTH-003 | TC-001 to TC-003, `authentication.cy.js`, EXP-001 | BUG-001 was found during the manual cycle, was not reproduced during EXP-001, and remains Needs Retest |
 | Restricted access control | SEC-001 | TC-006, `accounts.cy.js` | Access blocked, but generic internal error observed |
 | Account creation and balance visibility | ACC-001, ACC-002 | TC-004, TC-005, `accounts.cy.js` | Passed |
 | Transfer validation and balance consistency | TRF-001, TRF-002, TRF-003 | TC-007 to TC-009, `transfers.cy.js` | Valid transfer passed; two critical validation bugs found |
@@ -102,24 +104,26 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Exploratory Session | Area | Related Test Cases | Related Bugs / Observations | Result | Evidence |
 |---|---|---|---|---|---|
-| EXP-001 | Authentication and Session Access | TC-001, TC-002, TC-003, TC-006 | BUG-001, OBS-001, OBS-003 | Completed. BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. | `evidences/screenshots/exploratory/EXP-001_valid_login.png`, `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png`, `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png`, `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
-| EXP-003 | Transfers | TC-007, TC-008, TC-009, TC-010 | BUG-002, BUG-003, OBS-004, OBS-005, OBS-006, OBS-007, OBS-008 | Completed. BUG-002 and BUG-003 were confirmed. Five new transfer-related observations were recorded. | `evidences/screenshots/exploratory/EXP-003_valid_transfer.png`, `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png`, `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+| EXP-001 | Authentication and Session Access | TC-001, TC-002, TC-003, TC-006 | BUG-001, OBS-001, OBS-003 | Completed. BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded as a high-risk observation. | `evidences/screenshots/exploratory/EXP-001_valid_login.png`, `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png`, `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png`, `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
+| EXP-003 | Transfers | TC-007, TC-008, TC-009, TC-010 | BUG-002, BUG-003, OBS-004, OBS-005, OBS-006, linked impact evidence OBS-007 and OBS-008 | Completed. BUG-002 and BUG-003 were confirmed. Three transfer-related exploratory observations were recorded. OBS-007 and OBS-008 are treated as linked impact evidence for BUG-003 and related transfer validation issues. | `evidences/screenshots/exploratory/EXP-003_valid_transfer.png`, `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png`, `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
 
 ---
 
 ## Exploratory Findings Mapping
 
-| Finding ID | Type | Related Session | Related Area | Status | Evidence |
+| Finding ID | Type | Related Session | Related Area | Status / Risk | Evidence |
 |---|---|---|---|---|---|
-| BUG-001 | Existing Bug | EXP-001 | Authentication | Not reproduced during exploratory retest | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-001 | Existing Bug | EXP-001 | Authentication | Not reproduced during exploratory retest; remains Needs Retest | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
 | BUG-002 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
 | BUG-003 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
-| OBS-003 | New Observation | EXP-001 | Authentication / Session | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
-| OBS-004 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
-| OBS-005 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
-| OBS-006 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
-| OBS-007 | New Observation | EXP-003 | Transactions / Transfer History | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
-| OBS-008 | New Observation | EXP-003 | Accounts / Balance Consistency | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+| OBS-003 | Exploratory Observation | EXP-001 | Authentication / Session | Recorded during exploratory testing; High / P1 | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
+| OBS-004 | Exploratory Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing; Medium / P2 | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
+| OBS-005 | Exploratory Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing; Medium / P2 | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
+| OBS-006 | Exploratory Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing; Medium / P2 | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
+| OBS-007 | Linked Impact Evidence | EXP-003 | Transactions / Transfer History | Supports BUG-003 and transfer validation impact; not counted as a standalone observation | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| OBS-008 | Linked Impact Evidence | EXP-003 | Accounts / Balance Consistency | Supports BUG-003 and transfer validation impact; not counted as a standalone observation | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+
+---
 
 ## Related Documentation
 

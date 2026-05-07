@@ -14,7 +14,10 @@
  * Notes:
  * - Tests that require a valid customer create their own unique QA user.
  * - This avoids dependency on unstable public demo users.
- * - TC-002 is linked to known bug BUG-001 and is skipped by default to keep the regression suite stable.
+ * - TC-002 is linked to BUG-001. The issue was reproduced during the manual cycle,
+ *   was not reproduced during EXP-001, and remains Needs Retest.
+ * - TC-002 stays skipped by default until consistent retest results support updating
+ *   the documentation and automation strategy.
  */
 
 const knownBugIt = Cypress.expose('runKnownBugTests') ? it : it.skip;
@@ -52,8 +55,9 @@ describe('ParaBank Authentication', () => {
      * If this fails, authentication cannot be trusted.
      *
      * Current project status:
-     * This scenario is linked to BUG-001 and is skipped by default because the manual cycle confirmed
-     * that ParaBank authenticated a user even when an incorrect password was provided.
+     * BUG-001 was reproduced during the manual testing cycle, was not reproduced during EXP-001,
+     * and remains Needs Retest. This scenario stays pending/skipped by default until consistent
+     * retest results support updating the documentation and automation strategy.
      */
     cy.task('buildTestUser').then((validUser) => {
       cy.registerUser(validUser);

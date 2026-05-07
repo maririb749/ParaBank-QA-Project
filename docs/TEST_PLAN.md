@@ -1,22 +1,22 @@
 # ParaBank QA Test Plan
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Last Updated:** May 2026  
 **Document Type:** Test Plan  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual and Cypress Automation Cycles Executed  
+**Document Status:** Completed — Manual, Cypress Automation, and First Exploratory Cycles Executed  
 
 ---
 
 ## 1. Executive Summary
 
-This test plan defines the manual testing and Cypress UI automation scope, objectives, environment, execution approach, risks, and deliverables for the ParaBank QA Portfolio project.
+This test plan defines the manual testing, Cypress UI automation, and exploratory testing scope, objectives, environment, execution approach, risks, and deliverables for the ParaBank QA Portfolio project.
 
 ParaBank is a demo online banking application used to simulate common banking workflows such as user authentication, account opening, account balance verification, fund transfers, transaction history, and customer contact information updates.
 
-The first test cycle focused on manual functional testing through the web user interface. After the manual cycle, Cypress UI automation was implemented to provide repeatable regression coverage mapped to the same documented test cases. The goal is to validate the most relevant user flows, document results clearly, capture evidence, automate stable regression scenarios, and demonstrate structured QA thinking through well-written test artifacts.
+The first test cycle focused on manual functional testing through the web user interface. After the manual cycle, Cypress UI automation was implemented to provide repeatable regression coverage mapped to the same documented test cases. A first exploratory testing cycle was then completed for authentication/session access and transfers. The goal is to validate the most relevant user flows, document results clearly, capture evidence, automate stable regression scenarios, investigate high-risk behavior, and demonstrate structured QA thinking through well-written test artifacts.
 
 ---
 
@@ -39,7 +39,7 @@ The objectives of this test plan are to:
 
 ### 3.1 In Scope
 
-The current test cycle covers 15 manual functional test cases across 5 modules. Cypress UI automation was also implemented and mapped to the same 15 scenarios.
+The current completed scope covers 15 manual functional test cases across 5 modules. Cypress UI automation was also implemented and mapped to the same 15 scenarios. Exploratory testing was completed for authentication/session access and transfers.
 
 | Module | Functionality | Coverage |
 |---|---|---:|
@@ -55,6 +55,7 @@ The current test cycle covers 15 manual functional test cases across 5 modules. 
 **Cypress Automation Coverage:** 15 automated scenarios mapped to the manual test cases  
 **Latest Cypress Result:** 12 passing, 3 pending known bugs, 0 failing  
 **Automation Location:** `Automation/`  
+**Exploratory Sessions Completed:** EXP-001 - Authentication and Session Access; EXP-003 - Transfers  
 
 
 ---
@@ -68,19 +69,21 @@ The following areas are not included in the current test cycle:
 - Endurance testing
 - Security penetration testing
 - Full accessibility compliance testing
+- Accessibility checklist execution
+- Responsive checklist execution
 - Full localization testing
 - Mobile native application testing
 - API testing
 - Database testing
 - Third-party integrations outside the visible ParaBank demo application
 
-These areas may be considered in future phases if project scope is expanded.
+Accessibility and responsive testing templates exist and are ready for execution, but their checks have not been executed yet. API testing remains future scope.
 
 ---
 
 ## 4. Test Types
 
-The following test types are included in the current manual and Cypress automation testing scope:
+The following test types are included in the current manual, Cypress automation, and exploratory testing scope:
 
 | Test Type | Purpose | Related Test Cases |
 |---|---|---|
@@ -91,6 +94,7 @@ The following test types are included in the current manual and Cypress automati
 | Access Control Testing | Validate that unauthenticated users cannot access restricted pages | TC-006 |
 | Regression Candidate Testing | Identify tests suitable for repeatable regression execution | High-priority and critical flow test cases |
 | Cypress UI Automation | Automate stable UI regression scenarios mapped to manual test cases | TC-001 to TC-015, with known bugs pending/skipped |
+| Exploratory Testing | Investigate high-risk workflows beyond scripted checks | EXP-001, EXP-003 |
 
 ---
 
@@ -130,19 +134,25 @@ Customer Profile:
 
 ## 6. Risk-Based Prioritization
 
-The highest priority is given to user flows that affect authentication, account access, balances, and money movement.
+The highest priority is given to user flows that affect authentication, restricted access, balances, money movement, and transaction history.
 
 High-risk areas:
 
 - Login and authentication
 - Unauthorized access to restricted pages
-- Account creation
 - Account balance display
 - Fund transfers
 - Transaction history accuracy
-- Contact information updates
 
-High-priority test cases should be executed first because failures in these flows have a higher user impact.
+These areas are prioritized because failures could allow unauthorized access, expose sensitive account data, move money incorrectly, corrupt account balances or transaction records, or break customer trust.
+
+When time is limited, execution should focus first on:
+
+1. Login and session access, because all authenticated workflows depend on it.
+2. Restricted account access, because sensitive banking functions must not be exposed.
+3. Transfers and balances, because incorrect money movement creates the highest business and data-integrity risk.
+4. Transaction history, because users need reliable records of account activity.
+5. Customer profile and lower-risk validation checks after core banking flows are covered.
 
 ---
 
@@ -154,7 +164,7 @@ High-priority test cases should be executed first because failures in these flow
 - **Application URL:** `https://parabank.parasoft.com/parabank/index.htm`
 - **Application Type:** Demo Web Banking Application
 - **Observed Interface:** Web UI
-- **Testing Phase:** Manual UI Testing
+- **Testing Phase:** Manual UI Testing, Cypress UI Automation, and First Exploratory Cycle
 
 ---
 
@@ -182,6 +192,7 @@ High-priority test cases should be executed first because failures in these flow
 | Browser screenshots | Manual test evidence capture |
 | Cypress | UI automation and regression execution |
 | Node.js / npm | Cypress dependency management and test execution scripts |
+| GitHub Actions | CI workflow for Cypress regression execution |
 
 ---
 
@@ -192,7 +203,6 @@ The following tools may be introduced in future phases:
 | Tool | Purpose |
 |---|---|
 | Postman | API testing, if accessible endpoints are included |
-| GitHub Actions | Future CI execution for the Cypress suite |
 | SQL tool | Database validation, only if database access becomes available |
 
 ---
@@ -333,9 +343,24 @@ Known pending automated scenarios:
 
 | Test Case | Related Bug | Reason |
 |---|---|---|
-| TC-002 | BUG-001 | Incorrect password authentication is a known confirmed bug |
+| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle and remains Needs Retest after EXP-001 |
 | TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
 | TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
+
+---
+
+### 11.5 Exploratory Testing Strategy
+
+Exploratory testing was added after the scripted manual cycle to investigate high-risk workflows and behavior that may not be fully covered by fixed test cases.
+
+Completed exploratory sessions:
+
+- EXP-001 - Authentication and Session Access
+- EXP-003 - Transfers
+
+Exploratory testing focused on authentication/session behavior, direct URL access, browser Back behavior after logout, transfer amount variations, source/destination selection, transaction history impact, and final balance impact.
+
+Detailed exploratory results are documented in `docs/EXPLORATORY_TESTING.md`.
 
 ---
 
@@ -375,16 +400,20 @@ Known pending automated scenarios:
 - [x] Bug Reports
 - [x] Test Evidence
 - [x] Test Execution Summary
+- [x] Traceability Matrix
+- [x] Exploratory Testing Notes
+- [x] Accessibility Checklist Template
+- [x] Responsive Testing Template
 - [x] Cypress Automation Test Suite
+- [x] GitHub Actions CI Workflow
 
 ### 14.2 Future Deliverables
 
-- [ ] Traceability Matrix
 - [ ] API Test Collection
-- [ ] CI Pipeline with GitHub Actions
-- [ ] Additional exploratory testing notes
-- [ ] Accessibility checklist
-- [ ] Responsive testing checklist
+- [ ] Accessibility Execution Results
+- [ ] Responsive Execution Results
+- [ ] Compatibility Smoke Execution Notes
+- [ ] Additional scripted regression cases from selected exploratory findings
 
 ---
 
@@ -435,7 +464,23 @@ Detailed Cypress automation results are documented in `docs/TEST_SUMMARY_REPORT.
 
 ---
 
-## 17. Evidence Management
+## 17. Current Exploratory Testing Summary
+
+The first exploratory testing cycle has been completed for two high-risk areas.
+
+- **Sessions planned:** 5
+- **Sessions executed:** 2
+- **Existing bugs confirmed:** 2
+- **Existing bugs not reproduced:** 1
+- **Existing observations confirmed:** 1
+- **New exploratory observations recorded:** 4
+- **Linked exploratory impact evidence items:** 2
+
+Detailed exploratory testing results are documented in `docs/EXPLORATORY_TESTING.md`.
+
+---
+
+## 18. Evidence Management
 
 Evidence should be stored using a clear and consistent naming convention.
 
@@ -451,6 +496,7 @@ Recommended evidence file names:
 Recommended evidence folder:
 
 - `evidences/screenshots/`
+- `evidences/screenshots/exploratory/`
 
 Each evidence file should clearly identify:
 
@@ -461,7 +507,7 @@ Each evidence file should clearly identify:
 
 ---
 
-## 18. Traceability
+## 19. Traceability
 
 Each test case is mapped to a requirement reference to support coverage analysis.
 
@@ -476,11 +522,11 @@ Current requirement groups:
 | TXN | Transactions |
 | PRF | Customer Profile |
 
-The full mapping is maintained in the functional test cases document.
+The full mapping is maintained in `docs/TRACEABILITY_MATRIX.md`.
 
 ---
 
-## 19. Maintenance Guidelines
+## 20. Maintenance Guidelines
 
 This test plan should be reviewed and updated when:
 
@@ -488,32 +534,38 @@ This test plan should be reviewed and updated when:
 - A test case expected result is updated.
 - New bugs or observations change the testing approach.
 - New modules are added to the project.
-- Cypress automation changes or API/database testing is introduced.
+- Cypress automation, exploratory scope, or API/database testing changes.
 - Test execution results reveal coverage gaps.
 
 Test cases should also be reviewed after each execution cycle to ensure they remain accurate and useful.
 
 ---
 
-## 20. References
+## 21. References
 
 - Test Cases Document: `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - Bug Reports Document: `docs/BUG_REPORTS.md`
 - Test Strategy Document: `docs/TEST_STRATEGY.md`
 - Test Summary Report: `docs/TEST_SUMMARY_REPORT.md`
+- Traceability Matrix: `docs/TRACEABILITY_MATRIX.md`
+- Exploratory Testing: `docs/EXPLORATORY_TESTING.md`
+- Accessibility Checklist: `docs/ACCESSIBILITY_CHECKLIST.md`
+- Responsive Testing: `docs/RESPONSIVE_TESTING.md`
 - Cypress Automation: `Automation/`
+- GitHub Actions Workflow: `.github/workflows/cypress.yml`
 - Application URL: `https://parabank.parasoft.com/parabank/index.htm`
 - Repository: `ParaBank-QA-Project`
 
 ---
 
-## 21. Document History
+## 22. Document History
 
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Initial test plan for 15 manual functional test cases |
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle |
 | 1.2 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
+| 1.3 | May 2026 | Mariana | Updated portfolio scope, risk prioritization, exploratory testing, CI, and deliverable status |
 
 ---
 
