@@ -28,12 +28,12 @@ This document supports the following project artifacts:
 
 ## 2. Current Bug Status
 
-The first manual execution cycle identified confirmed bugs and observations.
+The first manual execution cycle identified confirmed bugs and observations. Later exploratory testing sessions provided additional retest context for existing bugs and recorded new observations.
 
 ### Summary
 
 - **Confirmed Bugs:** 3
-- **Observations:** 2
+- **Observations:** 8
 - **Critical Bugs:** 3
 - **High Bugs:** 0
 - **Medium Bugs:** 0
@@ -43,16 +43,22 @@ The first manual execution cycle identified confirmed bugs and observations.
 
 | Bug ID | Related Test Case | Module | Severity | Priority | Status |
 |---|---|---|---|---|---|
-| BUG-001 | TC-002 | Authentication | Critical | P0 | New |
-| BUG-002 | TC-008 | Transfers | Critical | P0 | New |
-| BUG-003 | TC-009 | Transfers | Critical | P0 | New |
+| BUG-001 | TC-002 | Authentication | Critical | P0 | Needs Retest |
+| BUG-002 | TC-008 | Transfers | Critical | P0 | Open |
+| BUG-003 | TC-009 | Transfers | Critical | P0 | Open |
 
 ### Observations
 
-| Observation ID | Related Test Case | Module | Status |
+| Observation ID | Related Test Case / Session | Module | Status |
 |---|---|---|---|
-| OBS-001 | TC-006 | Accounts / Security | Observation |
+| OBS-001 | TC-006 / EXP-001 | Accounts / Security | Observation Confirmed |
 | OBS-002 | TC-014 | Customer Profile | Observation |
+| OBS-003 | EXP-001 | Authentication / Session | New Observation |
+| OBS-004 | EXP-003 | Transfers / Validation | New Observation |
+| OBS-005 | EXP-003 | Transfers / Validation | New Observation |
+| OBS-006 | EXP-003 | Transfers / Validation | New Observation |
+| OBS-007 | EXP-003 | Transactions / Transfer History | New Observation |
+| OBS-008 | EXP-003 | Accounts / Balance Consistency | New Observation |
 
 ### Cypress Known Bug Mapping
 
@@ -72,6 +78,17 @@ Latest full Cypress suite result:
 | TC-009 | BUG-003 | `transfers.cy.js` | Pending / Skipped Known Bug |
 
 No new confirmed bugs were identified during the Cypress automation cycle.
+
+### Exploratory Retest Summary
+
+Exploratory testing added retest context for existing bugs and identified new observations.
+
+| Finding | Exploratory Session | Result | Evidence |
+|---|---|---|---|
+| BUG-001 | EXP-001 | Not reproduced. Incorrect password was rejected as expected. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-002 | EXP-003 | Confirmed. Negative transfer amount was accepted and processed. | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
+| BUG-003 | EXP-003 | Confirmed. Insufficient balance and very large transfers were accepted and processed. | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
+| OBS-001 | EXP-001 | Confirmed. Direct unauthenticated access was blocked with a generic internal error message. | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
 
 
 ---
@@ -126,9 +143,12 @@ Priority describes how urgently the issue should be addressed.
 | Open | Bug is confirmed and still unresolved |
 | In Review | Bug requires clarification or additional investigation |
 | Retest | Bug is ready to be tested again after a fix or clarification |
+| Needs Retest | Bug was previously reproduced, but the latest exploratory retest did not reproduce it consistently |
 | Closed | Bug is resolved, accepted, or no longer reproducible |
 | Not a Bug | Behavior is expected after review |
 | Observation | Behavior is notable but not confirmed as a defect |
+| Observation Confirmed | Previously documented observation was confirmed during exploratory testing |
+| New Observation | New notable behavior was identified during exploratory testing |
 
 ---
 
@@ -201,7 +221,7 @@ Add any additional context, investigation notes, browser console information, or
 **Module:** Authentication  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** New  
+**Status:** Needs Retest
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
@@ -261,13 +281,20 @@ The issue was reproduced in Chrome incognito mode, reducing the likelihood that 
 
 ---
 
+### Retest Notes
+
+| Retest ID | Related Session | Date | Result | Evidence | Notes |
+|---|---|---|---|---|---|
+| RT-001 | EXP-001 - Authentication and Session Access | May 2026 | Not Reproduced | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` | During exploratory session EXP-001, the incorrect password scenario was not reproduced. The system rejected the invalid password as expected. |
+---
+
 ## BUG-002 — Negative transfer amount is accepted and processed
 
 **Related Test Case:** TC-008  
 **Module:** Transfers  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** New  
+**Status:** Open  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -333,13 +360,21 @@ This bug is classified as Critical because it affects simulated financial transa
 
 ---
 
+### Exploratory Retest Notes
+
+| Retest ID | Related Session | Date | Result | Evidence | Notes |
+|---|---|---|---|---|---|
+| RT-002 | EXP-003 - Transfers | May 2026 | Confirmed | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` | During exploratory session EXP-003, a negative transfer amount of `-$10.00` was accepted and processed instead of being rejected. |
+
+---
+
 ## BUG-003 — Transfer with insufficient balance is accepted and creates negative balance
 
 **Related Test Case:** TC-009  
 **Module:** Transfers  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** New  
+**Status:** Open
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
@@ -404,6 +439,16 @@ This issue affects the reliability of the transfer flow. The system should preve
 ### Notes
 
 This bug is classified as Critical because it affects simulated financial transaction validation and account balance integrity.
+
+---
+
+
+### Exploratory Retest Notes
+
+| Retest ID | Related Session | Date | Result | Evidence | Notes |
+|---|---|---|---|---|---|
+| RT-003 | EXP-003 - Transfers | May 2026 | Confirmed | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png` | During exploratory session EXP-003, a transfer with insufficient balance was accepted instead of being rejected. |
+| RT-004 | EXP-003 - Transfers | May 2026 | Confirmed | `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` | During exploratory session EXP-003, a very large transfer amount was accepted instead of being rejected for insufficient balance. |
 
 ---
 
@@ -526,6 +571,215 @@ The application allows non-phone text to be saved in the phone field. This may r
 ### Notes
 
 This is documented as an observation instead of a confirmed bug because the current test case allows this behavior to be recorded when phone format validation is not implemented.
+
+---
+
+---
+
+## OBS-003 — Browser Back after logout displays cached authenticated account information
+
+**Related Session:** EXP-001  
+**Module:** Authentication / Session  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+After logout, using the browser Back button displayed a cached authenticated Accounts Overview page with account balance and Account Services visible. However, attempting to access a protected action requested login, indicating the active session was not restored.
+
+### Expected Result
+
+- After logout, the user should not be able to view cached authenticated account information.
+- Sensitive account data should not remain visible through browser Back navigation.
+- Protected actions should require authentication.
+
+### Actual Result
+
+- The cached Accounts Overview page was displayed after using the browser Back button.
+- Account balance and Account Services were visible.
+- Protected actions requested login, indicating that the active session was not restored.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png`
+
+### Impact
+
+This behavior may expose sensitive account information through cached browser content after logout. Although protected actions required authentication, account data visibility after logout is still a security and privacy concern.
+
+### Notes
+
+This is documented as an observation because the active session was not restored and protected actions required login.
+
+---
+
+## OBS-004 — Invalid transfer amount inputs display generic internal error messages
+
+**Related Session:** EXP-003  
+**Module:** Transfers / Validation  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+Empty and non-numeric transfer amount inputs were not processed, but the system displayed a generic internal error message instead of a clear validation message.
+
+### Expected Result
+
+- Empty amount should be rejected with a clear validation message.
+- Non-numeric amount should be rejected with a clear validation message.
+- The message should explain the affected field or action.
+
+### Actual Result
+
+- Empty amount was rejected with the message `An internal error has occurred and has been logged.`
+- Non-numeric amount was rejected with the same generic internal error message.
+- The message did not clearly identify the amount field or the validation issue.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_empty_amount.png`
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png`
+
+### Impact
+
+The transfer was not processed, which protects the financial operation. However, the generic internal error message may confuse users and does not provide clear guidance for correcting the input.
+
+---
+
+## OBS-005 — Zero-value transfer is accepted and processed
+
+**Related Session:** EXP-003  
+**Module:** Transfers / Validation  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+The system accepted and processed a zero-value transfer.
+
+### Expected Result
+
+- A zero-value transfer should be rejected or clearly explained as not allowed.
+- The system should prevent transactions that do not move monetary value.
+
+### Actual Result
+
+- The transfer of `$0.00` was accepted and processed.
+- The system displayed a transfer confirmation message.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_zero_amount.png`
+
+### Impact
+
+This behavior does not directly change the monetary balance, but it may create unnecessary transaction records and indicates weak validation around transfer amount rules.
+
+---
+
+## OBS-006 — Same-account transfer is accepted and processed
+
+**Related Session:** EXP-003  
+**Module:** Transfers / Validation  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+The system accepted and processed a transfer where the source and destination account were the same.
+
+### Expected Result
+
+- The system should prevent or reject transfers where the source and destination account are the same.
+- A clear validation message should explain the issue.
+
+### Actual Result
+
+- A transfer to the same account was accepted and processed.
+- The system displayed a transfer confirmation message.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png`
+
+### Impact
+
+Same-account transfers do not provide meaningful financial value and may create unnecessary or confusing transaction records. This indicates weak validation in the transfer flow.
+
+---
+
+## OBS-007 — Transaction history displays records for invalid or questionable transfer attempts
+
+**Related Session:** EXP-003  
+**Module:** Transactions / Transfer History  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+Transaction history displayed records for invalid or questionable transfer attempts, including zero-value, very large, and same-account transfers.
+
+### Expected Result
+
+- Invalid transfer attempts should not be recorded as successful transactions.
+- Questionable transactions should be prevented or clearly validated before appearing in account activity.
+
+### Actual Result
+
+- Transaction history displayed records related to invalid or questionable transfer attempts performed during the exploratory session.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png`
+
+### Impact
+
+The transaction history may become unreliable if invalid or questionable operations are recorded as successful activity. This can affect user trust and auditability of account activity.
+
+---
+
+## OBS-008 — Final balances show extreme values after invalid transfer attempts
+
+**Related Session:** EXP-003  
+**Module:** Accounts / Balance Consistency  
+**Status:** New Observation  
+**Reported By:** Mariana  
+**Reported Date:** May 2026  
+**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+
+### Summary
+
+Final account balances showed extreme negative and positive values after invalid or questionable transfer attempts were processed.
+
+### Expected Result
+
+- Invalid or questionable transfers should not create unrealistic account balances.
+- Final balances should remain consistent with valid transactions only.
+
+### Actual Result
+
+- One account displayed an extreme negative balance.
+- Another account displayed an extreme positive balance.
+- The total balance remained `$515.00`, but individual account balances became unrealistic.
+
+### Evidence
+
+- Screenshot: `evidences/screenshots/exploratory/EXP-003_final_balances.png`
+
+### Impact
+
+Extreme account balances indicate that invalid or questionable transfer attempts affected individual account state. This reinforces the risk already identified in the transfer validation bugs and affects confidence in account balance integrity.
 
 ---
 

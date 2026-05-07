@@ -30,6 +30,11 @@ It helps reviewers quickly verify that each tested requirement has documented co
 | Pending Known-Bug Cypress Tests | 3 |
 | Confirmed Bugs | 3 |
 | Observations | 2 |
+| Exploratory Sessions Executed | 2 |
+| Exploratory Checks Executed | 18 |
+| Existing Bugs Confirmed by Exploratory Testing | 2 |
+| Existing Bugs Not Reproduced by Exploratory Testing | 1 |
+| New Exploratory Observations | 6 |
 
 ---
 
@@ -92,6 +97,30 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 ---
 
+
+## Exploratory Testing Coverage Matrix
+
+| Exploratory Session | Area | Related Test Cases | Related Bugs / Observations | Result | Evidence |
+|---|---|---|---|---|---|
+| EXP-001 | Authentication and Session Access | TC-001, TC-002, TC-003, TC-006 | BUG-001, OBS-001, OBS-003 | Completed. BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. | `evidences/screenshots/exploratory/EXP-001_valid_login.png`, `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png`, `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png`, `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
+| EXP-003 | Transfers | TC-007, TC-008, TC-009, TC-010 | BUG-002, BUG-003, OBS-004, OBS-005, OBS-006, OBS-007, OBS-008 | Completed. BUG-002 and BUG-003 were confirmed. Five new transfer-related observations were recorded. | `evidences/screenshots/exploratory/EXP-003_valid_transfer.png`, `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png`, `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+
+---
+
+## Exploratory Findings Mapping
+
+| Finding ID | Type | Related Session | Related Area | Status | Evidence |
+|---|---|---|---|---|---|
+| BUG-001 | Existing Bug | EXP-001 | Authentication | Not reproduced during exploratory retest | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-002 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
+| BUG-003 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
+| OBS-003 | New Observation | EXP-001 | Authentication / Session | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
+| OBS-004 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_empty_amount.png`, `evidences/screenshots/exploratory/EXP-003_non_numeric_amount.png` |
+| OBS-005 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_zero_amount.png` |
+| OBS-006 | New Observation | EXP-003 | Transfers / Validation | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_same_account_transfer.png` |
+| OBS-007 | New Observation | EXP-003 | Transactions / Transfer History | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_transaction_history_after_invalid_attempts.png` |
+| OBS-008 | New Observation | EXP-003 | Accounts / Balance Consistency | Recorded during exploratory testing | `evidences/screenshots/exploratory/EXP-003_final_balances.png` |
+
 ## Related Documentation
 
 - Test Plan: `docs/TEST_PLAN.md`
@@ -101,6 +130,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 - Test Summary Report: `docs/TEST_SUMMARY_REPORT.md`
 - Cypress Automation: `Automation/`
 - Evidence Screenshots: `evidences/screenshots/`
+- Exploratory Testing: `docs/EXPLORATORY_TESTING.md`
 
 ---
 

@@ -279,6 +279,95 @@ Recommended next improvements for the project:
 
 ---
 
+
+## Exploratory Testing Summary
+
+### Overview
+
+Exploratory testing was added to complement the scripted manual test cases and Cypress automation suite.
+
+The first exploratory testing cycle focused on the highest-risk areas of the ParaBank project:
+
+- **EXP-001 - Authentication and Session Access**
+- **EXP-003 - Transfers**
+
+These areas were selected because authentication controls access to protected banking workflows, while transfers directly affect simulated account balances and transaction records.
+
+### Execution Summary
+
+| Metric | Total |
+|---|---:|
+| Exploratory Sessions Planned | 5 |
+| Exploratory Sessions Executed | 2 |
+| Exploratory Sessions Remaining Planned | 3 |
+| New Confirmed Bugs Found | 0 |
+| Existing Bugs Confirmed | 2 |
+| Existing Bugs Not Reproduced | 1 |
+| Existing Observations Confirmed | 1 |
+| New Observations Recorded | 6 |
+
+### Executed Sessions
+
+| Session ID | Area | Status | Main Result |
+|---|---|---|---|
+| EXP-001 | Authentication and Session Access | Completed | BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. |
+| EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-008 were recorded. |
+
+### Exploratory Findings
+
+| Finding ID | Type | Related Session | Summary |
+|---|---|---|---|
+| BUG-001 | Existing Bug Not Reproduced | EXP-001 | Incorrect password was rejected during exploratory retest. |
+| BUG-002 | Existing Bug Confirmed | EXP-003 | Negative transfer amount was accepted and processed. |
+| BUG-003 | Existing Bug Confirmed | EXP-003 | Insufficient balance and very large transfers were accepted and processed. |
+| OBS-001 | Existing Observation Confirmed | EXP-001 | Direct unauthenticated access was blocked with a generic internal error message. |
+| OBS-003 | New Observation | EXP-001 | Browser Back after logout displayed cached account information, but protected actions required login. |
+| OBS-004 | New Observation | EXP-003 | Empty and non-numeric transfer amounts displayed generic internal error messages. |
+| OBS-005 | New Observation | EXP-003 | Zero-value transfer was accepted and processed. |
+| OBS-006 | New Observation | EXP-003 | Same-account transfer was accepted and processed. |
+| OBS-007 | New Observation | EXP-003 | Transaction history displayed records for invalid or questionable transfer attempts. |
+| OBS-008 | New Observation | EXP-003 | Final balances showed extreme negative and positive values after invalid or questionable transfer attempts. |
+
+### Evidence
+
+Exploratory evidence is stored in:
+
+- `evidences/screenshots/exploratory/`
+
+Key evidence examples:
+
+- `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png`
+- `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png`
+- `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png`
+- `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`
+- `evidences/screenshots/exploratory/EXP-003_final_balances.png`
+
+### Impact on Overall QA Assessment
+
+The exploratory testing cycle strengthened the portfolio by showing investigation beyond scripted test cases.
+
+Main conclusions:
+
+- Authentication behavior improved during exploratory retest because BUG-001 was not reproduced.
+- Transfer validation remains high-risk because BUG-002 and BUG-003 were confirmed.
+- Additional usability, validation, transaction history, and balance consistency observations were identified.
+- The exploratory results provide candidates for future manual regression cases and Cypress automation coverage.
+
+### Recommended Follow-Up
+
+- Update `docs/BUG_REPORTS.md` with retest notes and new observations.
+- Update `docs/TRACEABILITY_MATRIX.md` to include exploratory coverage.
+- Consider creating future scripted test cases for:
+  - empty transfer amount
+  - non-numeric transfer amount
+  - zero-value transfer
+  - same-account transfer
+  - browser Back behavior after logout
+  - transaction history after invalid transfer attempts
+- Consider automating high-value exploratory findings in Cypress after documentation is aligned.
+  
+---
+
 ## 16. Document History
 
 | Version | Date | Author | Changes |
