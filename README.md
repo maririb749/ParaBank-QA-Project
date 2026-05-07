@@ -194,12 +194,13 @@ ParaBank-QA-Project/
 | Chrome | Manual web testing and evidence capture |
 | Chrome DevTools | Basic inspection and investigation during web testing |
 | Git Bash | Command-line Git and project workflow |
+---
 
-## Planned Next Steps
+##Planned Next Steps
 
-- Execute the planned accessibility smoke testing checklist and capture evidence.
-- Execute the planned responsive smoke testing checklist and capture evidence.
-- Add a small compatibility smoke pass.
+- Execute the planned accessibility smoke test checklist and capture evidence.
+- Execute the planned responsive testing checklist and capture evidence.
+- Add a small browser compatibility smoke pass.
 - Convert selected exploratory findings into scripted regression candidates.
 - Improve CI reporting or artifact handling if needed.
-- Add API testing only as a future phase if stable endpoints are included.
+- Add API testing as a future phase if stable endpoints are included.
