@@ -44,7 +44,7 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | GitHub Actions CI | Workflow exists |
 | Exploratory testing | EXP-001 and EXP-003 completed |
 | Accessibility testing | Smoke pass executed; full checklist remains future scope |
-| Responsive testing | Template exists; execution planned |
+| Responsive testing | Smoke pass executed; full checklist remains future scope |
 | API testing | Future scope if stable endpoints are included |
 
 ## Scope Tested
@@ -160,7 +160,7 @@ The workflow status is displayed through the GitHub Actions badge at the top of 
 | [Traceability Matrix](docs/TRACEABILITY_MATRIX.md) | Requirement, test case, bug, automation, risk, and evidence mapping |
 | [Exploratory Testing](docs/EXPLORATORY_TESTING.md) | Exploratory charters, executed sessions, observations, and linked impact evidence |
 | [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | Accessibility smoke execution and future-scope checklist |
-| [Responsive Testing](docs/RESPONSIVE_TESTING.md) | Planned responsive testing checklist |
+| [Responsive Testing](docs/RESPONSIVE_TESTING.md) | Responsive smoke execution and future-scope checklist |
 
 ## Evidence
 
@@ -169,7 +169,7 @@ The workflow status is displayed through the GitHub Actions badge at the top of 
 | Manual test screenshots | [evidences/screenshots/](evidences/screenshots/) | Evidence captured |
 | Exploratory screenshots | [evidences/screenshots/exploratory/](evidences/screenshots/exploratory/) | Evidence captured |
 | Accessibility screenshots | `evidences/screenshots/accessibility/` | Smoke evidence captured |
-| Responsive screenshots | `evidences/screenshots/responsive/` | Planned evidence folder; execution planned |
+| Responsive screenshots | `evidences/screenshots/responsive/` | Smoke evidence captured |
 
 Evidence file names include related test case, bug, observation, or exploratory session IDs so reviewers can trace claims back to screenshots quickly.
 
@@ -214,7 +214,7 @@ ParaBank-QA-Project/
 ## Planned Next Steps
 
 - Expand accessibility coverage beyond the executed smoke pass.
-- Execute the planned responsive testing checklist and capture evidence.
+- Expand responsive testing beyond the executed smoke pass.
 - Add a small browser compatibility smoke pass.
 - Convert selected exploratory findings into scripted regression candidates.
 - Improve CI reporting or artifact handling if needed.
