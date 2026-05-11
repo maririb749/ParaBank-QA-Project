@@ -69,15 +69,15 @@ The following areas are not included in the current test cycle:
 - Endurance testing
 - Security penetration testing
 - Full accessibility compliance testing
-- Accessibility checklist execution
-- Responsive checklist execution
+- Expanded accessibility testing beyond the executed smoke pass
+- Expanded responsive testing beyond the executed smoke pass
 - Full localization testing
 - Mobile native application testing
 - API testing
 - Database testing
 - Third-party integrations outside the visible ParaBank demo application
 
-Accessibility and responsive testing templates exist and are ready for execution, but their checks have not been executed yet. API testing remains future scope.
+Accessibility and responsive smoke tests were executed with evidence. Expanded accessibility and responsive coverage remain future scope. API testing remains future scope.
 
 ---
 

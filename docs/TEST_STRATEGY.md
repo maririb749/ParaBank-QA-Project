@@ -1091,8 +1091,8 @@ This document works together with the other project documents:
 - `TEST_SUMMARY_REPORT.md` summarizes manual, Cypress automation, and exploratory execution results.
 - `TRACEABILITY_MATRIX.md` connects requirements, manual test cases, automation, findings, and evidence.
 - `EXPLORATORY_TESTING.md` documents exploratory charters, execution notes, observations, and linked impact evidence.
-- `ACCESSIBILITY_CHECKLIST.md` defines planned accessibility checks.
-- `RESPONSIVE_TESTING.md` defines planned responsive checks.
+- `ACCESSIBILITY_CHECKLIST.md` documents the executed accessibility smoke test and remaining future-scope checks.
+- `RESPONSIVE_TESTING.md` documents the executed responsive smoke test and remaining future-scope checks.
 - `Automation/` contains Cypress UI automation mapped to the documented manual test cases.
 
 ---
@@ -1118,8 +1118,8 @@ The following improvements may be added in future project phases:
 
 - Expand Cypress automation with additional validation, exploratory, accessibility and compatibility scenarios.
 - API testing with Postman if stable endpoints are included.
-- Execute the planned accessibility checklist and capture evidence.
-- Execute the planned responsive testing checklist and capture evidence.
+- Expand accessibility coverage beyond the executed smoke pass.
+- Expand responsive testing beyond the executed smoke pass.
 - Run a small compatibility smoke pass in an additional browser.
 - Improve CI reporting and artifact retention for Cypress execution results.
 - Additional regression scenarios.
