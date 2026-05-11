@@ -1,8 +1,21 @@
 # ParaBank QA Portfolio Project
 
+[![Cypress Regression Tests](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml/badge.svg?branch=main)](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml)
+
 A practical QA project focused on testing core banking workflows, identifying risks, documenting bugs, collecting evidence, and building Cypress regression coverage.
 
-This project demonstrates manual functional testing, Cypress UI automation, risk-based exploratory testing, bug reporting, traceability, evidence management, and CI with GitHub Actions. The focus is practical QA work: identifying high-risk banking workflows, documenting results clearly, and mapping manual coverage to automated regression scenarios.
+This project demonstrates manual functional testing, Cypress UI automation, risk-based exploratory testing, bug reporting, traceability, evidence management, and CI with GitHub Actions.
+
+The focus is practical QA work: identifying high-risk banking workflows, documenting results clearly, and mapping manual coverage to automated regression scenarios.
+
+## Summary
+
+- Manual QA + Cypress automation project for a demo banking application
+- 15 manual test cases covering authentication, accounts, transfers, transactions and customer profile
+- 5 Cypress spec files with 15 mapped automated scenarios
+- Latest Cypress result: 12 passing, 3 pending known bugs, 0 failing
+- 3 documented bugs, 6 observations and 2 exploratory sessions
+- Includes risk analysis, traceability matrix, evidence, bug reports and GitHub Actions CI
 
 ## Application Under Test
 
@@ -131,7 +144,9 @@ Additional spec-level scripts are available in [Automation/package.json](Automat
 
 GitHub Actions workflow exists at [.github/workflows/cypress.yml](.github/workflows/cypress.yml).
 
-The workflow installs dependencies, runs the Cypress regression suite from the `Automation/` directory, and uploads Cypress screenshots and videos as artifacts when available. No badge is included because the repository does not currently define one.
+The workflow installs dependencies, runs the Cypress regression suite from the `Automation/` directory, and uploads Cypress screenshots and videos as artifacts when available.
+
+The workflow status is displayed through the GitHub Actions badge at the top of this README.
 
 ## Documentation Map
 
