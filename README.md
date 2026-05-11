@@ -8,14 +8,14 @@ This project demonstrates manual functional testing, Cypress UI automation, risk
 
 The focus is practical QA work: identifying high-risk banking workflows, documenting results clearly, and mapping manual coverage to automated regression scenarios.
 
-## Summary
+## Project Highlights
 
 - Manual QA + Cypress automation project for a demo banking application
 - 15 manual test cases covering authentication, accounts, transfers, transactions and customer profile
 - 5 Cypress spec files with 15 mapped automated scenarios
 - Latest Cypress result: 12 passing, 3 pending known bugs, 0 failing
 - 3 documented bugs, 6 observations and 2 exploratory sessions
-- Includes risk analysis, traceability matrix, evidence, bug reports and GitHub Actions CI
+- Includes risk analysis, traceability matrix, evidence, bug reports, Page Objects, custom Cypress commands and GitHub Actions CI
 
 ## Application Under Test
 
@@ -42,6 +42,7 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Cypress scenarios mapped | 15 |
 | Latest Cypress result | 12 passing, 3 pending known bugs, 0 failing |
 | GitHub Actions CI | Workflow exists |
+| Cypress architecture | Custom commands + Page Objects for authentication flows |
 | Exploratory testing | EXP-001 and EXP-003 completed |
 | Accessibility testing | Smoke pass executed; full checklist remains future scope |
 | Responsive testing | Smoke pass executed; full checklist remains future scope |
@@ -57,10 +58,12 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Transactions | Transaction history, search by amount, new account transaction state |
 | Customer Profile | Valid update, invalid phone format, empty required fields |
 | Exploratory Testing | Authentication/session access and transfers |
+| Accessibility | Login keyboard navigation, focus visibility, labels, login error message, link purpose |
+| Responsive | Login page and public navigation across desktop, tablet, and mobile viewports |
 
 Scenario coverage includes positive, negative, boundary, edge case, access control, exploratory, and regression-oriented testing.
 
-## Risk-Based Testing Mindset
+## Risk-Based Testing Approach
 
 The testing approach was guided by simple risk-based questions:
 
@@ -150,13 +153,15 @@ The workflow status is displayed through the GitHub Actions badge at the top of 
 
 ## Documentation Map
 
+This README is intentionally concise for portfolio review. Detailed QA artifacts are available below.
+
 | Document | Purpose |
 |---|---|
 | [Test Plan](docs/TEST_PLAN.md) | Scope, objectives, environment, risks, execution approach, deliverables |
 | [Test Strategy](docs/TEST_STRATEGY.md) | Testing approach, risk prioritization, regression strategy, automation strategy |
 | [Manual Test Cases](docs/test-cases/PARABANK_15_TEST_CASES_EN.md) | 15 executable manual test cases with expected results, actual results, status, and evidence |
 | [Bug Reports](docs/BUG_REPORTS.md) | Bugs, observations, severity, priority, impact, evidence, and retest notes |
-| [Test Summary Report](docs/TEST_SUMMARY_REPORT.md) | Manual, Cypress, and exploratory execution results |
+| [Test Summary Report](docs/TEST_SUMMARY_REPORT.md) | Manual, Cypress, exploratory, accessibility, and responsive execution results |
 | [Traceability Matrix](docs/TRACEABILITY_MATRIX.md) | Requirement, test case, bug, automation, risk, and evidence mapping |
 | [Exploratory Testing](docs/EXPLORATORY_TESTING.md) | Exploratory charters, executed sessions, observations, and linked impact evidence |
 | [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | Accessibility smoke execution and future-scope checklist |
@@ -178,7 +183,10 @@ Evidence file names include related test case, bug, observation, or exploratory 
 ```text
 ParaBank-QA-Project/
 ├── Automation/
-│   ├── cypress/e2e/
+│   ├── cypress/
+│   │   ├── e2e/
+│   │   ├── pages/
+│   │   └── support/
 │   └── package.json
 ├── docs/
 │   ├── test-cases/
