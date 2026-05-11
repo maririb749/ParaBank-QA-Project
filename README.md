@@ -46,7 +46,6 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Exploratory testing | EXP-001 and EXP-003 completed |
 | Accessibility testing | Smoke pass executed; full checklist remains future scope |
 | Responsive testing | Smoke pass executed; full checklist remains future scope |
-| API testing | Future scope if stable endpoints are included |
 
 ## Scope Tested
 
@@ -74,7 +73,7 @@ The testing approach was guided by simple risk-based questions:
 
 Based on these questions, the project focused first on core banking flows such as authentication, restricted access, transfers, balances, and transaction history.
 
-Other areas, such as profile validation, expanded accessibility coverage, responsive testing, compatibility, and API testing, are also important, but were documented or planned after the highest-risk flows were covered.
+Other areas, such as profile validation, expanded accessibility coverage, responsive testing, and compatibility, were documented after the highest-risk flows were covered.
 
 This approach helped keep the testing focused, realistic, and aligned with the main risks of the application.
 
@@ -217,13 +216,3 @@ ParaBank-QA-Project/
 | Chrome | Manual web testing and evidence capture |
 | Chrome DevTools | Basic inspection and investigation during web testing |
 | Git Bash | Command-line Git and project workflow |
----
-
-## Planned Next Steps
-
-- Expand accessibility coverage beyond the executed smoke pass.
-- Expand responsive testing beyond the executed smoke pass.
-- Add a small browser compatibility smoke pass.
-- Convert selected exploratory findings into scripted regression candidates.
-- Improve CI reporting or artifact handling if needed.
-- Add API testing as a future phase if stable endpoints are included.
