@@ -43,7 +43,7 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Latest Cypress result | 12 passing, 3 pending known bugs, 0 failing |
 | GitHub Actions CI | Workflow exists |
 | Exploratory testing | EXP-001 and EXP-003 completed |
-| Accessibility testing | Template exists; execution planned |
+| Accessibility testing | Smoke pass executed; full checklist remains future scope |
 | Responsive testing | Template exists; execution planned |
 | API testing | Future scope if stable endpoints are included |
 
@@ -71,7 +71,7 @@ The testing approach was guided by simple risk-based questions:
 
 Based on these questions, the project focused first on core banking flows such as authentication, restricted access, transfers, balances, and transaction history.
 
-Other areas, such as profile validation, accessibility, responsive testing, compatibility, and API testing, are also important, but were documented or planned after the highest-risk flows were covered.
+Other areas, such as profile validation, expanded accessibility coverage, responsive testing, compatibility, and API testing, are also important, but were documented or planned after the highest-risk flows were covered.
 
 This approach helped keep the testing focused, realistic, and aligned with the main risks of the application.
 
@@ -159,7 +159,7 @@ The workflow status is displayed through the GitHub Actions badge at the top of 
 | [Test Summary Report](docs/TEST_SUMMARY_REPORT.md) | Manual, Cypress, and exploratory execution results |
 | [Traceability Matrix](docs/TRACEABILITY_MATRIX.md) | Requirement, test case, bug, automation, risk, and evidence mapping |
 | [Exploratory Testing](docs/EXPLORATORY_TESTING.md) | Exploratory charters, executed sessions, observations, and linked impact evidence |
-| [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | Planned accessibility testing checklist |
+| [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | Accessibility smoke execution and future-scope checklist |
 | [Responsive Testing](docs/RESPONSIVE_TESTING.md) | Planned responsive testing checklist |
 
 ## Evidence
@@ -168,7 +168,7 @@ The workflow status is displayed through the GitHub Actions badge at the top of 
 |---|---|---|
 | Manual test screenshots | [evidences/screenshots/](evidences/screenshots/) | Evidence captured |
 | Exploratory screenshots | [evidences/screenshots/exploratory/](evidences/screenshots/exploratory/) | Evidence captured |
-| Accessibility screenshots | `evidences/screenshots/accessibility/` | Planned evidence folder; execution planned |
+| Accessibility screenshots | `evidences/screenshots/accessibility/` | Smoke evidence captured |
 | Responsive screenshots | `evidences/screenshots/responsive/` | Planned evidence folder; execution planned |
 
 Evidence file names include related test case, bug, observation, or exploratory session IDs so reviewers can trace claims back to screenshots quickly.
@@ -213,7 +213,7 @@ ParaBank-QA-Project/
 
 ## Planned Next Steps
 
-- Execute the planned accessibility smoke test checklist and capture evidence.
+- Expand accessibility coverage beyond the executed smoke pass.
 - Execute the planned responsive testing checklist and capture evidence.
 - Add a small browser compatibility smoke pass.
 - Convert selected exploratory findings into scripted regression candidates.
