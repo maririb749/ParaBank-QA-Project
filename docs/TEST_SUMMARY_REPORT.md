@@ -12,9 +12,9 @@
 
 ## 1. Purpose
 
-This document summarizes the results of the first manual functional testing cycle, the Cypress UI automation cycle, and the first exploratory testing cycle executed for the ParaBank QA Portfolio project.
+This document summarizes the results of the first manual functional testing cycle, the Cypress UI automation cycle, the first exploratory testing cycle, the accessibility smoke test, and the responsive smoke test executed for the ParaBank QA Portfolio project.
 
-The report consolidates the executed manual scope, Cypress automation coverage, exploratory testing scope, test results, confirmed bugs, observations, evidence, and final testing conclusion.
+The report consolidates the executed manual scope, Cypress automation coverage, exploratory testing scope, accessibility smoke testing, responsive smoke testing, test results, confirmed bugs, observations, evidence, and final testing conclusion.
 
 This document is based on:
 
@@ -23,27 +23,31 @@ This document is based on:
 - `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`
 - `docs/BUG_REPORTS.md`
 - `docs/EXPLORATORY_TESTING.md`
+- `docs/ACCESSIBILITY_CHECKLIST.md`
+- `docs/RESPONSIVE_TESTING.md`
 - `docs/TRACEABILITY_MATRIX.md`
 
 ---
 
 ## 2. Executive Summary
 
-The first manual testing cycle, the Cypress UI automation cycle, and the first exploratory testing cycle were completed for the ParaBank Demo Banking Application.
+The first manual testing cycle, the Cypress UI automation cycle, the first exploratory testing cycle, the accessibility smoke test, and the responsive smoke test were completed for the ParaBank Demo Banking Application.
 
 A total of 15 functional test cases were executed across Authentication, Accounts, Transfers, Transactions, and Customer Profile modules.
 
 The manual execution identified 3 confirmed bugs and 2 observations. The most critical issues were related to authentication and transfer validation.
 
-After the manual cycle, Cypress UI automation was implemented for the 15 documented functional scenarios. The automation suite contains 5 spec files, with 12 passing tests and 3 pending tests linked to known confirmed bugs.
+After the manual cycle, Cypress UI automation was implemented for the 15 documented functional scenarios. The automation suite contains 5 spec files, with 12 passing tests and 3 pending tests linked to known confirmed bugs. The automation layer also includes custom Cypress commands and lightweight Page Objects for authentication-related flows.
 
 Exploratory testing was then executed for two high-risk areas: authentication/session access and transfers. It confirmed two existing transfer bugs, did not reproduce BUG-001 during EXP-001, confirmed one existing observation, recorded four standalone exploratory observations, and captured two linked impact evidence items for transfer validation risk.
+
+Accessibility smoke testing was executed on the public login area and visible navigation elements. Responsive smoke testing was executed across desktop, tablet, and mobile viewports for the public login page, login error message, and public navigation.
 
 ---
 
 ## 3. Scope Executed
 
-The executed scope includes the manual functional cycle, Cypress UI automation mapping for the same 15 scenarios, and the first exploratory testing cycle.
+The executed scope includes the manual functional cycle, Cypress UI automation mapping for the same 15 scenarios, the first exploratory testing cycle, accessibility smoke testing, and responsive smoke testing.
 
 | Module | Test Cases Executed | Result Summary |
 |---|---:|---|
@@ -57,6 +61,14 @@ The executed scope includes the manual functional cycle, Cypress UI automation m
 |---|---|---|---|
 | EXP-001 | Authentication and Session Access | Completed | BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. |
 | EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-006 were recorded. OBS-007 and OBS-008 were retained as linked impact evidence. |
+
+| Accessibility Smoke Area | Checks Executed | Result Summary |
+|---|---:|---|
+| Public login and visible navigation | 5 | 4 Passed, 1 Observation, 0 Failed |
+
+| Responsive Smoke Area | Viewports Tested | Result Summary |
+|---|---:|---|
+| Public login, login error message, and public navigation | 3 | 1 Passed, 4 Observations, 0 Failed |
 
 ---
 
@@ -78,6 +90,12 @@ The executed scope includes the manual functional cycle, Cypress UI automation m
 | Existing Bugs Confirmed by Exploratory Testing | 2 |
 | Existing Bugs Not Reproduced by Exploratory Testing | 1 |
 | Linked Exploratory Impact Evidence Items | 2 |
+| Accessibility Smoke Checks Executed | 5 |
+| Accessibility Smoke Passed | 4 |
+| Accessibility Smoke Observations | 1 |
+| Responsive Smoke Checks Executed | 5 |
+| Responsive Smoke Passed | 1 |
+| Responsive Smoke Observations | 4 |
 
 ---
 
@@ -89,6 +107,12 @@ After the manual execution cycle, a Cypress UI automation suite was implemented 
 
 The automated suite maps directly to the 15 documented manual test cases.
 
+The automation structure includes custom Cypress commands and lightweight Page Objects for authentication-related flows:
+
+- `Automation/cypress/support/commands.js`
+- `Automation/cypress/pages/LoginPage.js`
+- `Automation/cypress/pages/RegisterPage.js`
+
 | Metric | Total |
 |---|---:|
 | Cypress Spec Files | 5 |
@@ -96,7 +120,7 @@ The automated suite maps directly to the 15 documented manual test cases.
 | Passing Automated Tests | 12 |
 | Pending Known Bug Tests | 3 |
 | Failing Automated Tests | 0 |
-| Latest Full Suite Duration | 01:36 |
+| Latest Full Suite Duration | 01:21 |
 
 ### Cypress Spec Coverage
 
@@ -121,6 +145,8 @@ The following automated tests are intentionally pending because the related beha
 ### Automation Quality Notes
 
 - Cypress tests use dynamic QA users to reduce dependency on unstable public demo data.
+- Custom commands keep repeated Cypress actions reusable across specs.
+- Lightweight Page Objects centralize authentication-related page interactions and selectors.
 - Known bugs are represented in the automation suite but skipped/pending by default to keep the regression suite stable.
 - Automated scenarios are linked to the documented manual test cases.
 - The latest full Cypress run completed with 0 failing tests.
@@ -190,10 +216,14 @@ BUG-001 was reproduced during the manual cycle and was not reproduced during EXP
 
 ## 9. Evidence Summary
 
-Screenshot evidence was captured for the manual executed test cases and stored in:
+Screenshot evidence was captured for manual test execution, exploratory testing, accessibility smoke testing, and responsive smoke testing.
+
+Evidence folders:
 
 - `evidences/screenshots/`
-
+- `evidences/screenshots/exploratory/`
+- `evidences/screenshots/accessibility/`
+- `evidences/screenshots/responsive/`
 
 Cypress automation was executed through the terminal using the scripts defined in `Automation/package.json`. The latest full suite execution completed with:
 
@@ -230,6 +260,8 @@ The following key findings were identified during the manual execution, Cypress 
 - BUG-002 and BUG-003 were confirmed again during exploratory transfer testing.
 - Browser Back after logout displayed cached authenticated account information, but protected actions required login.
 - Additional transfer validation weaknesses were observed for empty, non-numeric, zero-value, and same-account transfers.
+- Accessibility smoke testing found that the login focus indicator is present but visually subtle.
+- Responsive smoke testing found that tablet and mobile viewports keep a reduced desktop-style layout instead of adapting fully to smaller screens.
 
 Automation-related findings:
 
@@ -237,6 +269,7 @@ Automation-related findings:
 - 12 automated scenarios passed in the latest full suite run.
 - 3 automated scenarios were intentionally kept pending because they are linked to confirmed known bugs.
 - Dynamic test data improved automation stability in the public ParaBank demo environment.
+- Custom commands and Page Objects improved automation readability and reduced duplicated selectors.
 
 
 ---
@@ -250,6 +283,8 @@ Automation-related findings:
 | Accounts | Medium | Restricted access was blocked, but the error message was unclear |
 | Transactions | Low | Transaction history and search behaved as expected during execution |
 | Customer Profile | Medium | Invalid phone format was accepted, affecting data quality |
+| Accessibility | Medium | Smoke testing found subtle focus visibility, which may affect keyboard navigation clarity |
+| Responsive | Medium | Tablet and mobile layouts remain usable but are not fully optimized for smaller screens |
 
 ---
 
@@ -268,12 +303,15 @@ Automation-related findings:
 | Cypress full suite executed successfully | Met |
 | Cypress automated tests completed with 0 failures | Met |
 | Known bugs represented as pending/skipped automation scenarios | Met |
+| Accessibility smoke test executed with evidence | Met |
+| Responsive smoke test executed with evidence | Met |
+| Cypress structure improved with custom commands and Page Objects | Met |
 
 ---
 
 ## 13. Conclusion
 
-The first manual functional testing cycle, Cypress UI automation cycle, and first exploratory testing cycle for the ParaBank QA Portfolio project were completed.
+The first manual functional testing cycle, Cypress UI automation cycle, first exploratory testing cycle, accessibility smoke test, and responsive smoke test for the ParaBank QA Portfolio project were completed.
 
 The application passed most positive and standard functional scenarios. However, critical issues were found in authentication and transfer validation.
 
@@ -283,7 +321,7 @@ The most important concerns are:
 - Validation of negative transfer amounts.
 - Validation of insufficient balance scenarios.
 
-The project is suitable for demonstrating manual QA, exploratory testing, and UI automation skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, exploratory analysis, Cypress automation, regression mapping, and result analysis.
+The project is suitable for demonstrating manual QA, exploratory testing, accessibility smoke testing, responsive smoke testing, and UI automation skills, including test planning, test strategy, test case execution, evidence collection, bug reporting, exploratory analysis, Cypress automation, regression mapping, Page Object organization, and result analysis.
 
 ---
 
@@ -309,8 +347,8 @@ Before considering the tested scope stable, the following actions are recommende
 
 Recommended next improvements for the project:
 
-- Execute the planned accessibility checklist and capture results/evidence.
-- Execute the planned responsive testing checklist and capture results/evidence.
+- Expand accessibility coverage beyond the executed smoke pass.
+- Expand responsive testing beyond the executed smoke pass.
 - Add API testing in a separate future phase if stable endpoints are included.
 - Expand Cypress coverage with additional input validation, exploratory, accessibility and compatibility scenarios in future cycles.
 - Improve CI reporting and artifact retention for Cypress execution results.

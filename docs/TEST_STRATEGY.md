@@ -4,9 +4,9 @@
 **Last Updated:** May 2026  
 **Document Type:** Test Strategy  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing + Accessibility Smoke Testing + Responsive Smoke Testing  
 **Prepared By:** Mariana  
-**Document Status:** Completed — Manual, Cypress Automation, and First Exploratory Cycles Executed  
+**Document Status:** Completed — Manual, Cypress Automation, Exploratory, Accessibility Smoke, and Responsive Smoke Executed  
 
 ---
 
@@ -18,7 +18,7 @@ The purpose of this strategy is to explain how the application was tested, how s
 
 This strategy supports the test scope defined in `docs/TEST_PLAN.md` and aligns with the functional test cases documented in `docs/test-cases/PARABANK_15_TEST_CASES_EN.md`.
 
-The first phase focused on manual functional testing through the web user interface. The second phase added Cypress UI automation mapped to the documented manual test cases. The first exploratory cycle then investigated authentication/session access and transfers because those areas carry high customer, data, money, and trust risk. API testing, database testing, performance testing, accessibility execution, and responsive execution are not part of the completed execution scope and may be introduced in future phases.
+The first phase focused on manual functional testing through the web user interface. The second phase added Cypress UI automation mapped to the documented manual test cases. Exploratory testing then investigated authentication/session access and transfers because those areas carry high customer, data, money, and trust risk. Accessibility and responsive smoke tests were also executed for selected public-facing flows. API testing, database testing, performance testing, expanded accessibility testing, expanded responsive testing, and compatibility testing are not part of the completed execution scope and may be introduced in future phases.
 
 ---
 
@@ -56,7 +56,7 @@ This does not mean every real-world feature should always have exactly three tes
 
 ## 3. Current Testing Scope
 
-The current strategy covers 15 manual test cases, Cypress UI automation mapped to those same 15 scenarios, and the first exploratory testing cycle.
+The current strategy covers 15 manual test cases, Cypress UI automation mapped to those same 15 scenarios, exploratory testing, accessibility smoke testing, and responsive smoke testing.
 
 Manual and automated functional coverage spans 5 modules:
 
@@ -71,6 +71,11 @@ Completed exploratory sessions:
 - EXP-001 - Authentication and Session Access
 - EXP-003 - Transfers
 
+Completed smoke testing activities:
+
+- Accessibility smoke test on the public login area and visible navigation elements
+- Responsive smoke test across desktop, tablet, and mobile viewports
+
 Out of scope for the current phase:
 
 - API testing
@@ -78,17 +83,19 @@ Out of scope for the current phase:
 - Load testing
 - Stress testing
 - Security penetration testing
-- Accessibility checklist execution
-- Responsive checklist execution
+- Expanded accessibility testing beyond the executed smoke pass
+- Expanded responsive testing beyond the executed smoke pass
 - Full accessibility compliance testing
 - Full localization testing
 - Native mobile testing
 
-Accessibility and responsive testing templates exist and are ready for execution, but their checks have not been executed yet.
+Accessibility and responsive smoke tests were executed with evidence. Full accessibility and responsive coverage remain future scope.
 
 ### Cypress Automation Scope
 
 Cypress UI automation was implemented under the `Automation/` folder.
+
+The automation layer uses custom Cypress commands and lightweight Page Objects for authentication-related flows, keeping test specs readable and reducing duplicated selectors.
 
 The automation suite contains 5 spec files mapped to the 15 documented manual test cases:
 
@@ -106,7 +113,7 @@ Latest full Cypress execution result:
 - **Passing:** 12
 - **Pending known bugs:** 3
 - **Failing:** 0
-- **Full suite duration:** 01:36
+- **Full suite duration:** 01:21
 
 Known bugs or retest-risk scenarios intentionally kept pending in the automation suite:
 
