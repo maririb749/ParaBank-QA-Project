@@ -2,20 +2,92 @@
 
 [![Cypress Regression Tests](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml/badge.svg?branch=main)](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml)
 
-A practical QA project focused on testing core banking workflows, identifying risks, documenting bugs, collecting evidence, and building Cypress regression coverage.
+A practical QA portfolio project for a demo banking application, covering manual testing, Cypress automation, exploratory testing, accessibility smoke testing, responsive smoke testing, bug reporting, traceability, evidence management, and CI with GitHub Actions.
 
-This project demonstrates manual functional testing, Cypress UI automation, risk-based exploratory testing, bug reporting, traceability, evidence management, and CI with GitHub Actions.
+The project focuses on realistic QA work: identifying high-risk workflows, documenting defects clearly, collecting evidence, and mapping manual coverage to automated regression scenarios.
 
-The focus is practical QA work: identifying high-risk banking workflows, documenting results clearly, and mapping manual coverage to automated regression scenarios.
+## What This Project Demonstrates
 
-## Project Highlights
+| Skill | How It Is Demonstrated |
+|---|---|
+| Manual QA | 15 documented test cases across core banking workflows |
+| Cypress automation | 5 spec files mapped to 15 manual scenarios |
+| Test architecture | Custom Cypress commands and Page Objects for authentication flows |
+| Bug reporting | 3 documented bugs with severity, priority, impact, status, and evidence |
+| Exploratory testing | 2 executed exploratory sessions focused on authentication and transfers |
+| Accessibility testing | Smoke test executed for login usability, focus visibility, labels, errors, and link purpose |
+| Responsive testing | Smoke test executed across desktop, tablet, and mobile viewports |
+| Traceability | Requirements, test cases, bugs, automation, risks, and evidence mapped in a traceability matrix |
+| CI/CD | GitHub Actions workflow running the Cypress regression suite |
 
-- Manual QA + Cypress automation project for a demo banking application
-- 15 manual test cases covering authentication, accounts, transfers, transactions and customer profile
-- 5 Cypress spec files with 15 mapped automated scenarios
-- Latest Cypress result: 12 passing, 3 pending known bugs, 0 failing
-- 3 documented bugs, 6 observations and 2 exploratory sessions
-- Includes risk analysis, traceability matrix, evidence, bug reports, Page Objects, custom Cypress commands and GitHub Actions CI
+## QA Project Architecture
+
+```mermaid
+graph TB
+    subgraph Repo["ParaBank QA Portfolio"]
+        README["README.md"]
+
+        subgraph Docs["QA Documentation"]
+            PLAN["TEST_PLAN.md"]
+            STRATEGY["TEST_STRATEGY.md"]
+            CASES["Manual Test Cases"]
+            BUGS["BUG_REPORTS.md"]
+            SUMMARY["TEST_SUMMARY_REPORT.md"]
+            MATRIX["TRACEABILITY_MATRIX.md"]
+            EXP["EXPLORATORY_TESTING.md"]
+            A11Y["ACCESSIBILITY_CHECKLIST.md"]
+            RWD["RESPONSIVE_TESTING.md"]
+        end
+
+        subgraph Automation["Cypress Automation"]
+            SPECS["cypress/e2e/"]
+            PAGES["cypress/pages/"]
+            SUPPORT["cypress/support/"]
+        end
+
+        subgraph Evidence["Evidence"]
+            MANUAL["manual screenshots"]
+            EXPLORATORY["exploratory screenshots"]
+            ACCESSIBILITY["accessibility screenshots"]
+            RESPONSIVE["responsive screenshots"]
+        end
+
+        CI["GitHub Actions"]
+    end
+
+    subgraph AUT["Application Under Test"]
+        PARABANK["ParaBank Demo Banking Application"]
+    end
+
+    README --> Docs
+    README --> Automation
+    README --> Evidence
+
+    Docs --> PLAN
+    Docs --> STRATEGY
+    Docs --> CASES
+    Docs --> BUGS
+    Docs --> SUMMARY
+    Docs --> MATRIX
+    Docs --> EXP
+    Docs --> A11Y
+    Docs --> RWD
+
+    CI -->|runs| SPECS
+    SPECS -->|tests| PARABANK
+    SPECS -->|uses| PAGES
+    SPECS -->|uses| SUPPORT
+
+    CASES --> SPECS
+    CASES --> BUGS
+    CASES --> MANUAL
+    EXP --> EXPLORATORY
+    A11Y --> ACCESSIBILITY
+    RWD --> RESPONSIVE
+    MATRIX --> CASES
+    MATRIX --> BUGS
+    MATRIX --> SPECS
+```
 
 ## Application Under Test
 
@@ -28,26 +100,22 @@ The focus is practical QA work: identifying high-risk banking workflows, documen
 
 ParaBank simulates common banking workflows including login, account opening, account balance review, transfers, transaction history, and customer profile updates.
 
-## Current Project Status
+## Execution Snapshot
 
-| Area | Current Status |
+| Area | Result |
 |---|---|
-| Manual functional testing | Completed |
-| Manual test cases executed | 15 |
-| Bugs documented | 3 |
-| Manual observations | 2 |
-| Exploratory observations | 4 |
-| Linked exploratory impact evidence items | 2 |
-| Cypress automation | Implemented |
-| Cypress scenarios mapped | 15 |
+| Manual functional test cases | 15 executed |
+| Cypress automation | 5 spec files, 15 mapped scenarios |
 | Latest Cypress result | 12 passing, 3 pending known bugs, 0 failing |
-| GitHub Actions CI | Workflow exists |
-| Cypress architecture | Custom commands + Page Objects for authentication flows |
-| Exploratory testing | EXP-001 and EXP-003 completed |
-| Accessibility testing | Smoke pass executed; full checklist remains future scope |
-| Responsive testing | Smoke pass executed; full checklist remains future scope |
+| Bugs documented | 3 |
+| Total observations | 6 |
+| Exploratory testing | 2 executed sessions |
+| Accessibility testing | Smoke pass executed with evidence |
+| Responsive testing | Smoke pass executed with evidence |
+| CI | GitHub Actions workflow configured |
+| Automation architecture | Custom commands + Page Objects for authentication flows |
 
-## Scope Tested
+## Tested Scope
 
 | Module | Coverage |
 |---|---|
@@ -57,25 +125,23 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Transactions | Transaction history, search by amount, new account transaction state |
 | Customer Profile | Valid update, invalid phone format, empty required fields |
 | Exploratory Testing | Authentication/session access and transfers |
-| Accessibility | Login keyboard navigation, focus visibility, labels, login error message, link purpose |
-| Responsive | Login page and public navigation across desktop, tablet, and mobile viewports |
+| Accessibility Smoke | Login keyboard navigation, focus visibility, labels, login error message, link purpose |
+| Responsive Smoke | Login page, login error message, and public navigation across desktop, tablet, and mobile viewports |
 
-Scenario coverage includes positive, negative, boundary, edge case, access control, exploratory, and regression-oriented testing.
+Scenario coverage includes positive, negative, boundary, edge case, access control, exploratory, accessibility smoke, responsive smoke, and regression-oriented testing.
 
 ## Risk-Based Testing Approach
 
-The testing approach was guided by simple risk-based questions:
+Testing was prioritized around high-impact banking workflows:
 
-- What is the most important functionality for the user?
-- What could interrupt the customer workflow?
-- What data is sensitive?
-- What could cause the most damage if it failed?
+- Authentication and session access
+- Restricted page access
+- Transfers and balance behavior
+- Transaction history visibility
+- Customer profile validation
+- Error handling and validation feedback
 
-Based on these questions, the project focused first on core banking flows such as authentication, restricted access, transfers, balances, and transaction history.
-
-Other areas, such as profile validation, expanded accessibility coverage, responsive testing, and compatibility, were documented after the highest-risk flows were covered.
-
-This approach helped keep the testing focused, realistic, and aligned with the main risks of the application.
+This approach helped keep the test scope focused, realistic, and aligned with the main risks of the application.
 
 ## Key Findings
 
@@ -85,24 +151,26 @@ This approach helped keep the testing focused, realistic, and aligned with the m
 | BUG-002 | Negative transfer amount was accepted and processed. | Open |
 | BUG-003 | Insufficient balance transfer was accepted and created invalid balance behavior. | Open |
 | OBS-003 | Browser Back after logout displayed cached authenticated account data, while protected actions still required login. | Observation |
+| A11Y-OBS-001 | Login focus indicator is present but visually subtle. | Observation |
+| RWD-OBS-002 | Mobile viewport keeps a reduced desktop-style layout instead of adapting to the screen width. | Observation |
 
-Exploratory transfer testing also revealed additional validation weaknesses around empty, non-numeric, zero-value, same-account, and very large transfers. Transaction history and final balance evidence were linked to transfer validation impact instead of counted as separate standalone observations.
+Detailed bugs, observations, exploratory notes, and evidence are available in the documentation map below.
 
-## Automation Summary
+## Automation Overview
 
 The Cypress project is located in [Automation/](Automation/).
 
 | Automation Area | Details |
 |---|---|
 | Framework | Cypress |
-| Spec files | 5 |
-| Mapped scenarios | 15 |
-| Latest result | 12 passing, 3 pending known bugs, 0 failing |
-| Known-bug handling | TC-002, TC-008, and TC-009 are pending/skipped by default |
+| Test location | `Automation/cypress/e2e/` |
+| Page Objects | `Automation/cypress/pages/` |
+| Custom commands | `Automation/cypress/support/commands.js` |
 | Test data strategy | Dynamic QA users are used during Cypress execution |
-| CI | GitHub Actions workflow runs the Cypress suite |
+| Known-bug handling | TC-002, TC-008, and TC-009 are pending/skipped by default |
+| CI | GitHub Actions runs the Cypress regression suite |
 
-Cypress supports regression coverage, but it does not replace manual QA or exploratory thinking. The automated tests are mapped to documented manual test cases and keep known application bugs visible without causing the default regression run to fail.
+Cypress supports regression coverage, but it does not replace manual QA or exploratory thinking. Automated tests are mapped to documented manual test cases and keep known application bugs visible without causing the default regression run to fail.
 
 ## How To Run Cypress
 
@@ -137,7 +205,6 @@ Run known-bug scenarios intentionally:
 
 ```bash
 npm run cy:run:known-bugs
-
 ```
 
 Additional spec-level scripts are available in [Automation/package.json](Automation/package.json).
@@ -156,8 +223,8 @@ This README is intentionally concise for portfolio review. Detailed QA artifacts
 
 | Document | Purpose |
 |---|---|
-| [Test Plan](docs/TEST_PLAN.md) | Scope, objectives, environment, risks, execution approach, deliverables |
-| [Test Strategy](docs/TEST_STRATEGY.md) | Testing approach, risk prioritization, regression strategy, automation strategy |
+| [Test Plan](docs/TEST_PLAN.md) | Scope, objectives, environment, risks, execution approach, and deliverables |
+| [Test Strategy](docs/TEST_STRATEGY.md) | Testing approach, risk prioritization, regression strategy, and automation strategy |
 | [Manual Test Cases](docs/test-cases/PARABANK_15_TEST_CASES_EN.md) | 15 executable manual test cases with expected results, actual results, status, and evidence |
 | [Bug Reports](docs/BUG_REPORTS.md) | Bugs, observations, severity, priority, impact, evidence, and retest notes |
 | [Test Summary Report](docs/TEST_SUMMARY_REPORT.md) | Manual, Cypress, exploratory, accessibility, and responsive execution results |
@@ -203,16 +270,16 @@ ParaBank-QA-Project/
 │   └── workflows/
 └── README.md
 ```
+
 ## Tools Used
 
 | Tool | Purpose |
 |---|---|
-| Visual Studio Code | Editing QA documentation, Markdown files, Cypress tests, and project structure |
-| Markdown | QA documentation, test cases, reports, and checklists |
-| Git | Version control |
-| GitHub | Repository hosting, portfolio presentation, and project history |
 | Cypress | UI regression automation |
 | GitHub Actions | CI workflow for Cypress execution |
+| Markdown | QA documentation, test cases, reports, and checklists |
 | Chrome | Manual web testing and evidence capture |
-| Chrome DevTools | Basic inspection and investigation during web testing |
+| Chrome DevTools | Accessibility and responsive smoke checks |
+| Git and GitHub | Version control, repository hosting, and portfolio presentation |
+| Visual Studio Code | Editing QA documentation, Markdown files, Cypress tests, and project structure |
 | Git Bash | Command-line Git and project workflow |
