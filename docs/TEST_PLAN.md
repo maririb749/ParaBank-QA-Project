@@ -343,7 +343,7 @@ Known pending automated scenarios:
 
 | Test Case | Related Bug | Reason |
 |---|---|---|
-| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle and remains Needs Retest after EXP-001 |
+| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle but was not reproduced during EXP-001. The behavior appears flaky or environment-dependent and is treated as an intermittent authentication risk. |
 | TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
 | TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
 

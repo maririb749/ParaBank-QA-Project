@@ -117,7 +117,7 @@ Latest full Cypress execution result:
 
 Known bugs or retest-risk scenarios intentionally kept pending in the automation suite:
 
-- TC-002 → BUG-001, reproduced during the manual cycle and still Needs Retest after EXP-001
+- TC-002 → BUG-001, reproduced during the manual cycle but not reproduced during EXP-001; treated as an intermittent authentication risk
 - TC-008 → BUG-002
 - TC-009 → BUG-003
 

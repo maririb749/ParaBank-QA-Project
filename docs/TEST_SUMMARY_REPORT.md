@@ -138,8 +138,7 @@ The following automated tests are intentionally pending because the related beha
 
 | Test Case | Related Bug | Reason |
 |---|---|---|
-| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle. It was not reproduced during EXP-001, but remains pending/skipped until consistent retest results support a documentation and automation strategy update. |
-| TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
+| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle but was not reproduced during EXP-001. The behavior appears flaky or environment-dependent, so the scripted test remains pending/skipped until consistent reproduction is achieved. || TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
 | TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
 
 ### Automation Quality Notes
@@ -183,7 +182,7 @@ The following automated tests are intentionally pending because the related beha
 | BUG-002 | TC-008 | Transfers | Critical | P0 | Negative transfer amount is accepted and processed |
 | BUG-003 | TC-009 | Transfers | Critical | P0 | Transfer with insufficient balance is accepted and creates negative balance |
 
-BUG-001 was reproduced during the manual cycle and was not reproduced during EXP-001. It remains `Needs Retest` until the behavior is consistently retested.
+BUG-001 was reproduced during the manual cycle and was not reproduced during EXP-001. The behavior appears flaky or environment-dependent, so it is treated as an intermittent authentication risk. The scripted Cypress scenario remains pending/skipped until consistent reproduction is achieved.
 
 ---
 
@@ -256,7 +255,7 @@ The following key findings were identified during the manual execution, Cypress 
 - The transfer flow allowed a transaction greater than the source account balance and created a negative balance.
 - Direct access to a restricted page was blocked, but the system displayed a generic internal error message.
 - The contact information form accepted a non-phone text value in the phone field.
-- BUG-001 was not reproduced during exploratory retest and remains Needs Retest.
+- BUG-001 was not reproduced during exploratory retest and is treated as an intermittent authentication risk.
 - BUG-002 and BUG-003 were confirmed again during exploratory transfer testing.
 - Browser Back after logout displayed cached authenticated account information, but protected actions required login.
 - Additional transfer validation weaknesses were observed for empty, non-numeric, zero-value, and same-account transfers.
@@ -278,7 +277,7 @@ Automation-related findings:
 
 | Area | Risk Level | Reason |
 |---|---|---|
-| Authentication | High | Authentication is a high-risk module. BUG-001 is a Critical/P0 defect and remains Needs Retest. |
+| Authentication | High | Authentication is a high-risk module. BUG-001 is a Critical/P0 intermittent authentication risk that requires continued monitoring. |
 | Transfers | High | Transfers are a high-risk module. BUG-002 and BUG-003 are Critical/P0 defects affecting financial validation and balance integrity. |
 | Accounts | Medium | Restricted access was blocked, but the error message was unclear |
 | Transactions | Low | Transaction history and search behaved as expected during execution |
@@ -394,7 +393,7 @@ These areas were selected because authentication controls access to protected ba
 
 | Finding ID | Type | Related Session | Summary |
 |---|---|---|---|
-| BUG-001 | Existing Bug Not Reproduced | EXP-001 | Incorrect password was rejected during exploratory retest. BUG-001 remains Needs Retest because it was previously reproduced during the manual cycle. |
+| BUG-001 | Intermittent Issue | EXP-001 | Incorrect password was rejected during exploratory retest. Since the issue was previously reproduced during the manual cycle, it is treated as flaky or environment-dependent. |
 | BUG-002 | Existing Bug Confirmed | EXP-003 | Negative transfer amount was accepted and processed. |
 | BUG-003 | Existing Bug Confirmed | EXP-003 | Insufficient balance and very large transfers were accepted and processed. |
 | OBS-001 | Existing Observation Confirmed | EXP-001 | Direct unauthenticated access was blocked with a generic internal error message. |
@@ -425,7 +424,7 @@ The exploratory testing cycle strengthened the portfolio by showing investigatio
 
 Main conclusions:
 
-- BUG-001 was not reproduced during exploratory retest, but remains Needs Retest because it was previously reproduced in the manual cycle.
+- BUG-001 was not reproduced during exploratory retest, but it was previously reproduced in the manual cycle. It is treated as an intermittent authentication risk.
 - Transfer validation remains high-risk because BUG-002 and BUG-003 were confirmed.
 - Additional session, usability, and validation observations were identified. Transaction history and final balance screenshots support the impact analysis for transfer validation defects.
 - The exploratory results provide candidates for future manual regression cases and Cypress automation coverage.

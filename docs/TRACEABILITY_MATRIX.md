@@ -45,7 +45,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 | Requirement ID | Requirement Area | Manual Test Case | Manual Status | Cypress Spec | Cypress Status | Finding | Risk / Priority | Evidence | Notes |
 |---|---|---|---|---|---|---|---|---|---|
 | AUTH-001 | Valid customer authentication | TC-001 - Login with valid credentials | Passed | `authentication.cy.js` | Passed | N/A | High | `evidences/screenshots/TC-001_login_valid_credentials_pass.png` | Covers the primary login path that unlocks all authenticated banking workflows. |
-| AUTH-002 | Invalid password rejection | TC-002 - Login with incorrect password | Failed | `authentication.cy.js` | Pending / Skipped Known Bug | BUG-001 | Critical / P0 / Needs Retest | `evidences/screenshots/TC-002_login_incorrect_password_fail.png` | Validates authentication trust and protects against unauthorized account access. |
+| AUTH-002 | Invalid password rejection | TC-002 - Login with incorrect password | Failed | `authentication.cy.js` | Pending / Skipped Known Bug | BUG-001 | Critical / P0 / Intermittent / Needs Monitoring | `evidences/screenshots/TC-002_login_incorrect_password_fail.png` | Validates authentication trust and protects against unauthorized account access. |
 | AUTH-003 | Empty login field validation | TC-003 - Login with empty required fields | Passed | `authentication.cy.js` | Passed | N/A | Medium | `evidences/screenshots/TC-003_login_empty_required_fields_pass.png` | Checks basic form validation and unauthenticated state handling. |
 | ACC-001 | New account creation | TC-004 - Open new account with valid data | Passed | `accounts.cy.js` | Passed | N/A | High | `evidences/screenshots/TC-004_open_new_account_confirmation_pass.png` | Covers a core customer banking flow and setup dependency for transfers. |
 | ACC-002 | Account balance and details visibility | TC-005 - View account balance | Passed | `accounts.cy.js` | Passed | N/A | High | `evidences/screenshots/TC-005_view_account_balance_pass.png` | Verifies that customers can review account identity, balance, and available funds. |
@@ -66,7 +66,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Finding ID | Type | Related Test Case | Requirement ID | Module | Severity / Status | Cypress Mapping |
 |---|---|---|---|---|---|---|
-| BUG-001 | Confirmed Bug | TC-002 | AUTH-002 | Authentication | Critical / P0 / Needs Retest | `authentication.cy.js` - pending known bug |
+| BUG-001 | Intermittent Issue | TC-002 | AUTH-002 | Authentication | Critical / P0 / Intermittent / Needs Monitoring | `authentication.cy.js` - pending known bug |
 | BUG-002 | Confirmed Bug | TC-008 | TRF-002 | Transfers | Critical / P0 | `transfers.cy.js` - pending known bug |
 | BUG-003 | Confirmed Bug | TC-009 | TRF-003 | Transfers | Critical / P0 | `transfers.cy.js` - pending known bug |
 | OBS-001 | Observation | TC-006 | SEC-001 | Accounts / Security | Observation | `accounts.cy.js` - passed |
@@ -90,7 +90,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Risk Area | Related Requirements | Covered By | Current Result |
 |---|---|---|---|
-| Authentication reliability | AUTH-001, AUTH-002, AUTH-003 | TC-001 to TC-003, `authentication.cy.js`, EXP-001 | BUG-001 was found during the manual cycle, was not reproduced during EXP-001, and remains Needs Retest |
+| Authentication reliability | AUTH-001, AUTH-002, AUTH-003 | TC-001 to TC-003, `authentication.cy.js`, EXP-001 | BUG-001 was found during the manual cycle but was not reproduced during EXP-001. It is treated as an intermittent authentication risk. |
 | Restricted access control | SEC-001 | TC-006, `accounts.cy.js` | Access blocked, but generic internal error observed |
 | Account creation and balance visibility | ACC-001, ACC-002 | TC-004, TC-005, `accounts.cy.js` | Passed |
 | Transfer validation and balance consistency | TRF-001, TRF-002, TRF-003 | TC-007 to TC-009, `transfers.cy.js` | Valid transfer passed; two critical validation bugs found |
@@ -113,7 +113,7 @@ It helps reviewers quickly verify that each tested requirement has documented co
 
 | Finding ID | Type | Related Session | Related Area | Status / Risk | Evidence |
 |---|---|---|---|---|---|
-| BUG-001 | Existing Bug | EXP-001 | Authentication | Not reproduced during exploratory retest; remains Needs Retest | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-001 | Intermittent Issue | EXP-001 | Authentication | Not reproduced during exploratory retest; treated as flaky or environment-dependent | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
 | BUG-002 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
 | BUG-003 | Existing Bug | EXP-003 | Transfers | Confirmed during exploratory testing | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
 | OBS-003 | Exploratory Observation | EXP-001 | Authentication / Session | Recorded during exploratory testing; High / P1 | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |

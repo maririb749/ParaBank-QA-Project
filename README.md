@@ -147,7 +147,7 @@ This approach helped keep the test scope focused, realistic, and aligned with th
 
 | ID | Finding | Current Status |
 |---|---|---|
-| BUG-001 | Incorrect password authentication was reproduced during manual testing. It was not reproduced during EXP-001 and remains Needs Retest. | Needs Retest |
+| BUG-001 | Incorrect password authentication was reproduced during manual testing but was not reproduced during EXP-001. The behavior appears flaky or environment-dependent, so it is treated as an intermittent authentication risk. | Intermittent / Needs Monitoring |
 | BUG-002 | Negative transfer amount was accepted and processed. | Open |
 | BUG-003 | Insufficient balance transfer was accepted and created invalid balance behavior. | Open |
 | OBS-003 | Browser Back after logout displayed cached authenticated account data, while protected actions still required login. | Observation |

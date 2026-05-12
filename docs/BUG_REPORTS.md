@@ -48,7 +48,7 @@ The first manual execution cycle identified confirmed bugs and observations. Lat
 
 | Bug ID | Related Test Case | Module | Severity | Priority | Status |
 |---|---|---|---|---|---|
-| BUG-001 | TC-002 | Authentication | Critical | P0 | Needs Retest |
+| BUG-001 | TC-002 | Authentication | Critical | P0 | Intermittent / Needs Monitoring |
 | BUG-002 | TC-008 | Transfers | Critical | P0 | Open |
 | BUG-003 | TC-009 | Transfers | Critical | P0 | Open |
 
@@ -76,7 +76,7 @@ The following EXP-003 findings are treated as impact evidence linked to BUG-003 
 
 The Cypress automation suite maps the confirmed bugs from the manual cycle as pending/skipped known-bug scenarios. This keeps the regression suite stable while preserving coverage visibility for the known defects.
 
-BUG-001 was reproduced during the manual cycle and was not reproduced during exploratory session EXP-001. Its status remains `Needs Retest` until the behavior is consistently retested. TC-002 remains a pending/skipped known-bug Cypress scenario until the documentation and automation strategy are updated after consistent retest results.
+BUG-001 was reproduced during the manual cycle and was not reproduced during exploratory session EXP-001. The behavior appears flaky or environment-dependent, so it is treated as an intermittent authentication issue. TC-002 remains a pending/skipped known-bug Cypress scenario until consistent reproduction is achieved or enough retest evidence supports removing it from the known-bug list.
 
 Latest full Cypress suite result:
 
@@ -237,7 +237,7 @@ Add any additional context, investigation notes, browser console information, or
 **Module:** Authentication  
 **Severity:** Critical  
 **Priority:** P0  
-**Status:** Needs Retest  
+**Status:** Intermittent / Needs Monitoring  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
 **Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
@@ -302,6 +302,18 @@ The issue was reproduced in Chrome incognito mode, reducing the likelihood that 
 | Retest ID | Related Session | Date | Result | Evidence | Notes |
 |---|---|---|---|---|---|
 | RT-001 | EXP-001 - Authentication and Session Access | May 2026 | Not Reproduced | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` | During exploratory session EXP-001, the incorrect password scenario was not reproduced. The system rejected the invalid password as expected. |
+
+### Current Conclusion
+
+BUG-001 was reproduced during the manual testing cycle but was not reproduced during exploratory retest EXP-001. Based on the inconsistent result, the behavior appears flaky or environment-dependent.
+
+For portfolio purposes, the issue is treated as an intermittent authentication risk rather than an abandoned open defect. The related Cypress scenario remains pending/skipped as a known-bug test until consistent reproduction is achieved or additional retest evidence supports removing it from the known-bug list.
+
+### Current Conclusion
+
+BUG-001 was reproduced during the manual testing cycle but was not reproduced during exploratory retest EXP-001. Based on the inconsistent result, the behavior appears flaky or environment-dependent.
+
+For portfolio purposes, the issue is treated as an intermittent authentication risk rather than an abandoned open defect. The related Cypress scenario remains pending/skipped as a known-bug test until consistent reproduction is achieved or additional retest evidence supports removing it from the known-bug list.
 ---
 
 ## BUG-002 — Negative transfer amount is accepted and processed

@@ -160,7 +160,7 @@ Existing bug retest result and observations from this exploratory session:
 
 | Finding | Result | Evidence |
 |---|---|---|
-| BUG-001 | Not reproduced during this exploratory session. Incorrect password was rejected as expected. BUG-001 remains Needs Retest because it was previously reproduced during the manual cycle. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
+| BUG-001 | Not reproduced during this exploratory session. Incorrect password was rejected as expected. The behavior appears flaky or environment-dependent and is treated as an intermittent authentication risk. | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` |
 | OBS-001 | Confirmed. Direct unauthenticated access was blocked with a generic internal error message. | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
 | OBS-003 | New observation recorded. Browser Back after logout displayed cached account information, but protected actions required login. | `evidences/screenshots/exploratory/EXP-001_browser_back_after_logout.png` |
 
@@ -176,7 +176,7 @@ Existing bug retest result and observations from this exploratory session:
 
 ### Follow-Up Ideas
 
-- Continue retesting BUG-001 before changing its `Needs Retest` status or the Cypress skipped known-bug strategy for TC-002.
+- Continue monitoring BUG-001 as an intermittent authentication issue before removing the Cypress skipped known-bug strategy for TC-002.
 - Consider adding a future security/usability test case for browser Back behavior after logout.
 
 ---
