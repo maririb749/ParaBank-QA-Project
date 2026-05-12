@@ -1,4 +1,4 @@
-class LoginPage {
+export class LoginPage {
   visit() {
     cy.visit('/index.htm');
     this.assertLoginFormVisible();
