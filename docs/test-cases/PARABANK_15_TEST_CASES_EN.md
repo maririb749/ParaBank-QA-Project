@@ -176,7 +176,7 @@ Passed
 
 ### Test Data
 
-* **Username:** `maririb51`
+* **Username:** `QA test user`
 * **Password:** `wrong_password`
 
 ### Steps
@@ -903,7 +903,7 @@ Passed
 
 ### Notes
 
-- User used during execution: `maririb52`
+- User used during execution: `QA test user`
 
 ---
 
