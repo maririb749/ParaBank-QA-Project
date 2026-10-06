@@ -1,7 +1,7 @@
 # ParaBank Bug Reports
 
-**Version:** 1.3  
-**Last Updated:** May 2026  
+**Version:** 1.4  
+**Last Updated:** October 2026  
 **Document Type:** Bug Reports  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
@@ -103,6 +103,8 @@ Exploratory testing added retest context for existing bugs and identified new ob
 | BUG-002 | EXP-003 | Confirmed. Negative transfer amount was accepted and processed. | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` |
 | BUG-003 | EXP-003 | Confirmed. Insufficient balance and very large transfers were accepted and processed. | `evidences/screenshots/exploratory/EXP-003_insufficient_balance_bug003.png`, `evidences/screenshots/exploratory/EXP-003_large_amount_bug003.png` |
 | OBS-001 | EXP-001 | Confirmed. Direct unauthenticated access was blocked with a generic internal error message. | `evidences/screenshots/exploratory/EXP-001_direct_url_access_obs001.png` |
+| BUG-001 | Manual retest RT-005 (2026-10-06) | Not reproduced. Incorrect password was rejected as expected. | `evidences/screenshots/BUG-001_retest_2026-10-06.png` |
+| BUG-002 | Manual retest RT-006 (2026-10-06) | Confirmed. A `-$10.00` transfer between two different accounts was accepted. | `evidences/screenshots/BUG-002_retest_2026-10-06.png` |
 
 EXP-003 also produced transaction-history and final-balance evidence showing the impact of invalid transfer processing. These are linked to BUG-003 and related transfer validation issues rather than counted as separate standalone observations.
 
@@ -240,7 +242,7 @@ Add any additional context, investigation notes, browser console information, or
 **Status:** Intermittent / Needs Monitoring  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
-**Environment:** Windows 11, Chrome Incognito Mode, ParaBank Demo Web Application  
+**Environment:** Windows 11, Chrome Incognito Mode (browser version not recorded in the original execution), ParaBank Demo Web Application  
 
 ### Summary
 
@@ -302,6 +304,7 @@ The issue was reproduced in Chrome incognito mode, reducing the likelihood that 
 | Retest ID | Related Session | Date | Result | Evidence | Notes |
 |---|---|---|---|---|---|
 | RT-001 | EXP-001 - Authentication and Session Access | May 2026 | Not Reproduced | `evidences/screenshots/exploratory/EXP-001_wrong_password_rejected.png` | During exploratory session EXP-001, the incorrect password scenario was not reproduced. The system rejected the invalid password as expected. |
+| RT-005 | Manual retest | 2026-10-06 | Not Reproduced | `evidences/screenshots/BUG-001_retest_2026-10-06.png` | Windows 11 24H2 (Build 26100.4351), Chrome 152.0.7977.78 (64-bit), Incognito mode. New test user registered before the retest. Invalid password `wrong123` was rejected with the message "The username and password could not be verified." |
 
 ### Current Conclusion
 
@@ -309,11 +312,8 @@ BUG-001 was reproduced during the manual testing cycle but was not reproduced du
 
 For portfolio purposes, the issue is treated as an intermittent authentication risk rather than an abandoned open defect. The related Cypress scenario remains pending/skipped as a known-bug test until consistent reproduction is achieved or additional retest evidence supports removing it from the known-bug list.
 
-### Current Conclusion
+A second retest on 2026-10-06 (RT-005) also did not reproduce the issue. The bug has now not been reproduced in two consecutive retests.
 
-BUG-001 was reproduced during the manual testing cycle but was not reproduced during exploratory retest EXP-001. Based on the inconsistent result, the behavior appears flaky or environment-dependent.
-
-For portfolio purposes, the issue is treated as an intermittent authentication risk rather than an abandoned open defect. The related Cypress scenario remains pending/skipped as a known-bug test until consistent reproduction is achieved or additional retest evidence supports removing it from the known-bug list.
 ---
 
 ## BUG-002 — Negative transfer amount is accepted and processed
@@ -325,7 +325,7 @@ For portfolio purposes, the issue is treated as an intermittent authentication r
 **Status:** Open  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
-**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+**Environment:** Windows 11, Chrome (browser version not recorded in the original execution), ParaBank Demo Web Application  
 
 ### Summary
 
@@ -393,6 +393,7 @@ This bug is classified as Critical because it affects simulated financial transa
 | Retest ID | Related Session | Date | Result | Evidence | Notes |
 |---|---|---|---|---|---|
 | RT-002 | EXP-003 - Transfers | May 2026 | Confirmed | `evidences/screenshots/exploratory/EXP-003_negative_amount_bug002.png` | During exploratory session EXP-003, a negative transfer amount of `-$10.00` was accepted and processed instead of being rejected. |
+| RT-006 | Manual retest | 2026-10-06 | Confirmed | `evidences/screenshots/BUG-002_retest_before_2026-10-06.png`, `evidences/screenshots/BUG-002_retest_2026-10-06.png` | Windows 11 24H2 (Build 26100.4351), Chrome 152.0.7977.78 (64-bit). New test user and two accounts created before the retest (balances before: `15231` = `$415.50`, `31992` = `$100.00`). A transfer of `-$10.00` from account `31992` to account `15231` was accepted with the message "Transfer Complete!". The after-transfer balances were not captured because the public demo environment reset the test data before the final screenshot. |
 
 ---
 
@@ -405,7 +406,7 @@ This bug is classified as Critical because it affects simulated financial transa
 **Status:** Open  
 **Reported By:** Mariana  
 **Reported Date:** May 2026  
-**Environment:** Windows 11, Chrome, ParaBank Demo Web Application  
+**Environment:** Windows 11, Chrome (browser version not recorded in the original execution), ParaBank Demo Web Application  
 
 ### Summary
 
@@ -869,9 +870,10 @@ When retesting a bug:
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle with confirmed bugs and observations |
 | 1.2 | May 2026 | Mariana | Added Cypress known bug mapping for confirmed manual defects |
 | 1.3 | May 2026 | Mariana | Refined exploratory metrics, BUG-001 retest status, observation risk classification, and linked impact evidence for EXP-003 |
+| 1.4 | October 2026 | Mariana | Added October 2026 manual retests for BUG-001 and BUG-002 with browser and OS versions; removed duplicated BUG-001 conclusion |
 
 ---
 
 **Document Classification:** QA Portfolio Documentation  
 **Audience:** QA Engineers, Technical Reviewers, Hiring Managers  
-**Last Review:** May 2026
+**Last Review:** October 2026
