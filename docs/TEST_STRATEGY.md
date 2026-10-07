@@ -1,6 +1,6 @@
 # ParaBank QA Test Strategy
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Last Updated:** October 2026  
 **Document Type:** Test Strategy  
 **Application Under Test:** ParaBank Demo Banking Application  
@@ -74,7 +74,7 @@ Completed exploratory sessions:
 Completed smoke testing activities:
 
 - Accessibility smoke test on the public login area and visible navigation elements
-- WCAG 2.1 accessibility re-test on the public login pages with Lighthouse and manual contrast verification
+- WCAG 2.1 accessibility re-test on the public login pages with Lighthouse, manual contrast verification, and an NVDA screen reader check
 - Responsive smoke test across desktop, tablet, and mobile viewports
 
 Out of scope for the current phase:
@@ -1153,6 +1153,7 @@ The following improvements may be added in future project phases:
 | 1.1 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 | 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, explicit risk-based prioritization, CI status, and current portfolio deliverables |
 | 1.3 | October 2026 | Mariana | Added the WCAG 2.1 accessibility re-test to the completed scope and updated the accessibility checklist description |
+| 1.4 | October 2026 | Mariana | Added the NVDA screen reader check to the completed accessibility scope |
 
 ---
 

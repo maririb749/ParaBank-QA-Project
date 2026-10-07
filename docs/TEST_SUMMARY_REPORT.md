@@ -1,6 +1,6 @@
 # ParaBank Test Summary Report
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Last Updated:** October 2026  
 **Document Type:** Test Summary Report  
 **Application Under Test:** ParaBank Demo Banking Application  
@@ -41,7 +41,7 @@ After the manual cycle, Cypress UI automation was implemented for the 15 documen
 
 Exploratory testing was then executed for two high-risk areas: authentication/session access and transfers. It confirmed two existing transfer bugs, did not reproduce BUG-001 during EXP-001, confirmed one existing observation, recorded four standalone exploratory observations, and captured two linked impact evidence items for transfer validation risk.
 
-Accessibility smoke testing was executed on the public login area and visible navigation elements in May 2026. In October 2026, the accessibility checklist was mapped to WCAG 2.1 and re-tested with Lighthouse and manual contrast verification. The re-test executed 10 of 17 checks (2 passed, 6 failed, 2 observations) and documented 5 accessibility defects (A11Y-BUG-001 to A11Y-BUG-005). Accessibility defects are tracked separately from the functional bug metrics below. Responsive smoke testing was executed across desktop, tablet, and mobile viewports for the public login page, login error message, and public navigation.
+Accessibility smoke testing was executed on the public login area and visible navigation elements in May 2026. In October 2026, the accessibility checklist was mapped to WCAG 2.1 and re-tested with Lighthouse, manual contrast verification, and an NVDA screen reader check. The re-test executed 10 of 17 checks (2 passed, 6 failed, 2 observations) and documented 5 accessibility defects (A11Y-BUG-001 to A11Y-BUG-005). Accessibility defects are tracked separately from the functional bug metrics below. Responsive smoke testing was executed across desktop, tablet, and mobile viewports for the public login page, login error message, and public navigation.
 
 ---
 
@@ -458,6 +458,7 @@ Main conclusions:
 | 1.1 | May 2026 | Mariana | Updated with Cypress UI automation results and full suite execution summary |
 | 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, consistent metrics, BUG-001 retest clarification, and refined exploratory observation classification |
 | 1.3 | October 2026 | Mariana | Added WCAG 2.1 accessibility re-test results and accessibility defects; fixed merged rows in the known-bug table |
+| 1.4 | October 2026 | Mariana | Added the NVDA screen reader check to the accessibility re-test summary |
 
 ---
 

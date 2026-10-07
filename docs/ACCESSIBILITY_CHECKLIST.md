@@ -3,7 +3,7 @@
 **Project:** ParaBank QA Portfolio  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Document Type:** Accessibility Checklist (WCAG 2.1)  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Smoke Executed + WCAG 2.1 Re-test Executed / Full Checklist Partially Executed  
 **Prepared By:** Mariana  
 **Last Updated:** October 2026  
@@ -32,8 +32,8 @@ This document does not claim full WCAG compliance. It records a basic accessibil
 | Browser | Chrome | Google Chrome 152 (DevTools 152) |
 | Operating System | Windows | Windows 11 |
 | Pages Tested | Public login page and visible navigation elements | `index.htm` (public login page) and `login.htm` (login error page after an invalid login) |
-| Method | Manual: keyboard navigation and visual inspection | Automated: Lighthouse accessibility audit. Manual: DevTools style inspection and WebAIM Contrast Checker |
-| Tools | Keyboard navigation, Chrome DevTools, visual inspection | Chrome DevTools, Lighthouse, WebAIM Contrast Checker |
+| Method | Manual: keyboard navigation and visual inspection | Automated: Lighthouse accessibility audit. Manual: DevTools style inspection, WebAIM Contrast Checker, and NVDA screen reader check |
+| Tools | Keyboard navigation, Chrome DevTools, visual inspection | Chrome DevTools, Lighthouse, WebAIM Contrast Checker, NVDA screen reader (Speech Viewer) |
 | Lighthouse Runs | N/A | Navigation mode on `index.htm` at 13:19:54 and 13:33:52 (both scored 43/100). Snapshot mode on `login.htm` at 13:53:51 (6/13 audits passed). |
 | Viewport | Desktop browser window | DevTools device toolbar enabled (responsive viewport, 459 px wide) |
 | Evidence Folder | `evidences/screenshots/accessibility/` | `evidences/screenshots/accessibility/` |
@@ -78,7 +78,7 @@ The full accessibility checklist remains available for future execution across t
 | A11Y-001 | Keyboard Navigation | User can navigate the login form using only the keyboard | 2.1.1 Keyboard (A) | Passed | Login fields and submit button were reachable and the login form could be submitted using keyboard navigation. | `evidences/screenshots/accessibility/A11Y-001-login-keyboard-navigation.png` |
 | A11Y-002 | Keyboard Navigation | User can reach major authenticated navigation links using only the keyboard | 2.1.1 Keyboard (A) | Not Executed | Full authenticated navigation check remains future scope. | N/A |
 | A11Y-003 | Focus Visibility | Interactive elements show a visible focus indicator | 2.4.7 Focus Visible (AA) | Observation | Focus indicator is present on the Log In button during keyboard navigation, so 2.4.7 is met. The indicator is subtle and could be stronger for better visibility. | `evidences/screenshots/accessibility/A11Y-003-focus-visibility.png` |
-| A11Y-004 | Forms | Login inputs have understandable labels or accessible names | 1.3.1 Info and Relationships (A), 3.3.2 Labels or Instructions (A), 4.1.2 Name, Role, Value (A) | Failed | Re-evaluated on 2026-10-07. The visible texts "Username" and "Password" are present (3.3.2 met visually), but they are not programmatically associated with the inputs. Lighthouse reported "Form elements do not have associated labels" for both login inputs. The May 2026 result (Passed) was based on visual inspection only. See A11Y-BUG-001. | `evidences/screenshots/accessibility/A11Y-004-login-form-labels.png`, `evidences/screenshots/accessibility/A11Y-LH-002-form-labels-missing.png` |
+| A11Y-004 | Forms | Login inputs have understandable labels or accessible names | 1.3.1 Info and Relationships (A), 3.3.2 Labels or Instructions (A), 4.1.2 Name, Role, Value (A) | Failed | Re-evaluated on 2026-10-07. The visible texts "Username" and "Password" are present (3.3.2 met visually), but they are not programmatically associated with the inputs. Lighthouse reported "Form elements do not have associated labels" for both login inputs. Confirmed with the NVDA screen reader: on focus, NVDA announced the Username field only as "edição em branco" (edit, blank) and the Password field only as "edição protegido em branco" (edit, protected, blank), without the field names. The May 2026 result (Passed) was based on visual inspection only. See A11Y-BUG-001. | `evidences/screenshots/accessibility/A11Y-004-login-form-labels.png`, `evidences/screenshots/accessibility/A11Y-LH-002-form-labels-missing.png`, `evidences/screenshots/accessibility/A11Y-SR-001-nvda-username-no-name.png`, `evidences/screenshots/accessibility/A11Y-SR-002-nvda-password-no-name.png` |
 | A11Y-005 | Forms | Transfer form fields and dropdowns have understandable labels or context | 1.3.1 (A), 3.3.2 (A), 4.1.2 (A) | Not Executed | Transfer form accessibility check remains future scope. | N/A |
 | A11Y-006 | Forms | Update contact information fields have understandable labels or context | 1.3.1 (A), 3.3.2 (A), 4.1.2 (A) | Not Executed | Profile form accessibility check remains future scope. | N/A |
 | A11Y-007 | Error Messages | Login validation errors are visible and understandable | 3.3.1 Error Identification (A) | Passed | Invalid login feedback was visible and described the error in text. The contrast of this message is evaluated separately in A11Y-009. | `evidences/screenshots/accessibility/A11Y-007-login-error-message.png` |
@@ -149,6 +149,8 @@ Automated tools detect only a subset of accessibility issues. Lighthouse and the
 |---|---|---|---|
 | Login error message color and size | DevTools Styles panel on `p.error` | Text color `#FF0000` (rule `.error` in `style.css`), 13 px normal Arial. DevTools showed "No contrast information available" because of the background image. | `evidences/screenshots/accessibility/A11Y-DT-001-error-message-color-devtools.png` |
 | Login error message contrast | WebAIM Contrast Checker, foreground `#FF0000`, background `#FFFFFF` | Contrast ratio 3.99:1. WCAG AA normal text: Fail. WCAG AAA normal text: Fail. | `evidences/screenshots/accessibility/A11Y-DT-002-error-message-contrast-webaim.png` |
+| Username field announcement | NVDA screen reader with Chrome (incognito window) on `index.htm`, NVDA Speech Viewer, focus on the Username field | NVDA announced "edição em branco" (edit, blank). The field name "Username" was not announced. NVDA was used with the Portuguese interface language. | `evidences/screenshots/accessibility/A11Y-SR-001-nvda-username-no-name.png` |
+| Password field announcement | NVDA screen reader with Chrome (incognito window) on `index.htm`, NVDA Speech Viewer, Tab from the Username field | NVDA announced "edição protegido em branco" (edit, protected, blank). The field name "Password" was not announced. | `evidences/screenshots/accessibility/A11Y-SR-002-nvda-password-no-name.png` |
 
 Assumption: the background behind the error message was taken as white (`#FFFFFF`), because the background image only covers the page header area.
 
@@ -171,7 +173,7 @@ Severity and priority follow the definitions in `docs/BUG_REPORTS.md`.
 
 | Defect ID | Related Check | Summary | WCAG 2.1 Reference | Severity | Priority | Status | Evidence |
 |---|---|---|---|---|---|---|---|
-| A11Y-BUG-001 | A11Y-004 | Login inputs have visible text labels but no programmatic labels, so screen readers cannot announce which field is Username and which is Password. | 1.3.1 (A), 4.1.2 (A) | High | P1 | Open | `evidences/screenshots/accessibility/A11Y-LH-002-form-labels-missing.png` |
+| A11Y-BUG-001 | A11Y-004 | Login inputs have visible text labels but no programmatic labels, so screen readers cannot announce which field is Username and which is Password. Confirmed with NVDA. | 1.3.1 (A), 4.1.2 (A) | High | P1 | Open | `evidences/screenshots/accessibility/A11Y-LH-002-form-labels-missing.png`, `evidences/screenshots/accessibility/A11Y-SR-001-nvda-username-no-name.png`, `evidences/screenshots/accessibility/A11Y-SR-002-nvda-password-no-name.png` |
 | A11Y-BUG-002 | A11Y-009 | Login error message has insufficient contrast (3.99:1, requires 4.5:1). | 1.4.3 (AA) | Medium | P2 | Open | `evidences/screenshots/accessibility/A11Y-DT-001-error-message-color-devtools.png`, `evidences/screenshots/accessibility/A11Y-DT-002-error-message-contrast-webaim.png` |
 | A11Y-BUG-003 | A11Y-016 | The page language is not defined (`<html>` without `lang`). | 3.1.1 (A) | Medium | P2 | Open | `evidences/screenshots/accessibility/A11Y-LH-007-html-lang-missing.png` |
 | A11Y-BUG-004 | A11Y-009, A11Y-010 | Slogan, service box captions, news date, and footer text and link have insufficient contrast. | 1.4.3 (AA) | Low | P3 | Open | `evidences/screenshots/accessibility/A11Y-LH-005-contrast-login-page.png`, `evidences/screenshots/accessibility/A11Y-LH-005b-contrast-login-page-continued.png`, `evidences/screenshots/accessibility/A11Y-LH-006b-error-page-contrast.png` |
@@ -208,7 +210,12 @@ Execution 2 — WCAG 2.1 Re-test (October 2026), manual verification:
 - `evidences/screenshots/accessibility/A11Y-DT-001-error-message-color-devtools.png`
 - `evidences/screenshots/accessibility/A11Y-DT-002-error-message-contrast-webaim.png`
 
-Evidence prefixes: `A11Y-` manual smoke checks, `A11Y-LH-` Lighthouse audit, `A11Y-DT-` manual DevTools and contrast verification.
+Execution 2 — WCAG 2.1 Re-test (October 2026), screen reader (NVDA):
+
+- `evidences/screenshots/accessibility/A11Y-SR-001-nvda-username-no-name.png`
+- `evidences/screenshots/accessibility/A11Y-SR-002-nvda-password-no-name.png`
+
+Evidence prefixes: `A11Y-` manual smoke checks, `A11Y-LH-` Lighthouse audit, `A11Y-DT-` manual DevTools and contrast verification, `A11Y-SR-` screen reader check.
 
 ---
 
@@ -228,3 +235,4 @@ Evidence prefixes: `A11Y-` manual smoke checks, `A11Y-LH-` Lighthouse audit, `A1
 |---|---|---|---|
 | 1.0 | May 2026 | Mariana | Accessibility smoke test execution on the public login area |
 | 1.1 | October 2026 | Mariana | Added WCAG 2.1 mapping, Lighthouse and manual contrast re-test, re-evaluated A11Y-004 and A11Y-014, added A11Y-016 and A11Y-017, accessibility defects, and best-practice observations |
+| 1.2 | October 2026 | Mariana | Confirmed A11Y-BUG-001 with the NVDA screen reader and added screen reader evidence |

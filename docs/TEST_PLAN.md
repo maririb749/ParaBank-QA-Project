@@ -1,6 +1,6 @@
 # ParaBank QA Test Plan
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Last Updated:** October 2026  
 **Document Type:** Test Plan  
 **Application Under Test:** ParaBank Demo Banking Application  
@@ -191,6 +191,7 @@ When time is limited, execution should focus first on:
 | Chrome DevTools | UI inspection, console checks, debugging support |
 | Lighthouse (Chrome DevTools) | Automated accessibility audits |
 | WebAIM Contrast Checker | Manual color contrast verification |
+| NVDA | Screen reader check |
 | Browser screenshots | Manual test evidence capture |
 | Cypress | UI automation and regression execution |
 | Node.js / npm | Cypress dependency management and test execution scripts |
@@ -569,6 +570,7 @@ Test cases should also be reviewed after each execution cycle to ensure they rem
 | 1.2 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 | 1.3 | May 2026 | Mariana | Updated portfolio scope, risk prioritization, exploratory testing, CI, and deliverable status |
 | 1.4 | October 2026 | Mariana | Added WCAG 2.1 accessibility re-test to scope, added Lighthouse and WebAIM Contrast Checker to tools, and corrected deliverable status |
+| 1.5 | October 2026 | Mariana | Added NVDA screen reader to tools |
 
 ---
 

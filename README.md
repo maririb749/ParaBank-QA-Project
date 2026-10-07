@@ -15,7 +15,7 @@ The project focuses on realistic QA work: identifying high-risk workflows, docum
 | Test architecture | Custom Cypress commands and Page Objects for authentication flows |
 | Bug reporting | 3 documented bugs with severity, priority, impact, status, and evidence |
 | Exploratory testing | 2 executed exploratory sessions focused on authentication and transfers |
-| Accessibility testing | Checklist mapped to WCAG 2.1 (A/AA), Lighthouse audits, manual contrast verification, and 5 documented accessibility defects |
+| Accessibility testing | Checklist mapped to WCAG 2.1 (A/AA), Lighthouse audits, manual contrast verification, NVDA screen reader check, and 5 documented accessibility defects |
 | Responsive testing | Smoke test executed across desktop, tablet, and mobile viewports |
 | Traceability | Requirements, test cases, bugs, automation, risks, and evidence mapped in a traceability matrix |
 | CI/CD | GitHub Actions workflow running the Cypress regression suite |
@@ -284,6 +284,7 @@ ParaBank-QA-Project/
 | Chrome DevTools | Accessibility inspection and responsive smoke checks |
 | Lighthouse (Chrome DevTools) | Automated accessibility audits |
 | WebAIM Contrast Checker | Manual color contrast verification |
+| NVDA | Screen reader check of the login form |
 | Git and GitHub | Version control, repository hosting, and portfolio presentation |
 | Visual Studio Code | Editing QA documentation, Markdown files, Cypress tests, and project structure |
 | Git Bash | Command-line Git and project workflow |
