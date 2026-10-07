@@ -2,7 +2,7 @@
 
 [![Cypress Regression Tests](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml/badge.svg?branch=main)](https://github.com/maririb749/ParaBank-QA-Project/actions/workflows/cypress.yml)
 
-A practical QA portfolio project for a demo banking application, covering manual testing, Cypress automation, exploratory testing, accessibility smoke testing, responsive smoke testing, bug reporting, traceability, evidence management, and CI with GitHub Actions.
+A practical QA portfolio project for a demo banking application, covering manual testing, Cypress automation, exploratory testing, accessibility testing mapped to WCAG 2.1, responsive smoke testing, bug reporting, traceability, evidence management, and CI with GitHub Actions.
 
 The project focuses on realistic QA work: identifying high-risk workflows, documenting defects clearly, collecting evidence, and mapping manual coverage to automated regression scenarios.
 
@@ -15,7 +15,7 @@ The project focuses on realistic QA work: identifying high-risk workflows, docum
 | Test architecture | Custom Cypress commands and Page Objects for authentication flows |
 | Bug reporting | 3 documented bugs with severity, priority, impact, status, and evidence |
 | Exploratory testing | 2 executed exploratory sessions focused on authentication and transfers |
-| Accessibility testing | Smoke test executed for login usability, focus visibility, labels, errors, and link purpose |
+| Accessibility testing | Checklist mapped to WCAG 2.1 (A/AA), Lighthouse audits, manual contrast verification, and 5 documented accessibility defects |
 | Responsive testing | Smoke test executed across desktop, tablet, and mobile viewports |
 | Traceability | Requirements, test cases, bugs, automation, risks, and evidence mapped in a traceability matrix |
 | CI/CD | GitHub Actions workflow running the Cypress regression suite |
@@ -110,7 +110,7 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Bugs documented | 3 |
 | Total observations | 6 |
 | Exploratory testing | 2 executed sessions |
-| Accessibility testing | Smoke pass executed with evidence |
+| Accessibility testing | WCAG 2.1 re-test: 10 of 17 checks executed, 2 passed, 6 failed, 2 observations; 5 accessibility defects; Lighthouse score 43/100 |
 | Responsive testing | Smoke pass executed with evidence |
 | CI | GitHub Actions workflow configured |
 | Automation architecture | Custom commands + Page Objects for authentication flows |
@@ -125,7 +125,7 @@ ParaBank simulates common banking workflows including login, account opening, ac
 | Transactions | Transaction history, search by amount, new account transaction state |
 | Customer Profile | Valid update, invalid phone format, empty required fields |
 | Exploratory Testing | Authentication/session access and transfers |
-| Accessibility Smoke | Login keyboard navigation, focus visibility, labels, login error message, link purpose |
+| Accessibility (WCAG 2.1) | Keyboard navigation, focus visibility, form labels, error messages, contrast, heading structure, link purpose, page language, and image text alternatives on the public login pages |
 | Responsive Smoke | Login page, login error message, and public navigation across desktop, tablet, and mobile viewports |
 
 Scenario coverage includes positive, negative, boundary, edge case, access control, exploratory, accessibility smoke, responsive smoke, and regression-oriented testing.
@@ -151,6 +151,8 @@ This approach helped keep the test scope focused, realistic, and aligned with th
 | BUG-002 | Negative transfer amount was accepted and processed. | Open |
 | BUG-003 | Insufficient balance transfer was accepted and created invalid balance behavior. | Open |
 | OBS-003 | Browser Back after logout displayed cached authenticated account data, while protected actions still required login. | Observation |
+| A11Y-BUG-001 | Login inputs have no programmatic labels, so screen readers cannot identify the fields (WCAG 1.3.1, 4.1.2). | Open |
+| A11Y-BUG-002 | Login error message contrast is 3.99:1; WCAG AA requires 4.5:1 (WCAG 1.4.3). | Open |
 | A11Y-OBS-001 | Login focus indicator is present but visually subtle. | Observation |
 | RWD-OBS-002 | Mobile viewport keeps a reduced desktop-style layout instead of adapting to the screen width. | Observation |
 
@@ -230,7 +232,7 @@ This README is intentionally concise for portfolio review. Detailed QA artifacts
 | [Test Summary Report](docs/TEST_SUMMARY_REPORT.md) | Manual, Cypress, exploratory, accessibility, and responsive execution results |
 | [Traceability Matrix](docs/TRACEABILITY_MATRIX.md) | Requirement, test case, bug, automation, risk, and evidence mapping |
 | [Exploratory Testing](docs/EXPLORATORY_TESTING.md) | Exploratory charters, executed sessions, observations, and linked impact evidence |
-| [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | Accessibility smoke execution and future-scope checklist |
+| [Accessibility Checklist](docs/ACCESSIBILITY_CHECKLIST.md) | WCAG 2.1 checklist, Lighthouse results, accessibility defects, and future-scope checks |
 | [Responsive Testing](docs/RESPONSIVE_TESTING.md) | Responsive smoke execution and future-scope checklist |
 
 ## Evidence
@@ -239,7 +241,7 @@ This README is intentionally concise for portfolio review. Detailed QA artifacts
 |---|---|---|
 | Manual test screenshots | [evidences/screenshots/](evidences/screenshots/) | Evidence captured |
 | Exploratory screenshots | [evidences/screenshots/exploratory/](evidences/screenshots/exploratory/) | Evidence captured |
-| Accessibility screenshots | `evidences/screenshots/accessibility/` | Smoke evidence captured |
+| Accessibility screenshots | `evidences/screenshots/accessibility/` | Smoke, Lighthouse, and contrast evidence captured |
 | Responsive screenshots | `evidences/screenshots/responsive/` | Smoke evidence captured |
 
 Evidence file names include related test case, bug, observation, or exploratory session IDs so reviewers can trace claims back to screenshots quickly.
@@ -279,7 +281,9 @@ ParaBank-QA-Project/
 | GitHub Actions | CI workflow for Cypress execution |
 | Markdown | QA documentation, test cases, reports, and checklists |
 | Chrome | Manual web testing and evidence capture |
-| Chrome DevTools | Accessibility and responsive smoke checks |
+| Chrome DevTools | Accessibility inspection and responsive smoke checks |
+| Lighthouse (Chrome DevTools) | Automated accessibility audits |
+| WebAIM Contrast Checker | Manual color contrast verification |
 | Git and GitHub | Version control, repository hosting, and portfolio presentation |
 | Visual Studio Code | Editing QA documentation, Markdown files, Cypress tests, and project structure |
 | Git Bash | Command-line Git and project workflow |

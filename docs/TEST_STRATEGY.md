@@ -1,7 +1,7 @@
 # ParaBank QA Test Strategy
 
-**Version:** 1.2  
-**Last Updated:** May 2026  
+**Version:** 1.3  
+**Last Updated:** October 2026  
 **Document Type:** Test Strategy  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing + Accessibility Smoke Testing + Responsive Smoke Testing  
@@ -74,6 +74,7 @@ Completed exploratory sessions:
 Completed smoke testing activities:
 
 - Accessibility smoke test on the public login area and visible navigation elements
+- WCAG 2.1 accessibility re-test on the public login pages with Lighthouse and manual contrast verification
 - Responsive smoke test across desktop, tablet, and mobile viewports
 
 Out of scope for the current phase:
@@ -1091,7 +1092,7 @@ This document works together with the other project documents:
 - `TEST_SUMMARY_REPORT.md` summarizes manual, Cypress automation, and exploratory execution results.
 - `TRACEABILITY_MATRIX.md` connects requirements, manual test cases, automation, findings, and evidence.
 - `EXPLORATORY_TESTING.md` documents exploratory charters, execution notes, observations, and linked impact evidence.
-- `ACCESSIBILITY_CHECKLIST.md` documents the executed accessibility smoke test and remaining future-scope checks.
+- `ACCESSIBILITY_CHECKLIST.md` documents the accessibility checklist mapped to WCAG 2.1, the smoke and re-test results, accessibility defects, and remaining future-scope checks.
 - `RESPONSIVE_TESTING.md` documents the executed responsive smoke test and remaining future-scope checks.
 - `Automation/` contains Cypress UI automation mapped to the documented manual test cases.
 
@@ -1118,7 +1119,7 @@ The following improvements may be added in future project phases:
 
 - Expand Cypress automation with additional validation, exploratory, accessibility and compatibility scenarios.
 - API testing with Postman if stable endpoints are included.
-- Expand accessibility coverage beyond the executed smoke pass.
+- Expand accessibility coverage to the remaining checklist items and authenticated pages.
 - Expand responsive testing beyond the executed smoke pass.
 - Run a small compatibility smoke pass in an additional browser.
 - Improve CI reporting and artifact retention for Cypress execution results.
@@ -1151,9 +1152,10 @@ The following improvements may be added in future project phases:
 | 1.0 | May 2026 | Mariana | Initial test strategy aligned with 15 manual functional test cases |
 | 1.1 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 | 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, explicit risk-based prioritization, CI status, and current portfolio deliverables |
+| 1.3 | October 2026 | Mariana | Added the WCAG 2.1 accessibility re-test to the completed scope and updated the accessibility checklist description |
 
 ---
 
 **Document Classification:** QA Portfolio Documentation  
 **Audience:** QA Engineers, Technical Reviewers, Hiring Managers  
-**Last Review:** May 2026
+**Last Review:** October 2026

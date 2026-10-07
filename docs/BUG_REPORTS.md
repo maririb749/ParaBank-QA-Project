@@ -1,6 +1,6 @@
 # ParaBank Bug Reports
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Last Updated:** October 2026  
 **Document Type:** Bug Reports  
 **Application Under Test:** ParaBank Demo Banking Application  
@@ -43,6 +43,10 @@ The first manual execution cycle identified confirmed bugs and observations. Lat
 - **High Bugs:** 0
 - **Medium Bugs:** 0
 - **Low Bugs:** 0
+
+Accessibility defects found during the WCAG 2.1 re-test (A11Y-BUG-001 to A11Y-BUG-005) are tracked in `docs/ACCESSIBILITY_CHECKLIST.md` and are not included in the functional bug counts above.
+
+- **Accessibility Defects (WCAG 2.1):** 5
 
 ### Confirmed Bugs
 
@@ -871,6 +875,7 @@ When retesting a bug:
 | 1.2 | May 2026 | Mariana | Added Cypress known bug mapping for confirmed manual defects |
 | 1.3 | May 2026 | Mariana | Refined exploratory metrics, BUG-001 retest status, observation risk classification, and linked impact evidence for EXP-003 |
 | 1.4 | October 2026 | Mariana | Added October 2026 manual retests for BUG-001 and BUG-002 with browser and OS versions; removed duplicated BUG-001 conclusion |
+| 1.5 | October 2026 | Mariana | Added reference to the accessibility defects tracked in the accessibility checklist |
 
 ---
 

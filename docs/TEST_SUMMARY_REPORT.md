@@ -1,10 +1,10 @@
 # ParaBank Test Summary Report
 
-**Version:** 1.2  
-**Last Updated:** May 2026  
+**Version:** 1.3  
+**Last Updated:** October 2026  
 **Document Type:** Test Summary Report  
 **Application Under Test:** ParaBank Demo Banking Application  
-**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
+**Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing + Accessibility Testing + Responsive Smoke Testing  
 **Prepared By:** Mariana  
 **Document Status:** Completed — Manual, Cypress Automation, and First Exploratory Cycles Executed  
 
@@ -41,7 +41,7 @@ After the manual cycle, Cypress UI automation was implemented for the 15 documen
 
 Exploratory testing was then executed for two high-risk areas: authentication/session access and transfers. It confirmed two existing transfer bugs, did not reproduce BUG-001 during EXP-001, confirmed one existing observation, recorded four standalone exploratory observations, and captured two linked impact evidence items for transfer validation risk.
 
-Accessibility smoke testing was executed on the public login area and visible navigation elements. Responsive smoke testing was executed across desktop, tablet, and mobile viewports for the public login page, login error message, and public navigation.
+Accessibility smoke testing was executed on the public login area and visible navigation elements in May 2026. In October 2026, the accessibility checklist was mapped to WCAG 2.1 and re-tested with Lighthouse and manual contrast verification. The re-test executed 10 of 17 checks (2 passed, 6 failed, 2 observations) and documented 5 accessibility defects (A11Y-BUG-001 to A11Y-BUG-005). Accessibility defects are tracked separately from the functional bug metrics below. Responsive smoke testing was executed across desktop, tablet, and mobile viewports for the public login page, login error message, and public navigation.
 
 ---
 
@@ -62,9 +62,9 @@ The executed scope includes the manual functional cycle, Cypress UI automation m
 | EXP-001 | Authentication and Session Access | Completed | BUG-001 was not reproduced. OBS-001 was confirmed. OBS-003 was recorded. |
 | EXP-003 | Transfers | Completed | BUG-002 and BUG-003 were confirmed. OBS-004 to OBS-006 were recorded. OBS-007 and OBS-008 were retained as linked impact evidence. |
 
-| Accessibility Smoke Area | Checks Executed | Result Summary |
+| Accessibility Area | Checks Executed | Result Summary |
 |---|---:|---|
-| Public login and visible navigation | 5 | 4 Passed, 1 Observation, 0 Failed |
+| Public login and visible navigation (WCAG 2.1 re-test, October 2026) | 10 | 2 Passed, 6 Failed, 2 Observations; 5 accessibility defects |
 
 | Responsive Smoke Area | Viewports Tested | Result Summary |
 |---|---:|---|
@@ -90,9 +90,12 @@ The executed scope includes the manual functional cycle, Cypress UI automation m
 | Existing Bugs Confirmed by Exploratory Testing | 2 |
 | Existing Bugs Not Reproduced by Exploratory Testing | 1 |
 | Linked Exploratory Impact Evidence Items | 2 |
-| Accessibility Smoke Checks Executed | 5 |
-| Accessibility Smoke Passed | 4 |
-| Accessibility Smoke Observations | 1 |
+| Accessibility Checks Executed | 10 |
+| Accessibility Checks Passed | 2 |
+| Accessibility Checks Failed | 6 |
+| Accessibility Observations | 2 |
+| Accessibility Defects (WCAG 2.1) | 5 |
+| Lighthouse Accessibility Score (`index.htm`) | 43/100 |
 | Responsive Smoke Checks Executed | 5 |
 | Responsive Smoke Passed | 1 |
 | Responsive Smoke Observations | 4 |
@@ -138,7 +141,8 @@ The following automated tests are intentionally pending because the related beha
 
 | Test Case | Related Bug | Reason |
 |---|---|---|
-| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle but was not reproduced during EXP-001. The behavior appears flaky or environment-dependent, so the scripted test remains pending/skipped until consistent reproduction is achieved. || TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
+| TC-002 | BUG-001 | Incorrect password authentication was reproduced during the manual cycle but was not reproduced during EXP-001. The behavior appears flaky or environment-dependent, so the scripted test remains pending/skipped until consistent reproduction is achieved. |
+| TC-008 | BUG-002 | Negative transfer amount processing is a known confirmed bug |
 | TC-009 | BUG-003 | Insufficient balance transfer processing is a known confirmed bug |
 
 ### Automation Quality Notes
@@ -260,6 +264,7 @@ The following key findings were identified during the manual execution, Cypress 
 - Browser Back after logout displayed cached authenticated account information, but protected actions required login.
 - Additional transfer validation weaknesses were observed for empty, non-numeric, zero-value, and same-account transfers.
 - Accessibility smoke testing found that the login focus indicator is present but visually subtle.
+- The WCAG 2.1 re-test found that the login inputs have no programmatic labels, the login error message has insufficient contrast (3.99:1), the page language is not defined, secondary text has insufficient contrast, and the header image link to the admin page has no text alternative.
 - Responsive smoke testing found that tablet and mobile viewports keep a reduced desktop-style layout instead of adapting fully to smaller screens.
 
 Automation-related findings:
@@ -282,7 +287,7 @@ Automation-related findings:
 | Accounts | Medium | Restricted access was blocked, but the error message was unclear |
 | Transactions | Low | Transaction history and search behaved as expected during execution |
 | Customer Profile | Medium | Invalid phone format was accepted, affecting data quality |
-| Accessibility | Medium | Smoke testing found subtle focus visibility, which may affect keyboard navigation clarity |
+| Accessibility | High | Login inputs have no programmatic labels (A11Y-BUG-001), which affects screen reader users on the entry point to the application. Contrast, page language, and image text alternative defects were also found |
 | Responsive | Medium | Tablet and mobile layouts remain usable but are not fully optimized for smaller screens |
 
 ---
@@ -303,6 +308,7 @@ Automation-related findings:
 | Cypress automated tests completed with 0 failures | Met |
 | Known bugs represented as pending/skipped automation scenarios | Met |
 | Accessibility smoke test executed with evidence | Met |
+| Accessibility checklist mapped to WCAG 2.1 and re-tested with evidence | Met |
 | Responsive smoke test executed with evidence | Met |
 | Cypress structure improved with custom commands and Page Objects | Met |
 
@@ -338,6 +344,7 @@ Before considering the tested scope stable, the following actions are recommende
 - Keep known-bug automated tests pending until the related application behavior is fixed.
 - Re-enable TC-002, TC-008, and TC-009 automated tests after the related bugs are fixed.
 - Run the Cypress full suite before future documentation or release milestones.
+- Fix the accessibility defects A11Y-BUG-001 to A11Y-BUG-005, starting with the login input labels, and re-run the affected accessibility checks.
 
 
 ---
@@ -346,7 +353,7 @@ Before considering the tested scope stable, the following actions are recommende
 
 Recommended next improvements for the project:
 
-- Expand accessibility coverage beyond the executed smoke pass.
+- Expand accessibility coverage to the remaining checklist items and authenticated pages.
 - Expand responsive testing beyond the executed smoke pass.
 - Add API testing in a separate future phase if stable endpoints are included.
 - Expand Cypress coverage with additional input validation, exploratory, accessibility and compatibility scenarios in future cycles.
@@ -450,9 +457,10 @@ Main conclusions:
 | 1.0 | May 2026 | Mariana | Initial summary report for the first manual functional testing cycle |
 | 1.1 | May 2026 | Mariana | Updated with Cypress UI automation results and full suite execution summary |
 | 1.2 | May 2026 | Mariana | Updated with exploratory testing scope, consistent metrics, BUG-001 retest clarification, and refined exploratory observation classification |
+| 1.3 | October 2026 | Mariana | Added WCAG 2.1 accessibility re-test results and accessibility defects; fixed merged rows in the known-bug table |
 
 ---
 
 **Document Classification:** QA Portfolio Documentation  
 **Audience:** QA Engineers, Technical Reviewers, Hiring Managers  
-**Last Review:** May 2026
+**Last Review:** October 2026

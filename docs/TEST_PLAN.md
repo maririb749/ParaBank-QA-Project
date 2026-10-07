@@ -1,7 +1,7 @@
 # ParaBank QA Test Plan
 
-**Version:** 1.3  
-**Last Updated:** May 2026  
+**Version:** 1.4  
+**Last Updated:** October 2026  
 **Document Type:** Test Plan  
 **Application Under Test:** ParaBank Demo Banking Application  
 **Execution Mode:** Manual Testing + Cypress UI Automation + Exploratory Testing  
@@ -69,7 +69,7 @@ The following areas are not included in the current test cycle:
 - Endurance testing
 - Security penetration testing
 - Full accessibility compliance testing
-- Expanded accessibility testing beyond the executed smoke pass
+- Expanded accessibility testing beyond the executed smoke pass and WCAG 2.1 re-test
 - Expanded responsive testing beyond the executed smoke pass
 - Full localization testing
 - Mobile native application testing
@@ -77,7 +77,7 @@ The following areas are not included in the current test cycle:
 - Database testing
 - Third-party integrations outside the visible ParaBank demo application
 
-Accessibility and responsive smoke tests were executed with evidence. Expanded accessibility and responsive coverage remain future scope. API testing remains future scope.
+Accessibility and responsive smoke tests were executed with evidence. In October 2026, the accessibility checklist was mapped to WCAG 2.1 and re-tested on the public login pages. Expanded accessibility and responsive coverage remain future scope. API testing remains future scope.
 
 ---
 
@@ -189,6 +189,8 @@ When time is limited, execution should focus first on:
 | GitHub | Repository hosting and documentation |
 | Markdown | Test documentation |
 | Chrome DevTools | UI inspection, console checks, debugging support |
+| Lighthouse (Chrome DevTools) | Automated accessibility audits |
+| WebAIM Contrast Checker | Manual color contrast verification |
 | Browser screenshots | Manual test evidence capture |
 | Cypress | UI automation and regression execution |
 | Node.js / npm | Cypress dependency management and test execution scripts |
@@ -402,16 +404,16 @@ Detailed exploratory results are documented in `docs/EXPLORATORY_TESTING.md`.
 - [x] Test Execution Summary
 - [x] Traceability Matrix
 - [x] Exploratory Testing Notes
-- [x] Accessibility Checklist Template
-- [x] Responsive Testing Template
+- [x] Accessibility Checklist with Smoke and WCAG 2.1 Re-test Results
+- [x] Responsive Testing Checklist with Smoke Results
 - [x] Cypress Automation Test Suite
 - [x] GitHub Actions CI Workflow
 
 ### 14.2 Future Deliverables
 
 - [ ] API Test Collection
-- [ ] Accessibility Execution Results
-- [ ] Responsive Execution Results
+- [ ] Remaining Accessibility Checklist Items and Authenticated Pages
+- [ ] Expanded Responsive Testing Results
 - [ ] Compatibility Smoke Execution Notes
 - [ ] Additional scripted regression cases from selected exploratory findings
 
@@ -566,9 +568,10 @@ Test cases should also be reviewed after each execution cycle to ensure they rem
 | 1.1 | May 2026 | Mariana | Updated after first manual execution cycle |
 | 1.2 | May 2026 | Mariana | Updated after Cypress UI automation implementation and full suite execution |
 | 1.3 | May 2026 | Mariana | Updated portfolio scope, risk prioritization, exploratory testing, CI, and deliverable status |
+| 1.4 | October 2026 | Mariana | Added WCAG 2.1 accessibility re-test to scope, added Lighthouse and WebAIM Contrast Checker to tools, and corrected deliverable status |
 
 ---
 
 **Document Classification:** QA Portfolio Documentation  
 **Audience:** QA Engineers, Technical Reviewers, Hiring Managers  
-**Last Review:** May 2026
+**Last Review:** October 2026
